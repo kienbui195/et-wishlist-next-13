@@ -1,0 +1,47 @@
+.carouselBtn:hover svg > path {
+  fill: rgba(0, 61, 104, 1);
+}
+.carouselBtn:hover g path {
+  stroke: rgba(255, 255, 255, 1);
+}
+.slick-arrow {
+  z-index: 29;
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50%;
+  background-color: white !important;
+}
+.slick-prev {
+  left: 10px !important;
+}
+.slick-next {
+  right: 10px !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 38px !important;
+  position: absolute;
+  transform: translate(-49%, -43%);
+}
+
+.slick-dots {
+  bottom: 10px !important;
+}
+
+.slick-dots button::before {
+  color: rgba(217, 217, 217, 0.5) !important;
+}
+
+.slick-dots li.slick-active button:before {
+  opacity: 1 !important;
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+.slick-dots li {
+  margin: 0 !important;
+}
+
+.slick-next:before, .slick-prev:before {
+  color: #000 !important;
+}

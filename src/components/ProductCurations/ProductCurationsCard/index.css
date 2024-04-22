@@ -1,0 +1,318 @@
+.gfl-product-wrap {
+  float: left;
+  width: 100%;
+  /* margin-bottom: 30px; */
+}
+.gfl-mainbody * {
+  font-family: 'Helvetica Now', Helvetica Neue, -apple-system,
+    BlinkMacSystemFont, Arial, Noto Sans, Ubuntu, Roboto, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+.gfl-product {
+  /* margin: 0 13px; */
+  position: relative;
+  color: #3a3d42;
+}
+
+@media screen and (max-width: 700px) {
+  .gfl-product,
+  .gfl-product-thumb {
+    z-index: auto;
+  }
+  .gfl-product-actions-wrap {
+    text-align: left;
+  }
+}
+.gfl-product-thumb {
+  display: block;
+  position: relative;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #ececec;
+  box-shadow: 0 3px 11px 0 rgba(0, 0, 0, 0.06);
+}
+@media screen and (max-width: 640px) {
+  .gfl-product-type.as {
+    background-size: auto 25px;
+  }
+  .gfl-product-thumb {
+    padding-top: 0 !important;
+    box-shadow: none;
+    /* padding-bottom: 75%; */
+  }
+  .gfl-product-type {
+    left: 22px;
+    opacity: 0.7;
+    width: 42px;
+    height: 42px;
+    background-size: auto 23px;
+  }
+  .gfl-product-meta {
+    height: 26px;
+  }
+  .gfl-product-title {
+    font-size: 19px;
+  }
+  .gfl-product-meta {
+    height: 26px;
+  }
+  .gfl-product-type {
+    left: 22px;
+    opacity: 0.7;
+    width: 42px;
+    height: 42px;
+    background-size: auto 23px;
+  }
+  .gfl-product-type-tooltip {
+    left: 0;
+    transform: none;
+    bottom: auto;
+    top: calc(100% + 5px);
+  }
+
+  .gfl-product-wrap,
+  .gfl-archive-widget-featured-products {
+    width: 100%;
+  }
+  /* .gfl-product-wrap {
+    margin-bottom: 25px;
+  } */
+  .gfl-product {
+    margin: 0 10px;
+    overflow: visible;
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 0;
+  }
+  .gfl-product-sm {
+    overflow: visible;
+    border-radius: 12px;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+.gfl-product-type.as {
+  background-image: url(./media/product_type_as_dark.svg);
+  background-color: #fff;
+  color: #504d4e;
+  background-size: auto 23px;
+}
+
+.gfl-product-type {
+  background-size: auto 21px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: 100% 100% 100% 5px;
+  position: absolute;
+  left: 15px;
+  top: 17px;
+  z-index: 2;
+  color: #fff;
+}
+
+.gfl-product-actions {
+  display: none;
+  position: absolute;
+  bottom: 36px;
+  right: -80px;
+  z-index: 9;
+  text-align: right;
+  transition: 0.5s width;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.gfl-product-actions-wrap {
+  text-align: center;
+  position: relative;
+}
+
+.gfl-product-content {
+  padding: 16px;
+  overflow: hidden;
+}
+.gfl-mainbody * {
+  font-family: 'Helvetica Now', Helvetica Neue, -apple-system,
+    BlinkMacSystemFont, Arial, Noto Sans, Ubuntu, Roboto, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+div {
+  vertical-align: top;
+}
+
+.gfl-product-meta {
+  height: 24px;
+  overflow: hidden;
+  margin: 0 auto 5px;
+}
+
+.gfl-archive-products-wrap .gfl-product-title {
+  overflow: visible;
+  white-space: normal;
+  text-overflow: inherit;
+}
+
+.gfl-product-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #262323;
+  line-height: 1.3;
+}
+
+.gfl-product-title-when {
+  color: #d8d8d8;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 6px auto 0;
+}
+.gfl-product-title a {
+  text-decoration: none;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+.gfl-product-title-when a {
+  font-size: inherit;
+  text-decoration: none;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.gfl-product-meta {
+  height: 24px;
+  overflow: hidden;
+  margin: 0 auto 5px;
+}
+
+.gfl-product-price {
+  font-weight: 700;
+  margin-right: 7px;
+  margin-bottom: 4px;
+  color: #28b25d;
+  font-size: 14px;
+  vertical-align: baseline;
+  display: inline-block;
+  background-color: #eefff5;
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+.gfl-product-category-link {
+  display: inline-block;
+  margin-right: 4px;
+  color: #7e64ff;
+  background-color: #f5f3ff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 3px 9px;
+}
+.gfl-product-category-link.category-220 {
+  color: #64bdff;
+  background-color: #ebf7ff;
+}
+.gfl-product-category-link {
+  display: inline-block;
+  margin-right: 4px;
+  color: #7e64ff;
+  background-color: #f5f3ff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 100px;
+  padding: 3px 9px;
+}
+
+.gfl-thumb-link {
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.gfl-product-type.tr {
+  background-image: url(./media/product_type_trending.svg);
+  background-color: #f15353;
+  background-size: auto 30px;
+  background-position: calc(50% - 1px) calc(50% - 1px);
+}
+
+.gfl-product-type {
+  background-size: auto 21px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: 100% 100% 100% 5px;
+  position: absolute;
+  left: 15px;
+  top: 17px;
+  z-index: 2;
+  color: #fff;
+}
+.gfl-product-type-tooltip {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 5px);
+  background-color: inherit;
+  padding: 5px 15px;
+  border-radius: 100px;
+  color: inherit;
+  font-size: 14px;
+  white-space: nowrap;
+  display: none;
+}
+
+.gfl-product-thumb-cont {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  z-index: 1;
+  overflow: hidden;
+  /* border-radius: 12px; */
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* .gfl-product-thumb img {
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: 100%;
+  z-index: 0;
+} */
+
+.prdCurVoteText {
+  /* stylename: text-title-18; */
+  font-family: Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+/* styleName: text-menu-15;
+font-family: Helvetica;
+font-size: 15px;
+font-weight: 700;
+line-height: 18px;
+letter-spacing: 0px;
+text-align: center; */

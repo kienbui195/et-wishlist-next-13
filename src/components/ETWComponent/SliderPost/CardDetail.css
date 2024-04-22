@@ -1,0 +1,63 @@
+.wrapperVoted {
+  padding: 4px 8px 4px 4px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.6);
+}
+.cardWrapper {
+  border-radius: 14px;
+  /* background: linear-gradient(0deg, #e8ebef, #e8ebef),
+    linear-gradient(0deg, #ffffff, #ffffff); */
+  border: 0.5px solid #e8ebef;
+}
+.cardWrapper:hover {
+  box-shadow: 0px 4px 8px 0px #00000026;
+}
+.bgBtnSlider {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.cardDetailTitle {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 196px;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+.cardVideoTitle {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 288px;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: 2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.videoDuration {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 100px;
+  padding: 0px 4px;
+  font-size: 12px;
+  color: #f0f0f0;
+}
+
+.showAll {
+  height: 20px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+}

@@ -1,0 +1,15 @@
+.closeBtn.warning > img > svg > path {
+  fill: val(--state-warning);
+}
+
+.closeBtn.error > img > svg > path {
+  fill: val(--state-error);
+}
+
+.closeBtn.info > img > svg > path {
+  fill: val(--state-info);
+}
+
+.closeBtn.success > img > svg > path {
+  fill: val(--state-success);
+}

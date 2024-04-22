@@ -1,0 +1,419 @@
+:root {
+  --el-color-primary-rgb: 0, 0, 0;
+  --el-color-success-rgb: 103, 194, 58;
+  --el-color-warning-rgb: 230, 162, 60;
+  --el-color-danger-rgb: 245, 108, 108;
+  --el-color-error-rgb: 245, 108, 108;
+  --el-color-info-rgb: 144, 147, 153;
+  --el-font-size-extra-large: 20px;
+  --el-font-size-large: 18px;
+  --el-font-size-medium: 16px;
+  --el-font-size-base: 14px;
+  --el-font-size-small: 13px;
+  --el-font-size-extra-small: 12px;
+  --el-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  --el-font-weight-primary: 500;
+  --el-font-line-height-primary: 24px;
+  --el-index-normal: 1;
+  --el-index-top: 1000;
+  --el-index-popper: 2000;
+  --el-border-radius-base: 6px;
+  --el-border-radius-small: 2px;
+  --el-border-radius-round: 20px;
+  --el-border-radius-circle: 100%;
+  --el-transition-duration: 0.3s;
+  --el-transition-duration-fast: 0.2s;
+  --el-transition-function-ease-in-out-bezier: cubic-bezier(
+    0.645,
+    0.045,
+    0.355,
+    1
+  );
+  --el-transition-function-fast-bezier: cubic-bezier(0.23, 1, 0.32, 1);
+  --el-transition-all: all var(--el-transition-duration)
+    var(--el-transition-function-ease-in-out-bezier);
+  --el-transition-fade: opacity var(--el-transition-duration)
+    var(--el-transition-function-fast-bezier);
+  --el-transition-md-fade: transform var(--el-transition-duration)
+      var(--el-transition-function-fast-bezier),
+    opacity var(--el-transition-duration)
+      var(--el-transition-function-fast-bezier);
+  --el-transition-fade-linear: opacity var(--el-transition-duration-fast) linear;
+  --el-transition-border: border-color var(--el-transition-duration-fast)
+    var(--el-transition-function-ease-in-out-bezier);
+  --el-transition-box-shadow: box-shadow var(--el-transition-duration-fast)
+    var(--el-transition-function-ease-in-out-bezier);
+  --el-transition-color: color var(--el-transition-duration-fast)
+    var(--el-transition-function-ease-in-out-bezier);
+  --el-component-size-large: 38px;
+  --el-component-size: 32px;
+  --el-component-size-small: 24px;
+  color-scheme: light;
+  --el-color-white: #fff;
+  --el-color-black: #000;
+  --el-color-primary: #000;
+  --el-color-primary-light-3: #4d4d4d;
+  --el-color-primary-light-5: gray;
+  --el-color-primary-light-7: #b3b3b3;
+  --el-color-primary-light-8: #ccc;
+  --el-color-primary-light-9: #e6e6e6;
+  --el-color-primary-dark-2: #000;
+  --el-color-success: #67c23a;
+  --el-color-success-light-3: #95d475;
+  --el-color-success-light-5: #b3e19d;
+  --el-color-success-light-7: #d1edc4;
+  --el-color-success-light-8: #e1f3d8;
+  --el-color-success-light-9: #f0f9eb;
+  --el-color-success-dark-2: #529b2e;
+  --el-color-warning: #e6a23c;
+  --el-color-warning-light-3: #eebe77;
+  --el-color-warning-light-5: #f3d19e;
+  --el-color-warning-light-7: #f8e3c5;
+  --el-color-warning-light-8: #faecd8;
+  --el-color-warning-light-9: #fdf6ec;
+  --el-color-warning-dark-2: #b88230;
+  --el-color-danger: #f56c6c;
+  --el-color-danger-light-3: #f89898;
+  --el-color-danger-light-5: #fab6b6;
+  --el-color-danger-light-7: #fcd3d3;
+  --el-color-danger-light-8: #fde2e2;
+  --el-color-danger-light-9: #fef0f0;
+  --el-color-danger-dark-2: #c45656;
+  --el-color-error: #f56c6c;
+  --el-color-error-light-3: #f89898;
+  --el-color-error-light-5: #fab6b6;
+  --el-color-error-light-7: #fcd3d3;
+  --el-color-error-light-8: #fde2e2;
+  --el-color-error-light-9: #fef0f0;
+  --el-color-error-dark-2: #c45656;
+  --el-color-info: #909399;
+  --el-color-info-light-3: #b1b3b8;
+  --el-color-info-light-5: #c8c9cc;
+  --el-color-info-light-7: #dedfe0;
+  --el-color-info-light-8: #e9e9eb;
+  --el-color-info-light-9: #f4f4f5;
+  --el-color-info-dark-2: #73767a;
+  --el-bg-color: #fff;
+  --el-bg-color-page: #f2f3f5;
+  --el-bg-color-overlay: #fff;
+  --el-text-color-primary: #303133;
+  --el-text-color-regular: #606266;
+  --el-text-color-secondary: #909399;
+  --el-text-color-placeholder: #a8abb2;
+  --el-text-color-disabled: #c0c4cc;
+  --el-border-color: #dcdfe6;
+  --el-border-color-light: #e4e7ed;
+  --el-border-color-lighter: #ebeef5;
+  --el-border-color-extra-light: #f2f6fc;
+  --el-border-color-dark: #d4d7de;
+  --el-border-color-darker: #cdd0d6;
+  --el-fill-color: #f0f2f5;
+  --el-fill-color-light: #f5f7fa;
+  --el-fill-color-lighter: #fafafa;
+  --el-fill-color-extra-light: #fafcff;
+  --el-fill-color-dark: #ebedf0;
+  --el-fill-color-darker: #e6e8eb;
+  --el-fill-color-blank: #fff;
+  --el-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.04),
+    0px 8px 20px rgba(0, 0, 0, 0.08);
+  --el-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.12);
+  --el-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.12);
+  --el-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, 0.08),
+    0px 12px 32px rgba(0, 0, 0, 0.12), 0px 8px 16px -8px rgba(0, 0, 0, 0.16);
+  --el-disabled-bg-color: var(--el-fill-color-light);
+  --el-disabled-text-color: var(--el-text-color-placeholder);
+  --el-disabled-border-color: var(--el-border-color-light);
+  --el-overlay-color: rgba(0, 0, 0, 0.8);
+  --el-overlay-color-light: rgba(0, 0, 0, 0.7);
+  --el-overlay-color-lighter: rgba(232, 235, 239, 0.8);
+  --el-mask-color: hsla(0, 0%, 100%, 0.9);
+  --el-mask-color-extra-light: hsla(0, 0%, 100%, 0.3);
+  --el-border-width: 1px;
+  --el-border-style: solid;
+  --el-border-color-hover: var(--el-text-color-disabled);
+  --el-border: var(--el-border-width) var(--el-border-style)
+    var(--el-border-color);
+  --el-svg-monochrome-grey: var(--el-border-color);
+}
+
+.el-form-item__label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  color: #344054;
+  margin-bottom: 12px;
+  display: block;
+  height: auto;
+  text-align: left;
+  padding: 0 12px 0 0;
+  box-sizing: border-box;
+}
+
+.el-form-item__label::after {
+  content: '*';
+  color: var(--el-color-danger);
+  margin-left: 4px;
+
+  font-family: Inter;
+  font-weight: 500;
+}
+.el-input__wrapper {
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 11px;
+  background-color: var(--el-input-bg-color, #f2f2f2);
+  background-image: none;
+  border-radius: var(--el-input-border-radius, 4px);
+  cursor: text;
+  transition: var(--el-transition-box-shadow);
+  transform: translateZ(0);
+  box-shadow: 0 0 0 1px var(--el-input-border-color, none) inset;
+}
+
+.el-form .el-form-item .el-input .el-input__wrapper .el-input__inner {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  margin: 0;
+
+  height: var(--el-input-inner-height);
+  line-height: var(--el-input-inner-height);
+  padding: 0;
+  outline: none;
+  border: none;
+  background: none;
+  box-sizing: border-box;
+  --el-input-inner-height: calc(var(--el-input-height, 32px) - 2px);
+  width: 100%;
+  flex-grow: 1;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
+}
+
+.el-form .el-form-item .el-input .el-input__wrapper {
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #e8ebef;
+  padding: 1px 16px;
+}
+
+.el-input__suffix-inner {
+  pointer-events: all;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#phone-input-wrapper .el-select .el-input__wrapper .el-input__inner {
+  text-align: right;
+  color: #101828;
+  font-weight: 600;
+  font-size: 16px;
+  font-style: normal;
+}
+.el-input__inner {
+  --el-input-inner-height: calc(var(--el-input-height, 32px) - 2px);
+  width: 100%;
+  flex-grow: 1;
+  -webkit-appearance: none;
+  color: var(--el-input-text-color, #000);
+  font-size: inherit;
+  height: var(--el-input-inner-height);
+  line-height: var(--el-input-inner-height);
+  padding: 0;
+  outline: none;
+  border: none;
+  background: none;
+  box-sizing: border-box;
+}
+
+.el-select .el-input__wrapper {
+  cursor: pointer;
+}
+#phone-input-wrapper .el-select {
+  max-width: 76px;
+}
+
+.el-form .el-form-item .el-select {
+  width: 100%;
+}
+
+.el-form .el-form-item .el-input {
+  height: 44px;
+  width: 100%;
+}
+
+.el-select .el-input {
+  display: flex;
+}
+#phone-input-wrapper .el-select .el-input__wrapper {
+  padding: 0 6px 0 10px;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.el-input__suffix {
+  display: inline-flex;
+  white-space: nowrap;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  height: 100%;
+  text-align: center;
+  color: var(--el-input-icon-color, var(--el-text-color-placeholder));
+  transition: all var(--el-transition-duration);
+  pointer-events: none;
+}
+.el-form .el-form-item .el-select .el-select__caret {
+  color: #667085;
+}
+.el-select .el-input .el-select__caret.el-icon {
+  position: relative;
+  height: inherit;
+  z-index: 2;
+}
+.el-select .el-input .el-select__caret {
+  color: var(--el-select-input-color);
+  font-size: var(--el-select-input-font-size);
+  transition: transform var(--el-transition-duration);
+  transform: rotate(0deg);
+  cursor: pointer;
+}
+.el-input__suffix-inner > :first-child {
+  margin-left: 8px;
+}
+.el-form .el-form-item .el-input {
+  height: 44px;
+  width: 100%;
+}
+.el-input {
+  --el-input-text-color: #000;
+  --el-input-border: none;
+  --el-input-hover-border: none;
+  --el-input-focus-border: none;
+  --el-input-transparent-border: 0 0 0 1px transparent inset;
+  --el-input-border-color: none;
+  --el-input-border-radius: 4px;
+  --el-input-bg-color: #f2f2f2;
+  --el-input-icon-color: var(--el-text-color-placeholder);
+  --el-input-placeholder-color: #000;
+  --el-input-hover-border-color: none;
+  --el-input-clear-hover-color: none;
+  --el-input-focus-border-color: none;
+  --el-input-width: 100%;
+  --el-input-height: var(--el-component-size);
+  position: relative;
+  font-size: var(--el-font-size-base);
+  display: inline-flex;
+  width: var(--el-input-width);
+  line-height: var(--el-input-height);
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.el-input .el-input__wrapper:focus {
+  border: 1px solid #0a888d !important;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05),
+    0 0 0 2px rgba(10, 136, 141, 0.1) !important;
+}
+
+.el-input .el-input__wrapper .el-input__inner:focus {
+  box-shadow: none;
+}
+
+.el-form-item__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+  line-height: 32px;
+  position: relative;
+  font-size: var(--font-size);
+  min-width: 0;
+}
+.el-textarea {
+  --el-input-text-color: #000;
+  --el-input-border: none;
+  --el-input-hover-border: none;
+  --el-input-focus-border: none;
+  --el-input-transparent-border: 0 0 0 1px transparent inset;
+  --el-input-border-color: none;
+  --el-input-border-radius: 4px;
+  --el-input-bg-color: #f2f2f2;
+  --el-input-icon-color: var(--el-text-color-placeholder);
+  --el-input-placeholder-color: #000;
+  --el-input-hover-border-color: none;
+  --el-input-clear-hover-color: none;
+  --el-input-focus-border-color: none;
+  --el-input-width: 100%;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom;
+  font-size: var(--el-font-size-base);
+}
+
+.el-form .el-form-item .el-textarea__inner {
+  min-height: 108px !important;
+  resize: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
+  background: #fff;
+  border-radius: 6px;
+  padding: 9px 16px;
+  border: 1px solid #e8ebef;
+}
+
+.el-textarea__inner {
+  position: relative;
+  display: block;
+  resize: vertical;
+  padding: 5px 11px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--el-input-text-color, #000);
+  background-color: var(--el-input-bg-color, #f2f2f2);
+  background-image: none;
+  -webkit-appearance: none;
+  box-shadow: 0 0 0 1px var(--el-input-border-color, none) inset;
+  border-radius: var(--el-input-border-radius, 4px);
+  transition: var(--el-transition-box-shadow);
+  border: none;
+}
+
+.el-form .el-form-item .el-input__count {
+  bottom: 15px;
+  right: 16px;
+  color: #8e9dae;
+  font-size: 12px;
+  line-height: 22px;
+}
+.el-textarea .el-input__count {
+  color: var(--el-color-info);
+  background: var(--el-fill-color-blank);
+  position: absolute;
+  font-size: 12px;
+  line-height: 14px;
+  bottom: 5px;
+  right: 10px;
+}
+.el-divider--vertical {
+  display: inline-block;
+  width: 1px;
+  /* height: 1em; */
+  /* margin: 0 8px; */
+  vertical-align: middle;
+  position: relative;
+  border-left: 1px var(--el-border-color) var(--el-border-style);
+}
+.el-divider {
+  position: relative;
+}

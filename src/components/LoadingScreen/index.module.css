@@ -1,0 +1,24 @@
+.loading-indicator-container {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 36px;
+  }
+  
+  .loading-indicator-circle {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 5px solid #ccc;
+    border-top-color: #66c2a5;
+    animation: spin 0.8s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

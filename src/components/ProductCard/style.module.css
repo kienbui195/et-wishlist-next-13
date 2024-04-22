@@ -1,0 +1,38 @@
+.prdTags {
+  --backgroundColor: rgb(10 136 141 / 0.1);
+
+  --tw-text-opacity: 1;
+  color: rgb(142 157 174 / var(--tw-text-opacity));
+
+  line-height: 1rem;
+
+  font-weight: 600;
+
+  font-size: 15px;
+
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 249 252 / var(--tw-bg-opacity));
+
+  border-radius: 0.25rem;
+
+  white-space: normal;
+
+  align-items: center;
+
+  min-height: 24px;
+
+  display: flex;
+
+  margin-right: 0.25rem;
+
+  margin-bottom: 0.25rem;
+}
+.prdTags:hover {
+  background-color: rgb(232 235 239);
+}

@@ -1,0 +1,19 @@
+.scrollBar::-webkit-scrollbar {
+  width: 6px;
+  padding: 0.5px;
+  background: transparent;
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.scrollBar:hover::-webkit-scrollbar-thumb {
+   background: rgb(214, 214, 214);
+}
+
+.scrollBar:hover::-webkit-scrollbar-thumb:hover {
+  background: gray;
+}
+
