@@ -48,7 +48,7 @@ const Step4: FC<StepProps> = ({ step, nextStep, backStep }) => {
               className="flex min-h-[39px] items-center rounded bg-green-950 px-[18px] py-2.5 text-base font-semibold leading-[19px] text-white z-10"
               onClick={() => setOpenModal(true)}
             >
-              {/*<img*/}
+              {/*<Image*/}
               {/*  src={Plus}*/}
               {/*  alt=""*/}
               {/*  width="10"*/}
@@ -88,7 +88,7 @@ const Step4: FC<StepProps> = ({ step, nextStep, backStep }) => {
               <p>Maximum file size of 10mb per image.</p>
             </div>
             <button className="flex min-h-[39px] items-center rounded bg-green-950 px-[18px] py-2.5 text-base font-semibold leading-[19px] text-white absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform whitespace-nowrap">
-              <img
+              <Image
                 src="https://d22lwxpnhu2n4a.cloudfront.net/grommet/img/plus.svg"
                 alt=""
                 width="10"
@@ -110,7 +110,7 @@ const Step4: FC<StepProps> = ({ step, nextStep, backStep }) => {
           </div>
           <div className="relative mt-3 flex min-h-[390px] w-full max-w-[240px] flex-col items-center justify-end rounded-md border border-gray-1350 bg-gray-2150 p-5">
             <button className="flex min-h-[39px] items-center rounded bg-green-950 px-[18px] py-2.5 text-base font-semibold leading-[19px] text-white absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform whitespace-nowrap">
-              <img
+              <Image
                 src="https://d22lwxpnhu2n4a.cloudfront.net/grommet/img/plus.svg"
                 alt=""
                 width="10"
@@ -185,7 +185,7 @@ const Step4: FC<StepProps> = ({ step, nextStep, backStep }) => {
               <div className="upload-media mt-4">
                 <div className="el-upload el-upload--text is-drag ">
                   <div className="el-upload-dragger">
-                    <img
+                    <Image
                       src="https://d22lwxpnhu2n4a.cloudfront.net/grommet/img/upload.svg"
                       alt="upload media"
                       width="40"

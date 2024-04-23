@@ -1,32 +1,25 @@
-import React from 'react'
-import TableCate from '../../assets/svg/tabler_category.svg'
-import UserCrown from '../../assets/svg/iconoir_user-crown.svg'
-import moment from 'moment'
-import { Link } from 'react-router-dom'
-import { IProductState } from './prdDetailInterface'
-import { SquareLogoET } from 'utils/svgExport'
+import React from "react";
+import TableCate from "../../assets/svg/tabler_category.svg";
+import UserCrown from "../../assets/svg/iconoir_user-crown.svg";
+import moment from "moment";
+import Link from "next/link";
+import { IProductState } from "./prdDetailInterface";
+import { SquareLogoET } from "@/utils/svgExport";
+import Image from "next/image";
 
 interface VendorDescProps {
-  product: IProductState
-  callback: () => void
+  product: IProductState;
+  callback: () => void;
 }
 
 const VendorDesc = ({ product, callback }: VendorDescProps) => {
-  const matchRoute = window.location.pathname.split('/')[1]
+  const matchRoute = window.location.pathname.split("/")[1];
   return (
     <div className="mt-[20px] pb-5 border-b border-gray-2400">
-      <div
-        className={`w-full ${
-          matchRoute === 'brands-products' ? 'sm:max-w-[563px]' : ''
-        } md:mt-0`}
-      >
+      <div className={`w-full ${matchRoute === "brands-products" ? "sm:max-w-[563px]" : ""} md:mt-0`}>
         <div className="flex justify-between">
           <div className="flex">
-            <img
-              src={UserCrown}
-              alt=""
-              className="mr-4 w-6 shrink-0 self-start"
-            />
+            <Image src={UserCrown} alt="" className="mr-4 w-6 shrink-0 self-start" />
             <div>
               <span className="font-[RobotoBold]  font-bold leading-[18px] text-[15px] text-[--gray-text]">
                 Created by
@@ -37,34 +30,33 @@ const VendorDesc = ({ product, callback }: VendorDescProps) => {
               <div
                 className="mt-1 cursor-pointer font-medium text-[12px] leading-5 underline text-[--gray-text]"
                 onClick={() => {
-                  document.body.classList.add('overflow-hidden')
-                  callback && callback()
+                  document.body.classList.add("overflow-hidden");
+                  callback && callback();
                 }}
               >
                 Our Story
               </div>
             </div>
           </div>
-          <img
+          <Image
             src={`${process.env.NEXT_PUBLIC_BE_URL}${product?.attributes.ourStory?.founderImage.data?.attributes.url}`}
             alt=""
             className="h-20 w-20 shrink-0 rounded-full object-cover md:h-16 md:w-16"
+            width={0}
+            height={0}
+            sizes="100vw"
           />
         </div>
         <div className="mt-6 flex">
-          <img
-            src={TableCate}
-            alt=""
-            className="mr-4 w-6 shrink-0 self-start"
-          />
+          <Image src={TableCate} alt="" className="mr-4 w-6 shrink-0 self-start" />
           <div>
             <span className="mb-1.5 font-[RobotoBold]  font-bold leading-[18px] text-[15px] text-[--gray-text]">
               Categories
             </span>
             <div>
               <Link
-                to={
-                  matchRoute === 'products'
+                href={
+                  matchRoute === "products"
                     ? `${window.location.origin}?category=${product?.attributes?.category?.data?.attributes.slug}`
                     : `${window.location.origin}/brands?category=${product?.attributes?.category?.data?.attributes.slug}`
                 }
@@ -78,25 +70,19 @@ const VendorDesc = ({ product, callback }: VendorDescProps) => {
           </div>
         </div>
         <div className="mt-6 flex">
-          <img
-            src={SquareLogoET}
-            alt=""
-            className="mr-4 w-6 shrink-0 self-start"
-          />
+          <Image src={SquareLogoET} alt="" className="mr-4 w-6 shrink-0 self-start" />
           <div>
             <span className="font-[RobotoBold] font-bold leading-[18px] text-[15px] text-[--gray-text]">
               Launched on ET Wishlist
             </span>
             <div className="mt-1 text-[14px] leading-5 text-[--text-gray] font-normal">
-              {product?.attributes.launchDate
-                ? moment(product?.attributes.launchDate).format('LL')
-                : ''}
+              {product?.attributes.launchDate ? moment(product?.attributes.launchDate).format("LL") : ""}
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VendorDesc
+export default VendorDesc;

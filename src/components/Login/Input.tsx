@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { forwardRef } from "react";
 
 export interface IInputProps {
@@ -41,7 +42,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
         <div className="whitespace-nowrap R-body-small text-[--gray]">{label}</div>
         <div className="flex flex-col items-stretch space-y-2">
           <div className="h-[36px] rounded-[6px] border-[1px] p-[6px_8px] border-[--gray-line] flex justify-between items-center bg-[--gray-bg-hover] space-x-2">
-            {startIcon && startIcon !== "" && <img src={startIcon} alt="" className="h-[24px] w-[24px] object-cover" />}
+            {startIcon && startIcon !== "" && <Image src={startIcon} alt="" className="h-[24px] w-[24px] object-cover" />}
             <input
               ref={ref}
               autoComplete={autoComplete}
@@ -53,7 +54,7 @@ const Input = forwardRef<HTMLInputElement, IInputProps>(
             />
 
             {endIcon && endIcon !== "" && (
-              <img src={endIcon} alt="" className="h-[24px] w-[24px] object-cover cursor-pointer" onClick={() => endAction && endAction()} />
+              <Image src={endIcon} alt="" className="h-[24px] w-[24px] object-cover cursor-pointer" onClick={() => endAction && endAction()} />
             )}
           </div>
           <div className="flex justify-end">

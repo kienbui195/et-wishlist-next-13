@@ -82,7 +82,7 @@ const ButtonAvatar = () => {
             className=" h-[50px] w-[50px] border-[1px] border-[--gray-line] rounded-full p-2 hover:bg-[--gray-line] hover:cursor-pointer flex justify-center items-center"
             onClick={() => setShowDropdown(!showDropdown)}
           >
-            {/* <img src={DefaultAvatar} alt="" /> */}
+            {/* <Image src={DefaultAvatar} alt="" /> */}
             <AvatarComponent
               username={userInfo.last_name && userInfo.first_name ? `${userInfo.first_name} ${userInfo.last_name}` : userInfo.email}
               fontSize={22}

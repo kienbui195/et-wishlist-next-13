@@ -1,76 +1,66 @@
-import CustomButton from 'app/ClipPage/CustomButton'
-import { useAdminContext } from 'context/adminContext'
-import { TCurrency, TDiscountCodeStatus } from './prdDetailInterface'
-import * as React from 'react'
-import { formatDataNumber, getCurrencyCode } from 'utils/function'
-import {
-  CloseButton,
-  CurationBookmark,
-  CurationBookmarked,
-  UpVote,
-  VotedIcon,
-} from 'utils/svgExport'
-import { RootState } from 'app/store'
-import { useSelector } from 'react-redux'
-import { ENUM_WL_SYS_CONFIG } from 'utils/constants'
+'use client'
+
+import { useAlertContext } from "@/context/alertContext";
+import { TCurrency, TDiscountCodeStatus } from "./prdDetailInterface";
+import * as React from "react";
+import { formatDataNumber, getCurrencyCode } from "@/utils/function";
+import { CloseButton, CurationBookmark, CurationBookmarked, UpVote, VotedIcon } from "@/utils/svgExport";
+import { RootState } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { ENUM_WL_SYS_CONFIG } from "@/utils/constants";
+import Image from "next/image";
+import CustomButton from "@/app/clips/CustomButton";
 
 interface IVoteLandMobileProps {
-  discountCode?: string
-  prodPageLink?: string
-  prodLink?: string
-  isVoted?: boolean
-  discountStatus?: TDiscountCodeStatus | string
-  prodPrice: number
-  prodCurrency: TCurrency
-  isBookmark?: boolean
-  votes: number
-  handleVote?: () => void
-  handleBookmark?: () => void
-  handleUnBookmarked?: () => void
-  disabled?: boolean
-  prodName?: string
-  className?: string
-  isHaveBookmarked?: boolean
-  isDemo?: boolean
-  priceSale?: number
+  discountCode?: string;
+  prodPageLink?: string;
+  prodLink?: string;
+  isVoted?: boolean;
+  discountStatus?: TDiscountCodeStatus | string;
+  prodPrice: number;
+  prodCurrency: TCurrency;
+  isBookmark?: boolean;
+  votes: number;
+  handleVote?: () => void;
+  handleBookmark?: () => void;
+  handleUnBookmarked?: () => void;
+  disabled?: boolean;
+  prodName?: string;
+  className?: string;
+  isHaveBookmarked?: boolean;
+  isDemo?: boolean;
+  priceSale?: number;
 }
 
 const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
-  discountCode = '',
-  prodLink = '/',
+  discountCode = "",
+  prodLink = "/",
   isVoted = false,
   prodPrice = 0,
-  discountStatus = 'ACTIVE',
-  prodCurrency = 'USD',
+  discountStatus = "ACTIVE",
+  prodCurrency = "USD",
   isBookmark = false,
   votes = 0,
   handleBookmark,
   handleUnBookmarked,
   handleVote,
   disabled = false,
-  prodName = '',
-  className = '',
-  prodPageLink = '/',
+  prodName = "",
+  className = "",
+  prodPageLink = "/",
   isHaveBookmarked = true,
   isDemo = false,
   priceSale,
 }) => {
-  const [showTips, setShowTips] = React.useState(false)
-  const { showAlert } = useAdminContext()
-  const wlMemberType = useSelector(
-    (state: RootState) => state.user.user
-  ).wl_member_type
+  const [showTips, setShowTips] = React.useState(false);
+  const { showAlert } = useAlertContext();
+  const wlMemberType = useSelector((state: RootState) => state.user.user).wl_member_type;
 
-  const salePer =
-    wlMemberType && wlMemberType.id === ENUM_WL_SYS_CONFIG.SUBSCRIBED_ET_MEMBER
-      ? 40
-      : 20
+  const salePer = wlMemberType && wlMemberType.id === ENUM_WL_SYS_CONFIG.SUBSCRIBED_ET_MEMBER ? 40 : 20;
   // const priceSale = Math.ceil(prodPrice - prodPrice * (salePer / 100))
-  const menuBarDisplay = useSelector(
-    (state: RootState) => state.menuBarDisplay.isShow
-  )    
+  const menuBarDisplay = useSelector((state: RootState) => state.menuBarDisplay.isShow);
 
-  if (menuBarDisplay) return null
+  if (menuBarDisplay) return null;
 
   return (
     <div
@@ -81,11 +71,11 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
         <div className="w-full flex justify-center items-center">
           <div
             className={`${
-              showTips ? 'absolute -top-[130px]' : 'hidden'
+              showTips ? "absolute -top-[130px]" : "hidden"
             } mx-3.5 overflow-hidden rounded-xl border border-gray-1350 bg-gray-2150 p-5 pr-12 shadow-voteBarInfo md:hidden w-fit`}
           >
             <div>
-              <img
+              <Image
                 onClick={() => setShowTips(false)}
                 src={CloseButton}
                 alt=""
@@ -93,22 +83,21 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
                 height="14"
                 className="absolute right-2 top-2 h-3.5 w-3.5 cursor-pointer"
               />
-              {discountCode !== '' ? (
+              {discountCode !== "" ? (
                 <div className="text-15 leading-normal text-slate-1150">
-                  Support{' '}
+                  Support{" "}
                   <span className="font-semibold" title={`${prodName}`}>
-                    {prodName}{' '}
+                    {prodName}{" "}
                   </span>
-                  with an upvote and get a unique discount code to use while on
-                  their website.{' '}
+                  with an upvote and get a unique discount code to use while on their website.{" "}
                 </div>
               ) : (
                 <div className="text-15 leading-normal text-slate-1150">
-                  Support{' '}
+                  Support{" "}
                   <span className="font-semibold" title={`${prodName}`}>
-                    {prodName}{' '}
+                    {prodName}{" "}
                   </span>
-                  with an upvote or save your bookmarks{' '}
+                  with an upvote or save your bookmarks{" "}
                 </div>
               )}
             </div>
@@ -117,9 +106,9 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
       </div>
       {/* TODO: header */}
       <div className="flex  text-xl font-semibold leading-none text-slate-1150 font-[RobotoBold]">
-        {`${isVoted ? 'Thanks for voting!' : 'UpVote Or Bookmark'}`}
-        <img
-          src="https://d22lwxpnhu2n4a.cloudfront.net/grommet/img/info.svg"
+        {`${isVoted ? "Thanks for voting!" : "UpVote Or Bookmark"}`}
+        <Image
+          src="https://d22lwxpnhu2n4a.cloudfront.net/grommet/Image/info.svg"
           alt="info"
           width={15}
           height={15}
@@ -164,46 +153,44 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
         <div className="flex flex-col space-y-2 items-stretch w-full">
           <div
             className={`${
-              discountCode !== '' ? 'flex' : 'hidden'
+              discountCode !== "" ? "flex" : "hidden"
             } justify-content h-[64px] w-full cursor-pointer flex-col items-center justify-center space-y-1 
             whitespace-nowrap rounded border px-1  text-xs font-semibold 
             leading-none ${
-              discountStatus === 'ACTIVE'
-                ? 'border-[--state-success] text-[--state-success]'
-                : discountStatus === 'LIMIT'
-                ? 'border-[--state-error] text-[--state-error]'
-                : 'border-[--state-warning] text-[--state-warning]'
+              discountStatus === "ACTIVE"
+                ? "border-[--state-success] text-[--state-success]"
+                : discountStatus === "LIMIT"
+                ? "border-[--state-error] text-[--state-error]"
+                : "border-[--state-warning] text-[--state-warning]"
             }`}
             onClick={() => {
-              navigator.clipboard.writeText(discountCode)
-              showAlert('success', 'Copy Success!')
+              navigator.clipboard.writeText(discountCode);
+              showAlert("success", "Copy Success!");
             }}
           >
             <div>
-              {discountStatus === 'ACTIVE'
-                ? 'CLICK TO COPY CODE'
-                : discountStatus === 'LIMIT'
-                ? 'YOUR DISCOUNT CODE IS APPLIED'
-                : 'YOUR DISCOUNT CODE IS EXPIRED'}
+              {discountStatus === "ACTIVE"
+                ? "CLICK TO COPY CODE"
+                : discountStatus === "LIMIT"
+                ? "YOUR DISCOUNT CODE IS APPLIED"
+                : "YOUR DISCOUNT CODE IS EXPIRED"}
             </div>
-            <div className="text-lg font-bold leading-none font-[RobotoBold]">
-              {discountCode}
-            </div>
+            <div className="text-lg font-bold leading-none font-[RobotoBold]">{discountCode}</div>
           </div>
           {/* TODO: button */}
           <div className="flex space-x-2 items-center">
-            {discountCode === '' ? (
+            {discountCode === "" ? (
               <CustomButton
                 className="flex-1 w-full !h-[44px]"
-                type={isVoted ? 'normal' : 'primary'}
+                type={isVoted ? "normal" : "primary"}
                 disabled={disabled}
                 onClick={
                   !isDemo
                     ? () => {
                         if (isVoted) {
-                          window.open(prodLink, '_blank')
+                          window.open(prodLink, "_blank");
                         } else {
-                          handleVote && handleVote()
+                          handleVote && handleVote();
                         }
                       }
                     : () => {}
@@ -214,7 +201,7 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
                       <div className="flex items-center space-x-2 ">
                         <span>{`Buy Now`}</span>
                         <div>
-                          <img src={VotedIcon} alt="" />
+                          <Image src={VotedIcon} alt="" />
                         </div>
                         <span>{formatDataNumber(votes, 0)}</span>
                       </div>
@@ -222,7 +209,7 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
                       <div className="flex items-center space-x-2 ">
                         <span>{`UpVote`}</span>
                         <div>
-                          <img src={UpVote} alt="" />
+                          <Image src={UpVote} alt="" />
                         </div>
                         <span>{formatDataNumber(votes, 0)}</span>
                       </div>
@@ -233,30 +220,28 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
             ) : (
               <CustomButton
                 className="flex-1 w-full !h-[44px] "
-                type={
-                  isVoted && discountStatus === 'ACTIVE' ? 'normal' : 'primary'
-                }
+                type={isVoted && discountStatus === "ACTIVE" ? "normal" : "primary"}
                 disabled={disabled}
                 onClick={
                   !isDemo
                     ? () => {
-                        if (isVoted && discountStatus === 'ACTIVE') {
-                          window.open(prodLink, '_blank')
+                        if (isVoted && discountStatus === "ACTIVE") {
+                          window.open(prodLink, "_blank");
                         } else {
-                          handleVote && handleVote()
+                          handleVote && handleVote();
                         }
                       }
                     : () => {}
                 }
                 label={
                   <div className="font-semibold whitespace-nowrap font-[RobotoBold]">
-                    {discountStatus === 'ACTIVE' ? (
-                      'Buy With Discount'
+                    {discountStatus === "ACTIVE" ? (
+                      "Buy With Discount"
                     ) : (
                       <div className="flex items-center space-x-2 ">
                         <span>{`UpVote `}</span>
                         <div>
-                          <img src={UpVote} alt="" />
+                          <Image src={UpVote} alt="" />
                         </div>
                         <span>{formatDataNumber(votes, 0)}</span>
                       </div>
@@ -269,10 +254,10 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
             {!isVoted && !isHaveBookmarked && (
               <CustomButton
                 className="!w-fit !h-[44px]"
-                type={'normal'}
+                type={"normal"}
                 disabled={disabled}
                 onClick={() => {
-                  window.open(prodPageLink, '_blank')
+                  window.open(prodPageLink, "_blank");
                 }}
                 label={<span className="font-[RobotoBold]">Buy Now</span>}
               />
@@ -280,7 +265,7 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
 
             {isHaveBookmarked && (
               <div
-                className={`${discountCode === '' ? 'flex' : 'hidden'}`}
+                className={`${discountCode === "" ? "flex" : "hidden"}`}
                 onClick={
                   !isDemo
                     ? !disabled && isBookmark
@@ -289,7 +274,7 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
                     : () => {}
                 }
               >
-                <img
+                <Image
                   src={isBookmark ? CurationBookmarked : CurationBookmark}
                   alt=""
                   className="cursor-pointer h-[30px] w-[30px]"
@@ -300,7 +285,7 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VoteLandMobile
+export default VoteLandMobile;

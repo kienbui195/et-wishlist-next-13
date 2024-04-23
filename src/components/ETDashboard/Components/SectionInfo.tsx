@@ -24,7 +24,7 @@ const SectionInfo:FC<ISectionInfoProps> = ({
       </div>
       {/* <div className="flex-shrink-0">
         <div className="flex h-6 items-center justify-center rounded-full border border-gray-1150 bg-gray-1150/10 px-3">
-          <img
+          <Image
             src="https://d22lwxpnhu2n4a.cloudfront.net/grommet/img/delta-neutral.svg"
             alt=""
           />

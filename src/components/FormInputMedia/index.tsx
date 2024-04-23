@@ -1,100 +1,97 @@
-import apis from 'apis'
-import { useAdminContext } from 'context/adminContext'
-import { ChangeEvent, FC, Fragment, useEffect, useRef, useState } from 'react'
+import apis from "@/apis";
+import { useAlertContext } from "@/context/alertContext";
+import Image from "next/image";
+import { ChangeEvent, FC, Fragment, useEffect, useRef, useState } from "react";
 
 export interface IInputMediaProps {
-  label?: string
-  extraLabel?: string
-  buttonLabel?: string
-  value?: any
-  onChange?: (value: any) => void
-  required?: boolean
-  disabled?: boolean
-  error?: boolean
-  labelError?: string
-  className?: string
-  hint?: string
-  width?: string
-  accept: string
-  uploadMultiple?: boolean
-  showPreview?: boolean
-  minHeight?: number
-  minWidth?: number
-  maxDuration?: number
-  maxSize?: number
+  label?: string;
+  extraLabel?: string;
+  buttonLabel?: string;
+  value?: any;
+  onChange?: (value: any) => void;
+  required?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+  labelError?: string;
+  className?: string;
+  hint?: string;
+  width?: string;
+  accept: string;
+  uploadMultiple?: boolean;
+  showPreview?: boolean;
+  minHeight?: number;
+  minWidth?: number;
+  maxDuration?: number;
+  maxSize?: number;
 }
 
 const FormInputMedia: FC<IInputMediaProps> = ({
   required = false,
   label,
   extraLabel,
-  buttonLabel = 'Upload Image',
+  buttonLabel = "Upload Image",
   value,
   onChange,
-  className = '',
-  accept = 'image/*',
+  className = "",
+  accept = "image/*",
   uploadMultiple = false,
   showPreview = true,
   error = false,
-  labelError = '',
+  labelError = "",
   minHeight = 200,
   minWidth = 200,
   maxDuration = 60,
   maxSize = 60,
 }) => {
-  const { showAlert } = useAdminContext()
-  const inputFileRef = useRef<HTMLInputElement>(null)
-  const buttonInputFileRef = useRef<HTMLButtonElement>(null)
-  const [filePreview, setFilePreview] = useState<string | null>(null)
-  const [buttonLoading, setButtonLoading] = useState<boolean>(false)
+  const { showAlert } = useAlertContext();
+  const inputFileRef = useRef<HTMLInputElement>(null);
+  const buttonInputFileRef = useRef<HTMLButtonElement>(null);
+  const [filePreview, setFilePreview] = useState<string | null>(null);
+  const [buttonLoading, setButtonLoading] = useState<boolean>(false);
 
   const clearInput = () => {
     if (inputFileRef.current) {
-      inputFileRef.current.value = ''
+      inputFileRef.current.value = "";
     }
-  }
+  };
 
   const validateImage = async (file: File) => {
-    let error = false
+    let error = false;
     return new Promise((resolve) => {
-      const image = new Image()
-      image.src = URL.createObjectURL(file)
+      const image = document.createElement("img");
+      image.src = URL.createObjectURL(file);
 
       image.onload = () => {
-        const width = image.width
-        const height = image.height
-        error = width < minWidth || height < minHeight
-        error && showAlert('error', 'Image resolution must be at least 200x200')
-        resolve({ error })
-      }
+        const width = image.width;
+        const height = image.height;
+        error = width < minWidth || height < minHeight;
+        error && showAlert("error", "Image resolution must be at least 200x200");
+        resolve({ error });
+      };
 
       image.onerror = () => {
-        console.error(`Error loading image: ${file.name}`)
-        showAlert('error', `Error loading image: ${file.name}`)
-        resolve({ error: true })
-      }
-    })
-  }
+        console.error(`Error loading image: ${file.name}`);
+        showAlert("error", `Error loading image: ${file.name}`);
+        resolve({ error: true });
+      };
+    });
+  };
 
   const validateVideo = async (file: File) => {
-    let error = false
+    let error = false;
     return new Promise((resolve) => {
-      const video = document.createElement('video')
-      video.preload = 'metadata'
-      video.src = URL.createObjectURL(file)
+      const video = document.createElement("video");
+      video.preload = "metadata";
+      video.src = URL.createObjectURL(file);
       video.onloadedmetadata = () => {
-        const { duration } = video
-        const size = file.size / (1024 * 1024)
-        error = duration > maxDuration || size > maxSize
-        error &&
-          showAlert(
-            'error',
-            `Video must be ${maxDuration} seconds and ${maxSize}mb or less.`
-          )
-        resolve({ error })
-      }
-    })
-  }
+        const { duration } = video;
+        const size = file.size / (1024 * 1024);
+        error = duration > maxDuration || size > maxSize;
+        error && showAlert("error", `Video must be ${maxDuration} seconds and ${maxSize}mb or less.`);
+        resolve({ error });
+      };
+    });
+  };
 
   // const validateMultipleImages = async (files: FileList) => {
   //   const errors = [];
@@ -109,18 +106,18 @@ const FormInputMedia: FC<IInputMediaProps> = ({
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (uploadMultiple) {
-      const { files } = e.target
+      const { files } = e.target;
       if (files) {
         // TODO: check FileList images size
         // const res: any = accept.startsWith('image/')
         //   ? await validateMultipleImages(files)
         //   : {}
         // console.log(res)
-        setButtonLoading(true)
+        setButtonLoading(true);
         apis
           .uploadMultiImage(files)
           .then((res) => {
-            const { data } = res
+            const { data } = res;
             data.length > 0 &&
               onChange &&
               onChange(
@@ -129,31 +126,29 @@ const FormInputMedia: FC<IInputMediaProps> = ({
                   name: item.name,
                   url: item.url,
                 }))
-              )
-            clearInput()
-            setButtonLoading(false)
+              );
+            clearInput();
+            setButtonLoading(false);
           })
           .catch((err) => {
-            console.log(err.message)
-            setButtonLoading(false)
-          })
+            console.log(err.message);
+            setButtonLoading(false);
+          });
       }
     } else {
-      const file = e.target.files && e.target.files[0]
+      const file = e.target.files && e.target.files[0];
       if (file) {
-        const res: any = accept.startsWith('image/')
-          ? await validateImage(file)
-          : await validateVideo(file)
+        const res: any = accept.startsWith("image/") ? await validateImage(file) : await validateVideo(file);
         if (res.error) {
-          clearInput()
-          return
+          clearInput();
+          return;
         }
-        setButtonLoading(true)
-        const reader = new FileReader()
+        setButtonLoading(true);
+        const reader = new FileReader();
         reader.onloadend = () => {
-          setFilePreview(reader.result as string)
-        }
-        reader.readAsDataURL(file)
+          setFilePreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
         apis
           .uploadImage(file)
           .then((res) => {
@@ -162,88 +157,79 @@ const FormInputMedia: FC<IInputMediaProps> = ({
                 id: res.data[0].id,
                 name: res.data[0].name,
                 url: res.data[0].url,
-              })
+              });
             if (!showPreview) {
-              clearInput()
+              clearInput();
             }
-            setButtonLoading(false)
+            setButtonLoading(false);
           })
           .catch((err) => {
-            console.log(err.message)
-            setButtonLoading(false)
-          })
+            console.log(err.message);
+            setButtonLoading(false);
+          });
       }
     }
-  }
+  };
 
   useEffect(() => {
     const handleDragOver = (ev: DragEvent) => {
-      ev.preventDefault()
+      ev.preventDefault();
       if (buttonInputFileRef.current) {
-        buttonInputFileRef.current.classList.remove('border-gray-2550')
-        buttonInputFileRef.current.classList.add('border-black')
+        buttonInputFileRef.current.classList.remove("border-gray-2550");
+        buttonInputFileRef.current.classList.add("border-black");
       }
-    }
+    };
 
     const handleDragLeave = (e: DragEvent) => {
-      e.preventDefault()
+      e.preventDefault();
       if (buttonInputFileRef.current) {
-        buttonInputFileRef.current.classList.add('border-gray-2550')
-        buttonInputFileRef.current.classList.remove('border-black')
+        buttonInputFileRef.current.classList.add("border-gray-2550");
+        buttonInputFileRef.current.classList.remove("border-black");
       }
-    }
+    };
 
     const handleDrop = (e: DragEvent) => {
-      e.preventDefault()
+      e.preventDefault();
       if (buttonInputFileRef.current) {
-        buttonInputFileRef.current.classList.remove('border-gray-2550')
-        buttonInputFileRef.current.classList.add('border-black')
+        buttonInputFileRef.current.classList.remove("border-gray-2550");
+        buttonInputFileRef.current.classList.add("border-black");
       }
-    }
+    };
 
     if (buttonInputFileRef && buttonInputFileRef.current) {
-      buttonInputFileRef.current.addEventListener('dragover', handleDragOver)
-      buttonInputFileRef.current.addEventListener('dragleave', handleDragLeave)
-      buttonInputFileRef.current.addEventListener('drop', handleDrop)
+      buttonInputFileRef.current.addEventListener("dragover", handleDragOver);
+      buttonInputFileRef.current.addEventListener("dragleave", handleDragLeave);
+      buttonInputFileRef.current.addEventListener("drop", handleDrop);
     }
-  }, [buttonInputFileRef])
+  }, [buttonInputFileRef]);
 
   return (
-    <div
-      className={'el-form-item is-required asterisk-right  ' + className}
-      role="group"
-    >
+    <div className={"el-form-item is-required asterisk-right  " + className} role="group">
       {label && (
         <label className="text-[14px] flex space-x-1">
           {label}
-          {required ? (
-            <div className="text-[--state-error]">*</div>
-          ) : (
-            <span className="font-normal">optional</span>
-          )}
+          {required ? <div className="text-[--state-error]">*</div> : <span className="font-normal">optional</span>}
         </label>
       )}
       <div className="el-form-item__content">
         {extraLabel && <p className="text-base text-gray-1150">{extraLabel}</p>}
-        <div className={extraLabel || label ? 'mt-[12px]' : ''}>
+        <div className={extraLabel || label ? "mt-[12px]" : ""}>
           <div className="flex flex-col items-stretch space-y-0.5" tabIndex={0}>
             <button
               ref={buttonInputFileRef}
               className={`h-11 whitespace-nowrap rounded-md border-[1.4px] px-5 text-base font-semibold text-slate-1150 shadow-dashboardButtons ${
-                error ? 'border-[--state-error]' : 'border-gray-2550'
-              } ${
-                buttonLoading ? 'cursor-not-allowed bg-gray-200' : 'bg-white'
-              }`}
+                error ? "border-[--state-error]" : "border-gray-2550"
+              } ${buttonLoading ? "cursor-not-allowed bg-gray-200" : "bg-white"}`}
               onClick={
                 buttonLoading
                   ? () => {}
                   : (e) => {
-                      e.preventDefault()
-                      inputFileRef.current?.click()
+                      e.preventDefault();
+                      inputFileRef.current?.click();
                     }
               }
             >
-              {buttonLoading ? 'Uploading...' : buttonLabel}
+              {buttonLoading ? "Uploading..." : buttonLabel}
             </button>
             <input
               className="hidden"
@@ -254,18 +240,14 @@ const FormInputMedia: FC<IInputMediaProps> = ({
               onChange={handleFileChange}
               multiple={uploadMultiple}
             />
-            {error && (
-              <div className="text-[10px] leading-[10px] text-[--state-error]">
-                {labelError}
-              </div>
-            )}
+            {error && <div className="text-[10px] leading-[10px] text-[--state-error]">{labelError}</div>}
             {showPreview && (
               <Fragment>
                 {filePreview ? (
                   <Fragment>
-                    {accept.startsWith('image/') ? (
+                    {accept.startsWith("image/") ? (
                       <div className="mt-5 h-40 w-40 overflow-hidden rounded-[10px]">
-                        <img
+                        <Image
                           src={filePreview}
                           alt="Preview"
                           className="h-full max-h-full w-full max-w-full object-cover"
@@ -286,11 +268,11 @@ const FormInputMedia: FC<IInputMediaProps> = ({
                   </Fragment>
                 ) : (
                   <Fragment>
-                    {accept.startsWith('image/') ? (
+                    {accept.startsWith("image/") ? (
                       <Fragment>
                         {value?.url && (
                           <div className="mt-5 h-40 w-40 overflow-hidden rounded-[10px]">
-                            <img
+                            <Image
                               src={process.env.NEXT_PUBLIC_BE_URL + value.url}
                               alt="Preview"
                               className="h-full max-h-full w-full max-w-full object-cover"
@@ -322,7 +304,7 @@ const FormInputMedia: FC<IInputMediaProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FormInputMedia
+export default FormInputMedia;

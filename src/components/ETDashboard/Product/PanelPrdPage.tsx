@@ -5,7 +5,7 @@ import FormTextarea from 'components/FormTextarea/FormTextarea'
 import apis from 'apis'
 import { createQuery } from 'utils/function'
 import MultiSelect from 'components/MultiSelect'
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 
 const PanelPrdPage: React.FC<ProductPanelProps> = ({
   data,

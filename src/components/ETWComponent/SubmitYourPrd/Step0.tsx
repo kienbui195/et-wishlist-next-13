@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 import MainImage from 'assets/svg/Step2-image.svg'
 import { ETLogo } from 'utils/svgExport'
 
@@ -128,7 +128,7 @@ const Step0: FC<Step0Props> = ({ step, nextStep, handleSubmit }) => {
               </div>
             </div>
           </div>
-          <img
+          <Image
             src={MainImage}
             alt=""
             width="720"
@@ -144,7 +144,7 @@ const Step0: FC<Step0Props> = ({ step, nextStep, handleSubmit }) => {
               {' '}
               Powered by{' '}
               <Link to={"/"} className="ml-1">
-                <img src={ETLogo} alt="" className="h-[18px]" />
+                <Image src={ETLogo} alt="" className="h-[18px]" />
               </Link>
             </div>
             <a href="/merchant-terms" className="mx-3.5">

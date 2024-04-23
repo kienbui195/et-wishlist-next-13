@@ -21,7 +21,7 @@ const AwardItem: FC<AwardItemProps> = ({ type = "week", href, onClick }) => {
           background: `var(${type === "week" ? "--week-award" : type === "month" ? "--month-award" : "--year-award"})`,
         }}
       >
-        {/* <img src={cupWeek} className="h-[16px] w-[16px]" alt="" /> */}
+        {/* <Image src={cupWeek} className="h-[16px] w-[16px]" alt="" /> */}
         <SvgIcon
           className="md:!w-[12px] md:!h-[12px] !p-0 !h-[32px] !w-[32px]"
           icon={<Image src={type === "week" ? WeekAwardIcon : type === "month" ? MonthAwardIcon : YearAwardIcon} alt="" />}

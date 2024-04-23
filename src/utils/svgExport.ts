@@ -78,7 +78,13 @@ import ConsIcon from '../assets/svg/cons.svg'
 import Loader from '../assets/svg/Loader.svg'
 import EditIcon from '../assets/svg/EditIcon.svg'
 import ETIcon from '../assets/images/etfavicon.png'
-
+import StatusWarning from '../assets/svg/WarningIcon.svg'
+import StatusError from "../assets/svg/StatusE.svg";
+import UpvotedDetail from "../assets/svg/Upvote_Detail.svg";
+import UpvotedDetailHover from "../assets/svg/Upvote_Detail_Hover.svg";
+import CopyClipboard from "../assets/svg/CopyClipboard.svg";
+import CheckSuccess from "../assets/svg/check_success.svg";
+import Dropdown from '../assets/svg/DropdownIcon.svg'
 
 export {
   UpVotePrimary,
@@ -159,5 +165,12 @@ export {
   ConsIcon,
   Loader,
   EditIcon,
-  ETIcon
+  ETIcon,
+  StatusWarning,
+  StatusError,
+  UpvotedDetail,
+  UpvotedDetailHover,
+  CopyClipboard,
+  CheckSuccess,
+  Dropdown
 }

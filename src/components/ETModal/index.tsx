@@ -18,7 +18,7 @@ const ETModal: FC<LoginProps> = ({open = false, onClose, children}) => {
       }`}
     >
       <div className="w-full max-w-[362px] relative bg-white">
-        <img src={CloseButton} alt="" onClick={() => onClose && onClose()} className={"cursor-pointer absolute top-2 right-2"}/>
+        <Image src={CloseButton} alt="" onClick={() => onClose && onClose()} className={"cursor-pointer absolute top-2 right-2"}/>
         {children}
       </div>
     </div>

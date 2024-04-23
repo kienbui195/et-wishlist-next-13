@@ -1,67 +1,51 @@
-import React, { FC, useState } from 'react'
-import { useSwipeable } from 'react-swipeable'
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
-import { variants } from 'utils/animationVariants'
-import VotedIcon from '../../../assets/svg/arrow_up_vote.svg'
-import PrdAwdWeek from '../../../assets/svg/IconAwardWeek.svg'
-import PrdAwdMonth from '../../../assets/svg/IconAwardMonth.svg'
-import PrdAwdYear from '../../../assets/svg/IconAwardYear.svg'
-import './CardDetail.css'
-import ArrowRight from '../../../assets/svg/arrow_right.svg'
-import { useNavigate } from 'react-router-dom'
+"use client";
+
+import React, { FC, useState } from "react";
+import { useSwipeable } from "react-swipeable";
+import { AnimatePresence, motion, MotionConfig } from "framer-motion";
+import { variants } from "@/utils/animationVariants";
+import VotedIcon from "../../../assets/svg/arrow_up_vote.svg";
+import "./CardDetail.css";
+import ArrowRight from "../../../assets/svg/arrow_right.svg";
+import { ICuration } from "@/components/PrdDetailCommon/prdDetailInterface";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export interface CardSliderProps {
-  className?: string
-  heading: string
-  subHeading?: string
-  posts: PrdDetailDataType[]
-  postCardName?: 'card4' | 'card7' | 'card9' | 'card10' | 'card10V2' | 'card11'
-  perView?: 2 | 3 | 4
-  prefixHref?: string
+  className?: string;
+  heading: string;
+  posts: ICuration[];
+  perView?: 2 | 3 | 4;
+  prefixHref?: string;
 }
 
-export interface PrdDetailDataType {
-  votedCount: string | number | undefined
-  award: number[]
-  title: string
-  image: string
-  href: string
-}
-
-const CardSlider: FC<CardSliderProps> = ({
-  heading,
-  subHeading,
-  className = '',
-  posts,
-  perView = 4,
-  prefixHref = '',
-}) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const navigate = useNavigate()
+const CardSlider: FC<CardSliderProps> = ({ heading, className = "", posts, perView = 4, prefixHref = "" }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const router = useRouter();
 
   function changeItemId(newVal: number) {
     if (newVal > currentIndex) {
-      setDirection(1)
+      setDirection(1);
     } else {
-      setDirection(-1)
+      setDirection(-1);
     }
-    setCurrentIndex(newVal)
+    setCurrentIndex(newVal);
   }
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       if (currentIndex < posts?.length - 1) {
-        changeItemId(currentIndex + 1)
+        changeItemId(currentIndex + 1);
       }
     },
     onSwipedRight: () => {
       if (currentIndex > 0) {
-        changeItemId(currentIndex - 1)
+        changeItemId(currentIndex - 1);
       }
     },
     trackMouse: true,
-  })
+  });
 
   return (
     <div className={`nc-CardSlider w-full ${className}`}>
@@ -72,16 +56,13 @@ const CardSlider: FC<CardSliderProps> = ({
       <div className="group/images nc-MySlider w-full pt-5 flex space-x-4 overflow-x-scroll md:overflow-hidden relative">
         <MotionConfig
           transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
+            x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
           }}
         >
           <div className={`relative flow-root`} {...handlers}>
             <div className="flow-root overflow-hidden rounded-xl">
-              <motion.ul
-                initial={false}
-                className="relative whitespace-nowrap flex space-x-4 h-[280px]"
-              >
+              <motion.ul initial={false} className="relative whitespace-nowrap flex space-x-4 h-[280px]">
                 <AnimatePresence initial={false} custom={direction}>
                   {posts.map((_i, indx) => {
                     return (
@@ -99,52 +80,31 @@ const CardSlider: FC<CardSliderProps> = ({
                         style={{
                           width: `calc(1/${perView} * 100%)`,
                         }}
-                        onClick={() => navigate(`/${prefixHref}/${_i.href}`)}
+                        onClick={() => router.push(`/${prefixHref}/${_i.attributes.slug}`)}
                       >
                         <div>
                           <div className="relative pb-[10px]">
                             <Image
-                              src={_i.image}
+                              src={`${process.env.REACT_APP_URL_BE}${_i.attributes.thumbnail?.data?.attributes.url}`}
                               className="w-[200px] h-[200px] object-cover"
                               alt=""
+                              width={0}
+                              height={0}
+                              sizes="100vw"
                             />
                             <div className="absolute bottom-[18px] left-[6px] flex items-center justify-start space-x-1">
                               <div className="flex space-x-1 items-center justify-start wrapperVoted">
                                 <Image src={VotedIcon} alt="" />
-                                <span>{_i.votedCount || 0}</span>
+                                <span>{_i.attributes.votes || 0}</span>
                               </div>
-                              {_i.award.map((award: number, idx: number) => {
-                                let image
-                                switch (award) {
-                                  case 1:
-                                    image = (
-                                      <Image src={PrdAwdWeek} alt="" key={idx} />
-                                    )
-                                    break
-                                  case 2:
-                                    image = (
-                                      <Image src={PrdAwdMonth} alt="" key={idx} />
-                                    )
-                                    break
-                                  case 3:
-                                    image = (
-                                      <Image src={PrdAwdYear} alt="" key={idx} />
-                                    )
-                                    break
-                                  default:
-                                    break
-                                }
-
-                                return image
-                              })}
                             </div>
                           </div>
-                          <div className="R-home-content line-clamp-2 text-ellipsis cardDetailTitle text-[--gray-text]">
-                            {_i.title}
+                          <div className="R-home-content text-ellipsis line-clamp-2 cardDetailTitle text-[--gray-text]">
+                            {_i.attributes.name}
                           </div>
                         </div>
                       </motion.li>
-                    )
+                    );
                   })}
                 </AnimatePresence>
               </motion.ul>
@@ -155,11 +115,7 @@ const CardSlider: FC<CardSliderProps> = ({
               className="absolute top-[28px] left-0 w-[56px] h-[259px] items-center justify-center bgBtnSlider hidden group-hover/images:flex"
               onClick={() => changeItemId(currentIndex - 1)}
             >
-              <Image
-                src={ArrowRight}
-                alt=""
-                className="transition-all rotate-180"
-              />
+              <Image src={ArrowRight} alt="" className="transition-all rotate-180" />
             </button>
           ) : null}
 
@@ -174,7 +130,7 @@ const CardSlider: FC<CardSliderProps> = ({
         </MotionConfig>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CardSlider
+export default CardSlider;

@@ -1,23 +1,18 @@
-import React from 'react'
-import { ProductPanelProps } from './type'
-import Dropdown from 'components/CustomDropdown'
-import FormInputMedia from 'components/FormInputMedia'
-import BrandDotWhiteSvg from 'assets/svg/BrandDotWhite.svg'
+import React from "react";
+import { ProductPanelProps } from "./type";
+import Dropdown from "@/components/CustomDropdown";
+import FormInputMedia from "@/components/FormInputMedia";
+import BrandDotWhiteSvg from "assets/svg/BrandDotWhite.svg";
+import Image from "next/image";
 
-const PanelImages: React.FC<ProductPanelProps> = ({
-  data,
-  onSetState,
-  isCreate,
-  errors,
-}) => {
-
+const PanelImages: React.FC<ProductPanelProps> = ({ data, onSetState, isCreate, errors }) => {
   const handleDeleteImage = (idx: number) => {
     const images = [...data.images];
     if (idx >= 0 && idx < images.length) {
-      const newImages = images.filter((item, i) => i !== idx)
-      onSetState((preState) => ({ ...preState, images: newImages }))
+      const newImages = images.filter((item, i) => i !== idx);
+      onSetState((preState) => ({ ...preState, images: newImages }));
     }
-  }
+  };
 
   const handleMakePrimary = (idx: number) => {
     const images = [...data.images];
@@ -26,31 +21,18 @@ const PanelImages: React.FC<ProductPanelProps> = ({
     }
     const primaryImage = images[idx];
     const newImages = [primaryImage, ...images.filter((item, i) => i !== idx)];
-    onSetState((preState) => ({ ...preState, images: newImages }))
+    onSetState((preState) => ({ ...preState, images: newImages }));
   };
 
   return (
-    <div
-      id="pane-Images"
-      className="el-tab-pane"
-      role="tabpanel"
-      aria-hidden="true"
-      aria-labelledby="tab-Images"
-    >
+    <div id="pane-Images" className="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-Images">
       <div>
-        <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">
-          Product Page Gallery
-        </h2>
+        <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">Product Page Gallery</h2>
         <h3 className="mt-2.5 text-base leading-tight text-gray-1150">
-          To win more votes, use beautiful, high-quality images that highlight
+          {`To win more votes, use beautiful, high-quality images that highlight
           your product's unique features, packaging, and functionality, as well
-          as your core customers using it.{' '}
-          <a
-            target="_blank"
-            href='/'
-            className="text-green-950 underline"
-            rel='noreferrer'
-          >
+          as your core customers using it.`}
+          <a target="_blank" href="/" className="text-green-950 underline" rel="noreferrer">
             See best practices here.
           </a>
         </h3>
@@ -62,7 +44,7 @@ const PanelImages: React.FC<ProductPanelProps> = ({
               key={idx}
               className="relative h-[144px] w-[130px] rounded-md first:col-span-2 first:row-span-2 first:h-[293px] first:w-[265px]"
             >
-              <img
+              <Image
                 src={process.env.NEXT_PUBLIC_BE_URL + item.url}
                 alt=""
                 className="h-full w-full object-cover rounded-md"
@@ -73,23 +55,23 @@ const PanelImages: React.FC<ProductPanelProps> = ({
                   list={[
                     {
                       id: 1,
-                      name: 'Make Primary',
+                      name: "Make Primary",
                       onClick: () => {
-                        handleMakePrimary(idx)
+                        handleMakePrimary(idx);
                       },
                     },
                     {
                       id: 2,
-                      name: 'Delete Image',
+                      name: "Delete Image",
                       onClick: () => {
-                        handleDeleteImage(idx)
+                        handleDeleteImage(idx);
                       },
                     },
                   ]}
                 />
               </div>
             </div>
-          )
+          );
         })}
       </div>
       <div className="el-form-item is-required asterisk-right mt-[31px] h-16">
@@ -102,15 +84,15 @@ const PanelImages: React.FC<ProductPanelProps> = ({
           onChange={(val) => {
             onSetState((preState) => ({
               ...preState,
-              images: [...preState.images, ...val]
-            }))
+              images: [...preState.images, ...val],
+            }));
           }}
-          error={errors?.mediaImages !== ''}
+          error={errors?.mediaImages !== ""}
           labelError={errors?.mediaImages}
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PanelImages
+export default PanelImages;

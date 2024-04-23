@@ -1,7 +1,8 @@
-import { IDropdownItem } from 'data/wl-types'
+import { IDropdownItem } from '@/data/wl-types'
 import React, { ChangeEvent, FC, useEffect, useRef, useState } from 'react'
 import Dropdown from '../../assets/svg/DropdownIcon.svg'
 import s from './style.module.css'
+import Image from 'next/image'
 
 interface IPhoneNumberInputProps {
   label: string
@@ -127,7 +128,7 @@ const PhoneNumberInput: FC<IPhoneNumberInputProps> = ({
                 <div className="font-[400] text-[15px] leading-[15px] text-[--gray-text] select-none flex-1">
                   {selected || placeholder}
                 </div>
-                <img
+                <Image
                   src={dropdownIcon || Dropdown}
                   className={`h-[24px] w-[24px] object-contain transform duration-300 ${
                     open ? 'rotate-180' : ''

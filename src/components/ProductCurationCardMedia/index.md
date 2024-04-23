@@ -36,14 +36,14 @@
               </div>
               <div>
                 {mutedVideo ? (
-                  <img
+                  <Image
                     onClick={() => dispatch(setMutedVideo(false))}
                     alt=""
                     className="h-6 w-6 absolute z-10 right-[13px] top-[9px] cursor-pointer"
                     src={MuteOn}
                   />
                 ) : (
-                  <img
+                  <Image
                     onClick={() => dispatch(setMutedVideo(true))}
                     alt=""
                     className="h-6 w-6 absolute z-10 right-[13px] top-[9px] cursor-pointer"

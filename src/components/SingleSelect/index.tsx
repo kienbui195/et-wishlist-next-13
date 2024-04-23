@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import s from './style.module.css'
-import { IDropdownItem } from 'data/wl-types'
-import Dropdown from '../../assets/svg/DropdownIcon.svg'
-import { generateUID } from 'utils/function'
+import { IDropdownItem } from '@/data/wl-types'
+import { generateUID } from '@/utils/function'
+import Image from 'next/image'
+import { Dropdown } from '@/utils/svgExport'
 
 export interface ISingleSelectProps {
   onChange?: (val: IDropdownItem) => void
@@ -114,7 +115,7 @@ const SingleSelect: FC<ISingleSelectProps> = ({
         >
           <div className="flex justify-between items-center space-x-3 w-full">
             {startIcon && (
-              <img
+              <Image
                 src={startIcon}
                 alt=""
                 className="cursor-default w-[24px] h-[24px] object-contain"
@@ -125,7 +126,7 @@ const SingleSelect: FC<ISingleSelectProps> = ({
             >
               {!textHidden ? selected || placeholder : ''}
             </div>
-            <img
+            <Image
               src={dropdownIcon || Dropdown}
               className={`h-[24px] w-[24px] object-contain transform duration-300 ${
                 open ? 'rotate-180' : ''

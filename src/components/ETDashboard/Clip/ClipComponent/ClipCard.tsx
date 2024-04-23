@@ -49,7 +49,7 @@ const ClipCard: FC<ClipCardProps> = ({ data, onClick, handleDelete }) => {
           <span className="block truncate text-10 font-bold leading-6 text-slate-1150">
             {data.product.name}
           </span>
-          <img src={VerifiedBadgeSvg} alt="" className="ml-[3px] h-2 w-2" />
+          <Image src={VerifiedBadgeSvg} alt="" className="ml-[3px] h-2 w-2" />
         </div>}
         <Dropdown
           dropdownIcon={BrandDotSvg}

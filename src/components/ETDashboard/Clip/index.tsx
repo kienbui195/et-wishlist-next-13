@@ -460,7 +460,7 @@ const BrandClip = () => {
                     src={process.env.NEXT_PUBLIC_BE_URL + form.clip.url}
                   />
                   <div className="absolute right-2.5 top-3.5">
-                    <img
+                    <Image
                       src={MuteOffSvg}
                       alt=""
                       width="22"
@@ -470,7 +470,7 @@ const BrandClip = () => {
                       }`}
                       onClick={() => setMuteClip(true)}
                     />
-                    <img
+                    <Image
                       src={MuteOnSvg}
                       width="18.5"
                       height="15"

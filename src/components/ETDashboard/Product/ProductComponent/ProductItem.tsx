@@ -17,7 +17,7 @@ const ProductItem:FC<ProductItemProps> = ({
       <div className="flex h-10 items-center justify-between">
         <div className="flex">
           <div className="mr-5 h-10 w-10 shrink-0 overflow-hidden rounded-lg">
-            <img
+            <Image
               src={
                 value.thumbnail?.data?.attributes?.url
                   ? `${process.env.NEXT_PUBLIC_BE_URL}${value.thumbnail?.data?.attributes?.url}`

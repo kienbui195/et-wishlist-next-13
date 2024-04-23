@@ -1,76 +1,76 @@
-import React, { FC, useEffect, useRef } from 'react'
-import './ProductDetail.css'
-import CrossIcon from '../../assets/svg/Cross.svg'
-import MuteOff from '../../assets/svg/MuteOff.svg'
-import MuteOn from '../../assets/svg/MuteOn.svg'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'app/store'
-import { setMutedVideo } from 'features/global/mutedVideoSlice'
+import React, { FC, useEffect, useRef } from "react";
+import "./ProductDetail.css";
+import CrossIcon from "../../assets/svg/Cross.svg";
+import MuteOff from "../../assets/svg/MuteOff.svg";
+import MuteOn from "../../assets/svg/MuteOn.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { setMutedVideo } from "@/lib/features/global/mutedVideoSlice";
+import Image from "next/image";
 
 interface IOurStoryModal {
-  onClick?: () => void
-  avatarUrl: string
-  founderName: string
-  storyHeadline: string
-  storyDesc: string
-  storyClipUrl?: string
+  onClick?: () => void;
+  avatarUrl: string;
+  founderName: string;
+  storyHeadline: string;
+  storyDesc: string;
+  storyClipUrl?: string;
 }
 
 const OurStoryModal: FC<IOurStoryModal> = ({
   onClick,
-  avatarUrl = '',
-  founderName = '',
-  storyHeadline = '',
-  storyDesc = '',
-  storyClipUrl = '',
+  avatarUrl = "",
+  founderName = "",
+  storyHeadline = "",
+  storyDesc = "",
+  storyClipUrl = "",
 }) => {
-  const contentRef = useRef<HTMLDivElement>(null)
-  const mutedVideo = useSelector((state: RootState) => state.mutedVideo)
-  const dispatch = useDispatch()
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null);
+  const mutedVideo = useSelector((state: RootState) => state.mutedVideo);
+  const dispatch = useDispatch();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleActionMuteInMobile = (status: boolean) => {
-    dispatch(setMutedVideo(status))
+    dispatch(setMutedVideo(status));
     if (videoRef.current) {
-      videoRef.current.muted = status
+      videoRef.current.muted = status;
     }
-  }
+  };
 
   useEffect(() => {
     const handleVolumeChange = (e: any) => {
       if (e.target.volume === 0 || e.target.muted) {
-        dispatch(setMutedVideo(true))
+        dispatch(setMutedVideo(true));
       } else {
-        dispatch(setMutedVideo(false))
+        dispatch(setMutedVideo(false));
       }
-    }
+    };
 
     if (videoRef.current) {
-      const video = videoRef.current
-      video.addEventListener('volumechange', handleVolumeChange)
+      const video = videoRef.current;
+      video.addEventListener("volumechange", handleVolumeChange);
     }
 
-    return () =>
-      videoRef.current?.removeEventListener('volumechange', handleVolumeChange)
+    return () => videoRef.current?.removeEventListener("volumechange", handleVolumeChange);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoRef.current?.volume, mutedVideo])
+  }, [videoRef.current?.volume, mutedVideo]);
 
   useEffect(() => {
     if (storyDesc && contentRef.current) {
-      contentRef.current.innerHTML = storyDesc.replaceAll('\n', '<br/>') + ''
+      contentRef.current.innerHTML = storyDesc.replaceAll("\n", "<br/>") + "";
     }
-  }, [contentRef, storyDesc])
+  }, [contentRef, storyDesc]);
 
   return (
     <div id="el-id-8149-5" className="el-dialog__body">
-      <img
+      <Image
         src={CrossIcon}
         alt=""
         width="14"
         height="14"
         className="absolute right-5 top-5 z-10 h-3.5 cursor-pointer"
         onClick={() => {
-          onClick && onClick()
+          onClick && onClick();
         }}
       />
       <div className="flex md:flex-row flex-col flex-wrap md:flex-nowrap justify-between">
@@ -79,12 +79,8 @@ const OurStoryModal: FC<IOurStoryModal> = ({
             Our Story
           </div>
           <div className="mt-[26px] flex items-center border-y border-gray-1350 py-[25px]">
-            <img
-              src={
-                avatarUrl !== ''
-                  ? `${process.env.NEXT_PUBLIC_BE_URL}${avatarUrl}`
-                  : 'default-avatar.jpg'
-              }
+            <Image
+              src={avatarUrl !== "" ? `${process.env.NEXT_PUBLIC_BE_URL}${avatarUrl}` : "default-avatar.jpg"}
               alt=""
               className="mr-5 h-[60px] w-[60px] shrink-0 rounded-full object-cover"
             />
@@ -99,7 +95,7 @@ const OurStoryModal: FC<IOurStoryModal> = ({
             <div ref={contentRef} className="inline"></div>
           </div>
         </div>
-        {storyClipUrl && storyClipUrl !== '' && (
+        {storyClipUrl && storyClipUrl !== "" && (
           <div className="relative flex aspect-[9/16] shrink-0 items-center md:w-full w-[50%] overflow-hidden rounded-[10px] bg-black md:ml-[100px] md:max-h-[532px] md:max-w-[300px] mt-4">
             <video
               loop
@@ -110,14 +106,11 @@ const OurStoryModal: FC<IOurStoryModal> = ({
               className="inset-0 h-full object-contain"
               ref={videoRef}
             >
-              <source
-                src={`${process.env.NEXT_PUBLIC_BE_URL}${storyClipUrl}`}
-                type="video/mp4"
-              />
+              <source src={`${process.env.NEXT_PUBLIC_BE_URL}${storyClipUrl}`} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <div className="absolute right-2.5 top-3.5">
-              <img
+              <Image
                 src={mutedVideo ? MuteOn : MuteOff}
                 alt=""
                 width="22"
@@ -130,7 +123,7 @@ const OurStoryModal: FC<IOurStoryModal> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OurStoryModal
+export default OurStoryModal;

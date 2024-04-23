@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import './ProductDetail.css'
 import FAQDot from '../../assets/svg/FAQ_Dot.svg'
+import Image from 'next/image'
 
 interface IFAQProps {
   question: string
@@ -13,7 +14,7 @@ const FAQ: FC<IFAQProps> = ({ question, answer }) => {
       <div className="flex">
         <div className="flex items-baseline text-sm font-bold tracking-wide text-gray-1150">
           <span className="text-[--text-gray]">Q</span>
-          <img
+          <Image
             src={FAQDot}
             alt=""
             height="1"
@@ -31,7 +32,7 @@ const FAQ: FC<IFAQProps> = ({ question, answer }) => {
       <div className="mt-1 flex">
         <div className="flex items-baseline text-sm font-bold tracking-wide text-gray-1150">
           <span className="text-[--text-gray]">A</span>
-          <img
+          <Image
             src={FAQDot}
             height="1"
             width="24"

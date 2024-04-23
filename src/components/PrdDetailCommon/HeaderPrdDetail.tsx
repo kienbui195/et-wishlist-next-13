@@ -1,8 +1,9 @@
 import React from 'react'
 import WorldIcon from '../../assets/svg/world_icon.svg'
 import { IProductState, prdDetailState } from './prdDetailInterface'
-import IconTextButton from 'components/IconTextButton'
-import { ShareV2 } from 'utils/svgExport'
+import IconTextButton from '@/components/IconTextButton'
+import { ShareV2 } from '@/utils/svgExport'
+import Image from 'next/image'
 
 interface HeaderPrdDetailProps {
   product: IProductState
@@ -37,7 +38,7 @@ const HeaderPrdDetail = ({
         <div className="h-14 grow flex items-center justify-end self-end space-x-3">
           <IconTextButton
             className="text-menu-15 text-[--gray-text] sm:!flex !hidden"
-            startIcon={<img src={ShareV2} alt="" width={'24'} height={'24'} />}
+            startIcon={<Image src={ShareV2} alt="" width={'24'} height={'24'} />}
             label="Share"
             onClick={() => {
               document.body.classList.add('overflow-hidden')
@@ -51,7 +52,7 @@ const HeaderPrdDetail = ({
           <IconTextButton
             className="text-menu-15 text-[--gray-text] sm:!flex !hidden"
             startIcon={
-              <img src={WorldIcon} alt="" width={'24'} height={'24'} />
+              <Image src={WorldIcon} alt="" width={'24'} height={'24'} />
             }
             label="Visit Site"
             onClick={() => {

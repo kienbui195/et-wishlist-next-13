@@ -1,5 +1,6 @@
+import Image from 'next/image'
 import * as React from 'react'
-import { VoteIcon } from 'utils/svgExport'
+import { VoteIcon } from '@/utils/svgExport'
 
 interface IButtonUpVote {
   onClick?: () => void
@@ -9,7 +10,7 @@ const ButtonUpVoteCuration: React.FC<IButtonUpVote> = ({ onClick }) => {
   return (
     <div className="relative flex w-24 flex-col items-center justify-start md:h-40 md:w-[130px] transition-all duration-300 ease-in-out group-hover:pt-3 md:group-hover:pt-[30px]">
       <div className="flex h-[30px] w-[30px] shrink-0 scale-[0.77] items-start justify-center overflow-hidden rounded-full bg-[--brand-primary] py-[5px] md:scale-100 ">
-        <img
+        <Image
           src={VoteIcon}
           alt="vote"
           className="vote-icons transition-transform duration-300 group-hover:-translate-y-[29px]"

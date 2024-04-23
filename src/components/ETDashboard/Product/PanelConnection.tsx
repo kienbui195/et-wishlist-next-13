@@ -102,7 +102,7 @@ const PanelConnection: FC<Props> = ({
           <div className="manage-select-block cursor-default-important flex w-full flex-row justify-between">
             <div className="flex flex-row">
               <div className="mr-4">
-                <img
+                <Image
                   className="object-cover"
                   width="50"
                   height="50"
@@ -171,7 +171,7 @@ const PanelConnection: FC<Props> = ({
         <div key={idx} className="manage-select-block flex flex-row justify-between cursor-default-important">
           <div className="flex flex-row">
             <div className="mr-4">
-              <img
+              <Image
                 className="object-cover"
                 width="50"
                 height="50"

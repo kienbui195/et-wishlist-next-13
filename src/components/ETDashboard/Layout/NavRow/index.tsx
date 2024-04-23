@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 interface NavRowProps {
   label: string
   href: string
@@ -24,7 +24,7 @@ const NavRow: React.FC<NavRowProps> = ({
     >
       <div className="flex space-x-[30px] items-center sm:pl-[25px] pl-0 w-full justify-center sm:justify-start">
         <div className='sm:w-[32px] sm:h-[32px] w-[24px] h-[24px]'>
-          <img src={icon} alt="" className='sm:w-[32px] sm:h-[32px] w-[24px] h-[24px]'/>
+          <Image src={icon} alt="" className='sm:w-[32px] sm:h-[32px] w-[24px] h-[24px]'/>
         </div>
         <div className="capitalize sm:flex hidden font-[RobotoBold]">{label}</div>
       </div>

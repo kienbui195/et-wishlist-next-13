@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useEffect, useRef } from 'react'
 import './ProductDetail.css'
 import ArrowDown from '../../assets/svg/Arrow_down.svg'
+import Image from 'next/image'
 
 interface IMoreInfoProps {
   title: string
@@ -38,7 +39,7 @@ const MoreInfo: FC<IMoreInfoProps> = ({
       >
         <span className="text-[--gray-text]">{title}</span>
         <div>
-          <img
+          <Image
             src={ArrowDown}
             alt=""
             className={`transition-all ${isExpanded ? ' rotate-180' : ''}`}

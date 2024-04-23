@@ -65,7 +65,7 @@ const Video: FC<IVideoProps> = ({ title = '', src = '' }) => {
           />
         </video>
         <div className={`absolute top-0 w-full h-full ${play ? 'hidden' : 'flex'} justify-center items-center`}>
-          <img src={VideoPlayBtn} alt="" onClick={handlePlay} />
+          <Image src={VideoPlayBtn} alt="" onClick={handlePlay} />
         </div>
         <div
           className="absolute bottom-5  right-2 videoDuration "

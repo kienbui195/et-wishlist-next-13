@@ -12,7 +12,7 @@ import MiniProduct from 'assets/svg/fluent-mdl2_product.svg'
 import MiniSetting from 'assets/svg/ep_setting.svg'
 import MiniSp from 'assets/svg/heroicons-outline_support.svg'
 import useMediaQuery from 'hooks/useMediaQuery'
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 import s from './style.module.css'
 import { ETLogo } from 'utils/svgExport'
 
@@ -79,7 +79,7 @@ const DashboardLayout = ({ children }: { children?: ReactElement }) => {
         <div className="mb-[27px] sm:ml-[15px] ml-0 flex items-center text-xs font-medium leading-none text-gray-950">
           <span className={width <= 768 ? 'hidden' : 'block'}>Powered by</span>
           <Link to="/#" className="sm:ml-2 ml-0">
-            <img src={ETLogo} className="w-[48px]" alt="" />
+            <Image src={ETLogo} className="w-[48px]" alt="" />
           </Link>
         </div>
       </div>

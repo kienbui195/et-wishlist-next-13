@@ -83,7 +83,7 @@ const Dropdown: FC<IDropdownProps> = ({
           ref={dropdownIconRef}
         >
           <div className="flex justify-between items-center space-x-3 w-full">
-            <img
+            <Image
               src={dropdownIcon || DropdownIcon}
               className="h-[24px] w-[24px] object-contain"
               alt=""

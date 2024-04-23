@@ -3,7 +3,7 @@ import React from 'react'
 import ShopifyApp from '../../../assets/svg/Shopify-app.svg'
 import MainImage from 'assets/svg/Step1.1-image.svg'
 import { ETLogo } from 'utils/svgExport'
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 
 function NotInstallApp() {
   return (
@@ -32,7 +32,7 @@ function NotInstallApp() {
               </div>
               <div className="mt-4 flex items-center">
                 <Link to="https://apps.shopify.com/the-etwishlist">
-                  <img
+                  <Image
                     src={ShopifyApp}
                     alt="shopify app"
                     width="180"
@@ -79,7 +79,7 @@ function NotInstallApp() {
               </div>
             </div>
           </div>
-          <img
+          <Image
             src={MainImage}
             alt=""
             width="720"
@@ -108,7 +108,7 @@ function NotInstallApp() {
               {' '}
               Powered by{' '}
               <a href="/#" className="ml-1 ">
-                <img src={ETLogo} alt="" className="h-[18px]" />
+                <Image src={ETLogo} alt="" className="h-[18px]" />
               </a>
             </div>
             <a href="/merchant-terms" className="mx-3.5">

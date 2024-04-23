@@ -156,7 +156,7 @@ export interface prdDetailState {
   showStory: boolean
   showGallery: boolean
   showSharePrd: boolean
-  selectedGlrImg: number
+  selectedGlrImage: number
   showPrdQT: string
   discount: {
     title: string

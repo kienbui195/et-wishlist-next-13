@@ -321,7 +321,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
       >
         <div className="box-border flex-1 md:!min-w-[450px] md:!w-[450px] w-full md:p-[40px] p-[18px] relative">
           {step === 1 && (
-            <img
+            <Image
               onClick={() => setStep(step - 1)}
               className="absolute top-[16px] left-[16px] cursor-pointer"
               src={GoBackSvg}
@@ -329,7 +329,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
             />
           )}
           <div className="flex md:flex-col md:space-y-6 md:mb-0 mb-[16px] items-center justify-between relative">
-            <img
+            <Image
               src={ETLogoBeta}
               alt=""
               className="h-[48px] object-contain"
@@ -339,7 +339,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
               className="flex md:hidden cursor-pointer absolute -top-2 -right-2"
               onClick={handleClose}
             >
-              <img src={CloseButton} alt="close-icon" />
+              <Image src={CloseButton} alt="close-icon" />
             </div>
             <div className="text-title-18 md:mb-[32px] md:p-0 break-normal text-center mb-0 p-2">
               To discover, vote and discounts, sign in to Wishlist below.
@@ -558,13 +558,13 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
           </form>
         </div>
         <div className="w-full md:!min-w-[450px] md:!w-[450px] flex-1 hidden md:flex md:flex-col md:relative">
-          <img
+          <Image
             onClick={handleClose}
             className="absolute top-[18px] right-[18px] cursor-pointer"
             src={CloseButton}
             alt=""
           />
-          <img
+          <Image
             src={LoginRightImage}
             alt=""
             className="w-[243px] h-[258px] absolute top-[97px] left-[119px]"

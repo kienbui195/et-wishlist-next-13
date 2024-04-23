@@ -72,7 +72,7 @@ const FormInput: FC<IInputProps> = ({
           }`}
         >
           {startIcon && (
-            <img
+            <Image
               src={startIcon}
               alt="startIcon"
               className="h-[24px] w-[24px] object-cover"
@@ -95,7 +95,7 @@ const FormInput: FC<IInputProps> = ({
             type={type}
           />
           {endIcon && (
-            <img
+            <Image
               src={endIcon}
               alt="startIcon"
               className="h-[24px] w-[24px] object-cover cursor-pointer"

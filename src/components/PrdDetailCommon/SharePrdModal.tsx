@@ -1,21 +1,24 @@
-import React from 'react'
-import { IProductState, prdDetailState } from './prdDetailInterface'
-import CrossIcon from '../../assets/svg/Cross.svg'
-import FacebookIcon from '../../assets/svg/Facebook.svg'
-import PinterestIcon from '../../assets/svg/Pinterest.svg'
-import LinkedinIcon from '../../assets/svg/Linkedin.svg'
-import TwitterIcon from '../../assets/svg/Twitter.svg'
-import { Link } from 'react-router-dom'
-import { useAdminContext } from 'context/adminContext'
-import apis from 'apis'
+"use client";
+
+import React from "react";
+import { IProductState, prdDetailState } from "./prdDetailInterface";
+import CrossIcon from "../../assets/svg/Cross.svg";
+import FacebookIcon from "../../assets/svg/Facebook.svg";
+import PinterestIcon from "../../assets/svg/Pinterest.svg";
+import LinkedinIcon from "../../assets/svg/Linkedin.svg";
+import TwitterIcon from "../../assets/svg/Twitter.svg";
+import Link from "next/link";
+import { useAlertContext } from "@/context/alertContext";
+import apis from "@/apis";
+import Image from "next/image";
 
 interface SharePrdModalProps {
-  setPrdDetail: React.Dispatch<React.SetStateAction<prdDetailState>>
-  prdDetail: prdDetailState
-  closeSharePrd: any
-  product: IProductState
-  onShared?: (shares: number) => void
-  isDemo?: boolean
+  setPrdDetail: React.Dispatch<React.SetStateAction<prdDetailState>>;
+  prdDetail: prdDetailState;
+  closeSharePrd: any;
+  product: IProductState;
+  onShared?: (shares: number) => void;
+  isDemo?: boolean;
 }
 
 const SharePrdModal = ({
@@ -26,48 +29,45 @@ const SharePrdModal = ({
   onShared,
   isDemo = false,
 }: SharePrdModalProps) => {
-  const { showAlert } = useAdminContext()
+  const { showAlert } = useAlertContext();
 
   const handleShare = () => {
     apis
-      .update('wl-products', product.id, {
+      .update("wl-products", product.id, {
         data: {
           shares: product.attributes.shares + 1,
         },
       })
       .then((res) => {
-        onShared && onShared(res.data.data.attributes.shares)
+        onShared && onShared(res.data.data.attributes.shares);
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   return (
-    <div className="el-overlay" style={{ zIndex: '2009' }} id="sharePrdModal">
+    <div className="el-overlay" style={{ zIndex: "2009" }} id="sharePrdModal">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="el-id-8149-4"
         aria-describedby="el-id-8149-5"
         className="el-overlay-dialog flex justify-center"
-        style={{ display: 'flex' }}
+        style={{ display: "flex" }}
       >
-        <div
-          className="el-dialog share-product-modal w-full max-w-[700px] mt-[50px] h-[458px]"
-          tabIndex={-1}
-        >
+        <div className="el-dialog share-product-modal w-full max-w-[700px] mt-[50px] h-[458px]" tabIndex={-1}>
           <header className="el-dialog__header hidden">
             <button
               aria-label="Close this dialog"
               className="el-dialog__headerbtn"
               type="button"
               onClick={() => {
-                document.body.classList.remove('overflow-hidden')
+                document.body.classList.remove("overflow-hidden");
                 setPrdDetail({
                   ...prdDetail,
                   showSharePrd: !prdDetail.showSharePrd,
-                })
+                });
               }}
             >
               <i className="el-icon el-dialog__close">
@@ -81,20 +81,17 @@ const SharePrdModal = ({
             </button>
           </header>
           <div id="el-id-4766-7" className="el-dialog__body">
-            <div
-              className="flex w-full justify-end pb-4 pr-5 pt-5"
-              ref={closeSharePrd.current}
-            >
-              <img
+            <div className="flex w-full justify-end pb-4 pr-5 pt-5" ref={closeSharePrd.current}>
+              <Image
                 src={CrossIcon}
                 alt=""
                 className="my-px h-3 w-3 cursor-pointer"
                 onClick={() => {
-                  document.body.classList.remove('overflow-hidden')
+                  document.body.classList.remove("overflow-hidden");
                   setPrdDetail({
                     ...prdDetail,
                     showSharePrd: !prdDetail.showSharePrd,
-                  })
+                  });
                 }}
               />
             </div>
@@ -102,8 +99,8 @@ const SharePrdModal = ({
               Don’t Keep {product?.attributes.name} a Secret!
             </div>
             <div className="break-normal text-center text-base font-normal leading-5 tracking-wide text-[--text-gray] mx-auto max-w-[382px]">
-              Share {product?.attributes.name} with friends or on social media
-              to boost its exposure and support its creators.
+              Share {product?.attributes.name} with friends or on social media to boost its exposure and support its
+              creators.
             </div>
             <div className="relative mb-8 mt-6 flex overflow-hidden rounded-lg border border-gray-1500 bg-white mx-[40px] max-w-full shadow-productShareInfo cardShare">
               <div className="group/items rounded-10 mr-5 flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-10 md:mr-[30px] md:h-[160px] md:w-[160px]">
@@ -115,7 +112,7 @@ const SharePrdModal = ({
                   muted
                   autoPlay
                 ></video>
-                <img
+                <Image
                   src={`${process.env.NEXT_PUBLIC_BE_URL}${product?.attributes.thumbnail?.data?.attributes.url}`}
                   className="h-full max-h-full w-full max-w-full object-cover group-hover/items:hidden"
                   alt=""
@@ -123,10 +120,7 @@ const SharePrdModal = ({
               </div>
               <div className="mr-2 mt-[22px] grow md:mt-0 md:flex md:max-w-[390px] md:flex-col md:justify-center md:pb-[9px] md:pt-2.5">
                 <div className="flex items-center text-xs font-[RobotoBold] font-bold leading-tight text-[--gray-text]">
-                  <h2
-                    title={product?.attributes.name}
-                    className="product-title line-clamp-1 text-ellipsis"
-                  >
+                  <h2 title={product?.attributes.name} className="product-title line-clamp-1 text-ellipsis">
                     {product?.attributes.name}
                   </h2>
                 </div>
@@ -137,27 +131,26 @@ const SharePrdModal = ({
                   {product?.attributes.prodDtl?.productPageHeadline}
                 </div>
                 <div className=" md:flex-wrap hidden md:flex mt-2.5">
-                  {Array.from(product?.attributes?.tags.data || []).map(
-                    (_i: any, idx: number) =>
-                      !isDemo ? (
-                        <Link
-                          key={idx}
-                          onClick={() => {
-                            document.body.classList.remove('overflow-hidden')
-                          }}
-                          to={`/tag/${_i.attributes.slug}`}
-                          className="mb-1 mr-1 flex min-h-[24px] items-center whitespace-normal rounded px-1 py-0.5 text-15 font-semibold leading-4 md:min-h-[20px] md:leading-4 md:text-sm text-[--gray] tagPrd"
-                        >
-                          {_i.attributes.name}
-                        </Link>
-                      ) : (
-                        <div
-                          key={idx}
-                          className="mb-1 mr-1 flex min-h-[24px] items-center whitespace-normal rounded px-1 py-0.5 text-15 font-semibold leading-4 md:min-h-[20px] md:leading-4 md:text-sm text-[--gray] tagPrd"
-                        >
-                          {_i.attributes.name}
-                        </div>
-                      )
+                  {Array.from(product?.attributes?.tags.data || []).map((_i: any, idx: number) =>
+                    !isDemo ? (
+                      <Link
+                        key={idx}
+                        onClick={() => {
+                          document.body.classList.remove("overflow-hidden");
+                        }}
+                        href={`/tag/${_i.attributes.slug}`}
+                        className="mb-1 mr-1 flex min-h-[24px] items-center whitespace-normal rounded px-1 py-0.5 text-15 font-semibold leading-4 md:min-h-[20px] md:leading-4 md:text-sm text-[--gray] tagPrd"
+                      >
+                        {_i.attributes.name}
+                      </Link>
+                    ) : (
+                      <div
+                        key={idx}
+                        className="mb-1 mr-1 flex min-h-[24px] items-center whitespace-normal rounded px-1 py-0.5 text-15 font-semibold leading-4 md:min-h-[20px] md:leading-4 md:text-sm text-[--gray] tagPrd"
+                      >
+                        {_i.attributes.name}
+                      </div>
+                    )
                   )}
                 </div>
                 <div className="mt-2.5 flex flex-wrap"></div>
@@ -166,44 +159,32 @@ const SharePrdModal = ({
             <div className="flex h-[74px] items-center justify-center shadow-productShareNetwork">
               {!isDemo ? (
                 <>
-                  <Link
-                    className="share-network-facebook mr-2 cursor-pointer"
-                    to="/#"
-                  >
-                    <img src={FacebookIcon} alt="" />
+                  <Link className="share-network-facebook mr-2 cursor-pointer" href="/#">
+                    <Image src={FacebookIcon} alt="" />
                   </Link>
-                  <Link
-                    className="share-network-pinterest mr-2 cursor-pointer"
-                    to="/#"
-                  >
-                    <img src={PinterestIcon} alt="" />
+                  <Link className="share-network-pinterest mr-2 cursor-pointer" href="/#">
+                    <Image src={PinterestIcon} alt="" />
                   </Link>
-                  <Link
-                    className="share-network-linkedin mr-2 cursor-pointer"
-                    to="/#"
-                  >
-                    <img src={LinkedinIcon} alt="" />
+                  <Link className="share-network-linkedin mr-2 cursor-pointer" href="/#">
+                    <Image src={LinkedinIcon} alt="" />
                   </Link>
-                  <Link
-                    className="share-network-twitter mr-2 cursor-pointer"
-                    to="/#"
-                  >
-                    <img src={TwitterIcon} alt="" />
+                  <Link className="share-network-twitter mr-2 cursor-pointer" href="/#">
+                    <Image src={TwitterIcon} alt="" />
                   </Link>
                 </>
               ) : (
                 <>
                   <div className="share-network-facebook mr-2 cursor-pointer">
-                    <img src={FacebookIcon} alt="" />
+                    <Image src={FacebookIcon} alt="" />
                   </div>
                   <div className="share-network-pinterest mr-2 cursor-pointer">
-                    <img src={PinterestIcon} alt="" />
+                    <Image src={PinterestIcon} alt="" />
                   </div>
                   <div className="share-network-linkedin mr-2 cursor-pointer">
-                    <img src={LinkedinIcon} alt="" />
+                    <Image src={LinkedinIcon} alt="" />
                   </div>
                   <div className="share-network-twitter mr-2 cursor-pointer">
-                    <img src={TwitterIcon} alt="" />
+                    <Image src={TwitterIcon} alt="" />
                   </div>
                 </>
               )}
@@ -212,9 +193,9 @@ const SharePrdModal = ({
                 onClick={
                   !isDemo
                     ? () => {
-                        showAlert('success', 'Copied!')
-                        navigator.clipboard.writeText(window.location.href)
-                        handleShare()
+                        showAlert("success", "Copied!");
+                        navigator.clipboard.writeText(window.location.href);
+                        handleShare();
                       }
                     : () => {}
                 }
@@ -226,7 +207,7 @@ const SharePrdModal = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SharePrdModal
+export default SharePrdModal;

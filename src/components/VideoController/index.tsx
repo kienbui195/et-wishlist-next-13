@@ -1,23 +1,24 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { formatVideoDuration } from 'utils/function'
-import { PauseButton, PlayButton, MuteOff, MuteOn } from 'utils/svgExport'
+import React, { useState, useRef, useEffect } from "react";
+import { formatVideoDuration } from "@/utils/function";
+import { PauseButton, PlayButton, MuteOff, MuteOn } from "@/utils/svgExport";
+import Image from "next/image";
 
 interface IVideoController {
-  onPlay?: () => void
-  onPause?: () => void
-  onChangeVolume?: (value: number) => void
-  onMuted?: (val: boolean) => void
-  classes?: string
-  isPlay: boolean
-  volume: number
-  duration: number
-  currentTime: number
-  isMuted?: boolean
-  onChangeProgress?: (value: number) => void
+  onPlay?: () => void;
+  onPause?: () => void;
+  onChangeVolume?: (value: number) => void;
+  onMuted?: (val: boolean) => void;
+  classes?: string;
+  isPlay: boolean;
+  volume: number;
+  duration: number;
+  currentTime: number;
+  isMuted?: boolean;
+  onChangeProgress?: (value: number) => void;
 }
 
 const VideoController: React.FC<IVideoController> = ({
-  classes = '',
+  classes = "",
   isPlay = false,
   duration = 0,
   volume = 1,
@@ -29,40 +30,38 @@ const VideoController: React.FC<IVideoController> = ({
   isMuted = false,
   onChangeProgress,
 }) => {
-  const [isHoverMuteButton, setIsHoverMuteButton] = useState(false)
-  const [isHoverVolume, setIsHoverVolume] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const [isHoverMuteButton, setIsHoverMuteButton] = useState(false);
+  const [isHoverVolume, setIsHoverVolume] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChangeProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (isPlay) {
-      onPause && onPause()
-      onChangeProgress && onChangeProgress(+e.target.value)
-      onPlay && onPlay()
+      onPause && onPause();
+      onChangeProgress && onChangeProgress(+e.target.value);
+      onPlay && onPlay();
     } else {
-      onChangeProgress && onChangeProgress(+e.target.value)
+      onChangeProgress && onChangeProgress(+e.target.value);
     }
-  }
+  };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChangeVolume && onChangeVolume(+e.target.value)
-  }
+    onChangeVolume && onChangeVolume(+e.target.value);
+  };
 
   return (
-    <div
-      className={`w-full opacity-95 cursor-default ${classes}`}
-    >
+    <div className={`w-full opacity-95 cursor-default ${classes}`}>
       <div className="flex justify-around items-center space-x-2 bg-black h-12 p-2">
-        <img
+        <Image
           src={isPlay ? PauseButton : PlayButton}
           alt=""
           className="w-6 h-6 cursor-pointer"
           onClick={
             isPlay
               ? () => {
-                  onPause && onPause()
+                  onPause && onPause();
                 }
               : () => {
-                  onPlay && onPlay()
+                  onPlay && onPlay();
                 }
           }
         />
@@ -99,7 +98,7 @@ const VideoController: React.FC<IVideoController> = ({
             onMouseEnter={() => setIsHoverMuteButton(true)}
             onMouseLeave={() => setIsHoverMuteButton(false)}
           ></div>
-          <img
+          <Image
             src={isMuted || volume === 0 ? MuteOn : MuteOff}
             alt=""
             className="w-6 h-6 cursor-pointer"
@@ -110,7 +109,7 @@ const VideoController: React.FC<IVideoController> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VideoController
+export default VideoController;

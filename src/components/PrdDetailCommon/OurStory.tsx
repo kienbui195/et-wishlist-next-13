@@ -1,17 +1,17 @@
-import React from 'react'
-import { IProductState, prdDetailState } from './prdDetailInterface'
-import OurStoryModal from './OurStoryModal'
-import DefaultAvatar from 'assets/images/default-avatar.svg.svg'
+import React from "react";
+import { IProductState, prdDetailState } from "./prdDetailInterface";
+import OurStoryModal from "./OurStoryModal";
+import { DefaultAvatar } from "@/utils/svgExport";
 
 interface OurStoryProps {
-  setPrdDetail: React.Dispatch<React.SetStateAction<prdDetailState>>
-  prdDetail: prdDetailState
-  product: IProductState
+  setPrdDetail: React.Dispatch<React.SetStateAction<prdDetailState>>;
+  prdDetail: prdDetailState;
+  product: IProductState;
 }
 
 const OurStory = ({ setPrdDetail, prdDetail, product }: OurStoryProps) => {
   return (
-    <div className="el-overlay" style={{ zIndex: '2009' }} id="ourstoryModal">
+    <div className="el-overlay" style={{ zIndex: "2009" }} id="ourstoryModal">
       <div
         role="dialog"
         aria-modal="true"
@@ -29,11 +29,11 @@ const OurStory = ({ setPrdDetail, prdDetail, product }: OurStoryProps) => {
               className="el-dialog__headerbtn"
               type="button"
               onClick={() => {
-                document.body.classList.remove('overflow-hidden')
+                document.body.classList.remove("overflow-hidden");
                 setPrdDetail({
                   ...prdDetail,
                   showStory: !prdDetail.showStory,
-                })
+                });
               }}
             >
               <i className="el-icon el-dialog__close">
@@ -49,45 +49,34 @@ const OurStory = ({ setPrdDetail, prdDetail, product }: OurStoryProps) => {
 
           <OurStoryModal
             onClick={() => {
-              document.body.classList.remove('overflow-hidden')
-              console.log('an close')
+              document.body.classList.remove("overflow-hidden");
+              console.log("an close");
 
               setPrdDetail((preState) => ({
                 ...preState,
                 showStory: false,
-              }))
+              }));
             }}
             avatarUrl={
               product?.attributes.ourStory?.founderImage.data?.attributes.url
                 ? `${product?.attributes.ourStory?.founderImage.data?.attributes.url}`
                 : DefaultAvatar
             }
-            founderName={
-              product?.attributes.ourStory?.founderName
-                ? product?.attributes.ourStory?.founderName
-                : ''
-            }
+            founderName={product?.attributes.ourStory?.founderName ? product?.attributes.ourStory?.founderName : ""}
             storyHeadline={
-              product?.attributes.ourStory?.storyHeadline
-                ? product?.attributes.ourStory?.storyHeadline
-                : ''
+              product?.attributes.ourStory?.storyHeadline ? product?.attributes.ourStory?.storyHeadline : ""
             }
-            storyDesc={
-              product?.attributes.ourStory?.storyDesc
-                ? product?.attributes.ourStory?.storyDesc
-                : ''
-            }
+            storyDesc={product?.attributes.ourStory?.storyDesc ? product?.attributes.ourStory?.storyDesc : ""}
             storyClipUrl={
-              product?.attributes?.storyClip?.data?.attributes?.clip?.data
-                ?.attributes.url
+              product?.attributes?.storyClip?.data?.attributes?.clip?.data?.attributes.url
                 ? `${product?.attributes?.storyClip?.data?.attributes?.clip?.data?.attributes.url}`
-                : ''
+                : ""
             }
           />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OurStory
+export default OurStory;

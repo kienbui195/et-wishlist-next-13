@@ -4,7 +4,7 @@ import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 import { variants } from 'utils/animationVariants'
 import './CardDetail.css'
 import ArrowRight from '../../../assets/svg/arrow_right.svg'
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 import Video from './VideoComponent'
 
 export interface VideoSliderProps {
@@ -115,7 +115,7 @@ const VideoSlider: FC<VideoSliderProps> = ({
               className={`absolute top-5 left-0 w-[56px] h-[244px] items-center justify-center bgBtnSlider hidden group-hover/videos:block `}
               onClick={() => changeItemId(currentIndex - 1)}
             >
-              <img
+              <Image
                 src={ArrowRight}
                 alt=""
                 className={`transition-all rotate-180`}
@@ -128,7 +128,7 @@ const VideoSlider: FC<VideoSliderProps> = ({
               className={`absolute top-5 right-0 w-[56px] h-[244px] items-center justify-center bgBtnSlider hidden group-hover/videos:block`}
               onClick={() => changeItemId(currentIndex + 1)}
             >
-              <img src={ArrowRight} alt="" className={`transition-all`} />
+              <Image src={ArrowRight} alt="" className={`transition-all`} />
             </button>
           ) : null}
         </MotionConfig>

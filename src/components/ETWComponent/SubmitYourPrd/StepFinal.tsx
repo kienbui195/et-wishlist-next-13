@@ -6,7 +6,7 @@ const StepFinal = () => {
     <main className="w-full flex-1">
       <div className="fixed inset-x-0 inset-y-20 flex items-center justify-center">
         <div className="mx-auto w-full max-w-[316px] rounded-xl bg-white px-7 py-6 text-center shadow-appSubmit">
-          <img
+          <Image
             src={MainImage}
             alt=""
             width="50"
