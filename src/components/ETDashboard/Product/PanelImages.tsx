@@ -63,7 +63,7 @@ const PanelImages: React.FC<ProductPanelProps> = ({
               className="relative h-[144px] w-[130px] rounded-md first:col-span-2 first:row-span-2 first:h-[293px] first:w-[265px]"
             >
               <img
-                src={process.env.REACT_APP_URL_BE + item.url}
+                src={process.env.NEXT_PUBLIC_BE_URL + item.url}
                 alt=""
                 className="h-full w-full object-cover rounded-md"
               />

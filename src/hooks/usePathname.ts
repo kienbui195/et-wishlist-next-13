@@ -1,7 +1,8 @@
-import { useLocation } from "react-router-dom";
+"use client";
+import { usePathname as getPathname } from "next/navigation";
 
 const usePathname = () => {
-  const pathname = useLocation().pathname;
+  const pathname = getPathname();
   return pathname;
 };
 

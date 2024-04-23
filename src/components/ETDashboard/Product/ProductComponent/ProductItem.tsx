@@ -20,7 +20,7 @@ const ProductItem:FC<ProductItemProps> = ({
             <img
               src={
                 value.thumbnail?.data?.attributes?.url
-                  ? `${process.env.REACT_APP_URL_BE}${value.thumbnail?.data?.attributes?.url}`
+                  ? `${process.env.NEXT_PUBLIC_BE_URL}${value.thumbnail?.data?.attributes?.url}`
                   : defaultImage
               }
               alt=""

@@ -457,7 +457,7 @@ const BrandClip = () => {
                     muted={muteClip}
                     loop
                     className="absolute inset-0 h-full w-full object-cover"
-                    src={process.env.REACT_APP_URL_BE + form.clip.url}
+                    src={process.env.NEXT_PUBLIC_BE_URL + form.clip.url}
                   />
                   <div className="absolute right-2.5 top-3.5">
                     <img

@@ -25,7 +25,7 @@ const ClipCard: FC<ClipCardProps> = ({ data, onClick, handleDelete }) => {
         }}
       >
         <video
-          src={process.env.REACT_APP_URL_BE + data.clip.url}
+          src={process.env.NEXT_PUBLIC_BE_URL + data.clip.url}
           className="h-full w-full rounded-md object-cover md:rounded-10"
         />
         {isHover && (

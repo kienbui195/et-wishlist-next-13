@@ -1,4 +1,4 @@
-import { Popover, Tab, Transition } from "../../app/headlessui";
+import { Popover, Tab, Transition } from "../headlessui";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import { FC, Fragment } from "react";
@@ -67,9 +67,7 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
           >
             <div className="">
               <p className="text-sm font-medium ">{item.name}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                {item.description}
-              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{item.description}</p>
             </div>
           </a>
         ))}
@@ -124,9 +122,7 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Popover.Panel
-                className={`absolute z-20 w-96 mt-3.5 right-0 ${panelClassName}`}
-              >
+              <Popover.Panel className={`absolute z-20 w-96 mt-3.5 right-0 ${panelClassName}`}>
                 <div className="p-6 rounded-2xl bg-white dark:bg-neutral-800 shadow-lg ring-1 ring-black ring-opacity-5">
                   <Tab.Group>
                     <Tab.List className="flex space-x-1 rounded-full bg-gray-100 dark:bg-slate-700 p-1">
@@ -137,9 +133,7 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
                             classNames(
                               "w-full rounded-full py-2 text-sm font-medium leading-5 text-gray-700",
                               "focus:outline-none focus:ring-0",
-                              selected
-                                ? "bg-white shadow"
-                                : "text-gray-700 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-slate-900/40"
+                              selected ? "bg-white shadow" : "text-gray-700 dark:text-slate-300 hover:bg-white/70 dark:hover:bg-slate-900/40"
                             )
                           }
                         >
@@ -148,22 +142,8 @@ const LangDropdown: FC<LangDropdownProps> = ({ panelClassName = "" }) => {
                       ))}
                     </Tab.List>
                     <Tab.Panels className="mt-5">
-                      <Tab.Panel
-                        className={classNames(
-                          "rounded-xl p-3",
-                          "focus:outline-none focus:ring-0"
-                        )}
-                      >
-                        {renderLang(close)}
-                      </Tab.Panel>
-                      <Tab.Panel
-                        className={classNames(
-                          "rounded-xl p-3",
-                          "focus:outline-none focus:ring-0"
-                        )}
-                      >
-                        {renderCurr(close)}
-                      </Tab.Panel>
+                      <Tab.Panel className={classNames("rounded-xl p-3", "focus:outline-none focus:ring-0")}>{renderLang(close)}</Tab.Panel>
+                      <Tab.Panel className={classNames("rounded-xl p-3", "focus:outline-none focus:ring-0")}>{renderCurr(close)}</Tab.Panel>
                     </Tab.Panels>
                   </Tab.Group>
                 </div>

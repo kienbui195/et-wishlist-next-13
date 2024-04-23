@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react'
 import { IStringContent } from '.'
-import { IOptionalSetting } from 'data/wl-types'
+import { IOptionalSetting } from '../../data/wl-types'
 
 export interface ISingleContentProps {
   value: IStringContent

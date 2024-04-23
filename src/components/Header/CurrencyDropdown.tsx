@@ -1,4 +1,6 @@
-import { Popover, Transition } from "../../app/headlessui";
+'use client'
+
+import { Popover, Transition } from "../headlessui";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import {
   CurrencyDollarIcon,
@@ -87,9 +89,7 @@ export default function CurrencyDropdown() {
                         href={item.href}
                         onClick={() => close()}
                         className={`flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 ${
-                          item.active
-                            ? "bg-gray-100 dark:bg-neutral-700"
-                            : "opacity-80"
+                          item.active ? "bg-gray-100 dark:bg-neutral-700" : "opacity-80"
                         }`}
                       >
                         <item.icon className="w-[18px] h-[18px] " />

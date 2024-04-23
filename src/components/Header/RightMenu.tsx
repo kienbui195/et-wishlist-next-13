@@ -1,42 +1,38 @@
-import React, { useState } from 'react'
-import SearchComponent from './SearchComponent'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { createQuery } from 'utils/function'
-import ButtonAvatar from 'components/ButtonAvatar'
+"use client";
+
+import React, { useState } from "react";
+import SearchComponent from "./SearchComponent";
+import { useRouter, usePathname } from "next/navigation";
+import { createQuery } from "../../utils/function";
+import ButtonAvatar from "../../components/ButtonAvatar";
 
 const RightMenu = () => {
-  const [hidden, setHidden] = useState(false)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const shouldShowSearch =
-    !location.pathname.includes('submit-your-product') &&
-    !location.pathname.includes('brand-')
+  const [hidden, setHidden] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const shouldShowSearch = !pathname.includes("submit-your-product") && !pathname.includes("brand-");
   return (
-    <div
-      className={`flex items-center ${
-        hidden ? '' : 'space-x-6'
-      } justify-end md:w-[420px] w-full`}
-    >
+    <div className={`flex items-center ${hidden ? "" : "space-x-6"} justify-end md:w-[420px] w-full`}>
       {shouldShowSearch && (
         <div className="md:flex hidden flex-1">
           <SearchComponent
-            className={'md:flex hidden'}
+            className={"md:flex hidden"}
             onOpen={(val) => {
               if (val) {
-                setHidden(true)
+                setHidden(true);
               } else {
-                setHidden(false)
+                setHidden(false);
               }
             }}
             onEnter={(val) => {
               const queryObj = {
-                _pt: 'Single',
+                _pt: "Single",
+              };
+              if (pathname === "/brands") {
+                queryObj._pt = "Merchant";
               }
-              if (window.location.pathname === '/brands') {
-                queryObj._pt = 'Merchant'
-              }
-              const query = createQuery(queryObj)
-              navigate(`/product-search/${encodeURIComponent(val)}?${query}`)
+              const query = createQuery(queryObj);
+              router.push(`/product-search/${encodeURIComponent(val)}?${query}`);
             }}
           />
         </div>
@@ -45,7 +41,7 @@ const RightMenu = () => {
         <ButtonAvatar />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RightMenu
+export default RightMenu;

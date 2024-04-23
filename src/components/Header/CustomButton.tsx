@@ -1,18 +1,15 @@
-import React, {FC, ReactNode} from 'react';
+'use client'
+
+import React, { FC, ReactNode } from "react";
 
 interface ButtonProps {
-  label: string | ReactNode,
-  onClick?: () => void,
-  className?: string
-  style?: {}
+  label: string | ReactNode;
+  onClick?: () => void;
+  className?: string;
+  style?: {};
 }
 
-const CustomButton: FC<ButtonProps> = ({
-       label = 'Button',
-       onClick = () => {},
-       className = '',
-       style= {}
-}) => {
+const CustomButton: FC<ButtonProps> = ({ label = "Button", onClick = () => {}, className = "", style = {} }) => {
   return (
     <div
       style={style}
@@ -23,7 +20,7 @@ const CustomButton: FC<ButtonProps> = ({
     >
       {label}
     </div>
-  )
-}
+  );
+};
 
-export default CustomButton
+export default CustomButton;

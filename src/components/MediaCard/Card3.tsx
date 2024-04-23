@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import Card0 from './Card0'
 import { CardProps } from './Card1'
-import { DEFAULT_MEDIA_WIDTH } from 'components/ProductCurations/ProductCurationsCard'
+import { DEFAULT_MEDIA_WIDTH } from '@/components/ProductCurations/ProductCurationsCard'
 
 const Card3: FC<CardProps> = ({
   media,

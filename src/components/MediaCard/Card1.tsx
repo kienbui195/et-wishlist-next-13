@@ -3,7 +3,7 @@ import Card0 from './Card0'
 import {
   DEFAULT_MEDIA_WIDTH,
   ShowPrdGalleryModal,
-} from 'components/ProductCurations/ProductCurationsCard'
+} from '@/components/ProductCurations/ProductCurationsCard'
 
 export type WidthHeightRatio = 'larger' | 'smaller' | 'equal'
 

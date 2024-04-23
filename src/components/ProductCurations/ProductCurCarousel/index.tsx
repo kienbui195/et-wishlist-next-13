@@ -57,7 +57,7 @@ const ProductCurCarousel: FC<IProductCurCarouselProps> = ({
             return (
               <img
                 key={idx}
-                src={`${process.env.REACT_APP_URL_BE}${_i?.attributes.url}`}
+                src={`${process.env.NEXT_PUBLIC_BE_URL}${_i?.attributes.url}`}
                 alt=""
                 className={` ${imageHeight} ${imageWidth} ${maxHeight} object-contain cursor-pointer`}
               />

@@ -1,4 +1,4 @@
-import { IHeaderBarPage } from './../../components/HeaderBar/index';
+import { IHeaderBarPage } from '../../../components/HeaderBar';
 
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction } from "@reduxjs/toolkit";

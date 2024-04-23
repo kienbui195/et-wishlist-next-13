@@ -1,7 +1,7 @@
 
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction } from "@reduxjs/toolkit";
-import { INavigation } from 'components/Header/HeaderLogged';
+import { INavigation } from '../../../components/Header/HeaderLogged';
 
 export interface IFooterInitState {
   footer: {

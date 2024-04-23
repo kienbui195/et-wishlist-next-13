@@ -1,51 +1,46 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { formatDataNumber } from 'utils/function'
-import { IImage, IProductTags, IVideo, TAward } from 'data/wl-types'
-import AwardItem from 'components/Award/AwardItem'
-import apis from 'apis'
-import { useDispatch } from 'react-redux'
-import { setOpenModalLogin } from 'features/authenticate/loginSlice'
-import { useAdminContext } from 'context/adminContext'
-import {
-  CloseGalleryButton,
-  DefaultThumbnail,
-  UnVotedIcon,
-  VotedIcon,
-  VoteIcon,
-} from 'utils/svgExport'
+import React, { useState } from "react";
+import Link from "next/link";
+import { IImage, IProductTags, IVideo, TAward } from "@/data/wl-types";
+import { useDispatch } from "react-redux";
+import { setOpenModalLogin } from "@/lib/features/authenticate/loginSlice";
+import { CloseGalleryButton, DefaultThumbnail, UnVotedIcon, VotedIcon, VoteIcon } from "@/utils/svgExport";
+import { useAlertContext } from "@/context/alertContext";
+import apis from "@/apis";
+import AwardItem from "../Award/AwardItem";
+import Image from "next/image";
+import { formatDataNumber } from "@/utils/function";
 
 interface IProductCardProps {
-  id: number
-  name: string
-  slug: string
-  headline: string
-  subHeadline: string
-  thumbnail?: IImage
-  hoverVideo?: IVideo
-  discountType?: number
-  launcherDate?: Date
-  launchType?: number
-  launchStatus?: number
-  tags?: IProductTags[]
-  voted?: boolean
-  award?: TAward[]
-  dateVoted?: string
-  countVoted?: number
-  navigate?: () => void
-  spPrdId?: number
+  id: number;
+  name: string;
+  slug: string;
+  headline: string;
+  subHeadline: string;
+  thumbnail?: IImage;
+  hoverVideo?: IVideo;
+  discountType?: number;
+  launcherDate?: Date;
+  launchType?: number;
+  launchStatus?: number;
+  tags?: IProductTags[];
+  voted?: boolean;
+  award?: TAward[];
+  dateVoted?: string;
+  countVoted?: number;
+  navigate?: () => void;
+  spPrdId?: number;
 }
 
 interface StateProductCard {
-  vote: boolean
-  clearContent: boolean
+  vote: boolean;
+  clearContent: boolean;
 }
 
 function ProductCard({
   id,
   name,
-  headline = '',
-  subHeadline = '',
+  headline = "",
+  subHeadline = "",
   thumbnail,
   hoverVideo,
   tags = [],
@@ -59,56 +54,54 @@ function ProductCard({
   const [productCard, setProductCard] = useState<StateProductCard>({
     vote: false,
     clearContent: false,
-  })
-  const [discount, setDiscount] = useState('')
-  const dispatch = useDispatch()
-  const { showAlert } = useAdminContext()
-  const [open, setOpen] = useState(true)
-  const [disabled, setDisabled] = useState(false)
+  });
+  const [discount, setDiscount] = useState("");
+  const dispatch = useDispatch();
+  const { showAlert } = useAlertContext();
+  const [open, setOpen] = useState(true);
+  const [disabled, setDisabled] = useState(false);
 
   const handleVoteAction = () => {
-    const token =
-      localStorage.getItem('ETWL') &&
-      JSON.parse(localStorage.getItem('ETWL') as string)?.token
+    const token = localStorage.getItem("ETWL") && JSON.parse(localStorage.getItem("ETWL") as string)?.token;
     if (!token) {
-      dispatch(setOpenModalLogin(true))
-      showAlert('warning', 'This features require logging in to use')
+      dispatch(setOpenModalLogin(true));
+      showAlert("warning", "This features require logging in to use");
     } else {
-      setDisabled(true)
+      setDisabled(true);
       apis
-        .upVote(id, spPrdId + '')
+        .upVote(id, spPrdId + "")
         .then((res) => {
-          showAlert('success', 'Vote successfully')
-          setDiscount(res.data.discountCode.summary)
+          showAlert("success", "Vote successfully");
+          setDiscount(res.data.discountCode.summary);
           setProductCard((preState) => ({
             ...preState,
             vote: true,
-          }))
-          setDisabled(false)
+          }));
+          setDisabled(false);
         })
         .catch((err) => {
-          console.log(err)
-          setDisabled(false)
-          showAlert('error', 'Something went wrong! Please try again later')
-        })
+          console.log(err);
+          setDisabled(false);
+          showAlert("error", "Something went wrong! Please try again later");
+        });
     }
-  }
+  };
 
   const handleClearContent = () => {
     setProductCard((preState) => ({
       ...preState,
       clearContent: true,
-    }))
-    let timer: ReturnType<typeof setTimeout> | null = null
+    }));
+    let timer: ReturnType<typeof setTimeout> | null = null;
     if (timer) {
-      clearTimeout(timer)
-      timer = null
+      clearTimeout(timer);
+      timer = null;
     }
 
     timer = setTimeout(() => {
-      setOpen(false)
-    }, 2000)
-  }
+      setOpen(false);
+    }, 2000);
+  };
 
   const renderAward = (awards: TAward[]) => {
     return (
@@ -117,65 +110,32 @@ function ProductCard({
           <AwardItem type={item} key={idx} />
         ))}
       </React.Fragment>
-    )
-  }
+    );
+  };
 
   const renderVoteAction = () => {
     if (voted) {
       if (dateVoted) {
         return (
           <div className="group/unvote ml-auto flex h-[110px] shrink-0 flex-col items-center border-l-[1px] border-[--gray-line] md:mt-[25px] md:w-[130px] md:p-0 w-24">
-            <img
-              src={VotedIcon}
-              width="24"
-              height="24"
-              className="mt-2 group-hover/unvote:hidden"
-              alt=""
-            />
-            <img
-              src={UnVotedIcon}
-              width="24"
-              height="24"
-              className="mt-2 hidden group-hover/unvote:block h-[26px] w-[26px]"
-              alt=""
-            />
-            <div className="text-base font-bold leading-none text-slate-1150 md:text-xl md:leading-none mt-[8px]">
-              {countVoted}
-            </div>
-            <div className="font-medium leading-none text-slate-1150 text-xs mt-[21px] group-hover/unvote:hidden">
-              {' '}
-              Voted!
-            </div>
-            <div className="mt-[24px] hidden text-xs font-medium leading-none text-slate-1150 group-hover/unvote:block">
-              {' '}
-              Unvote{' '}
-            </div>
+            <Image src={VotedIcon} width="24" height="24" className="mt-2 group-hover/unvote:hidden" alt="" />
+            <Image src={UnVotedIcon} width="24" height="24" className="mt-2 hidden group-hover/unvote:block h-[26px] w-[26px]" alt="" />
+            <div className="text-base font-bold leading-none text-slate-1150 md:text-xl md:leading-none mt-[8px]">{countVoted}</div>
+            <div className="font-medium leading-none text-slate-1150 text-xs mt-[21px] group-hover/unvote:hidden"> Voted!</div>
+            <div className="mt-[24px] hidden text-xs font-medium leading-none text-slate-1150 group-hover/unvote:block"> Unvote </div>
           </div>
-        )
+        );
       } else {
         return (
           <div className="ml-auto h-[110px] shrink-0 border-l-[1px] border-[--gray-line] md:mt-[25px] md:w-[130px] w-24">
-            <Link
-              to={slug}
-              state={{ id }}
-              className="flex flex-col items-center"
-            >
-              <img
-                src={VotedIcon}
-                width="26"
-                height="26"
-                className="mt-2"
-                alt=""
-              />
+            <Link href={slug} className="flex flex-col items-center">
+              <Image src={VotedIcon} width="26" height="26" className="mt-2" alt="" />
 
               <div className="text-title-18 mt-[8px]">{countVoted}</div>
-              <div className="leading-[10px] text-[--gray-text] text-[10px] mt-[24px]">
-                {' '}
-                Voted!
-              </div>
+              <div className="leading-[10px] text-[--gray-text] text-[10px] mt-[24px]"> Voted!</div>
             </Link>
           </div>
-        )
+        );
       }
     } else {
       return (
@@ -186,11 +146,7 @@ function ProductCard({
           <div className="mt-4 h-[72px] shrink-0 md:mr-0 md:mt-[25px] md:h-[110px] bg-[--gray-line] w-[1px]"></div>
           <div className="relative flex w-24 flex-col items-center justify-start pt-7 md:h-40 md:w-[130px] md:pt-[50px] transition-all duration-300 ease-in-out group-hover:pt-3 md:group-hover:pt-[30px]">
             <div className="flex h-[24px] w-[24px] shrink-0 scale-[0.77] items-start justify-center overflow-hidden rounded-full bg-[--brand-primary] py-[5px] md:scale-100 ">
-              <img
-                src={VoteIcon}
-                alt="vote"
-                className="vote-icons transition-transform duration-300 group-hover:-translate-y-[29px]"
-              />
+              <Image src={VoteIcon} alt="vote" className="vote-icons transition-transform duration-300 group-hover:-translate-y-[29px]" />
             </div>
             <div className="tracking-none mt-3 text-base font-semibold leading-none text-slate-1150 md:mt-[15px] md:text-xl md:font-bold md:leading-none">
               {countVoted ? formatDataNumber(countVoted, 0) : 0}
@@ -198,23 +154,10 @@ function ProductCard({
             <div className="invisible mt-3 text-10 font-medium leading-none text-slate-1150 transition-all duration-150 ease-in-out group-hover:visible md:mt-6 md:text-xs">
               Upvote
             </div>
-            <div className="mt-2 text-base font-bold leading-none text-slate-1150 md:mt-[15px] md:text-xl hidden">
-              Voted!
-            </div>
+            <div className="mt-2 text-base font-bold leading-none text-slate-1150 md:mt-[15px] md:text-xl hidden">Voted!</div>
             <div className="absolute left-[11px] top-3 md:left-[42px] md:top-9">
-              <svg
-                width="51"
-                height="54"
-                viewBox="0 0 51 54"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="rays"
-              >
-                <clipPath
-                  id="rays-550"
-                  transform="translate(13, 15)"
-                  className="rays-clip-path"
-                >
+              <svg width="51" height="54" viewBox="0 0 51 54" fill="none" xmlns="http://www.w3.org/2000/svg" className="rays">
+                <clipPath id="rays-550" transform="translate(13, 15)" className="rays-clip-path">
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
@@ -264,46 +207,38 @@ function ProductCard({
             </div>
           </div>
         </div>
-      )
+      );
     }
-  }
+  };
 
   const handleVote = () => {
     return productCard.vote ? (
       <div className="relative w-full min-w-0 overflow-hidden pr-5">
-        <Link to={slug} state={{ id }}>
+        <Link href={slug}>
           <div
             className="discount-content"
             style={{
-              translate: 'none',
-              rotate: 'none',
-              scale: 'none',
-              transform: 'translate(0px, 0px)',
+              translate: "none",
+              rotate: "none",
+              scale: "none",
+              transform: "translate(0px, 0px)",
             }}
           >
             <div className="flex justify-between">
-              <span className="mt-[6px] flex items-center text-xs font-bold leading-none text-slate-1150 md:mt-[14px]">
-                {' '}
-                Thanks For Voting!{' '}
-              </span>
+              <span className="mt-[6px] flex items-center text-xs font-bold leading-none text-slate-1150 md:mt-[14px]"> Thanks For Voting! </span>
             </div>
-            <div className="mt-[11px]  text-lg font-semibold leading-none text-slate-1150">
-              You Earned: {discount}
-            </div>
+            <div className="mt-[11px]  text-lg font-semibold leading-none text-slate-1150">You Earned: {discount}</div>
             <div className="mt-2.5 max-w-[500px] text-sm font-medium leading-[1.4] text-gray-2350">
-              {' '}
-              Enjoy this exclusive discount from{' '}
-              <span
-                title="Maison d' Haiti Garland Nightgown"
-                className="break-word"
-              >
+              {" "}
+              Enjoy this exclusive discount from{" "}
+              <span title="Maison d' Haiti Garland Nightgown" className="break-word">
                 {name}
-              </span>{' '}
+              </span>{" "}
               as a thank you for boosting their exposure on Wishlist.
             </div>
             <div className="mb-1 flex flex-wrap">
               <div className="mr-2.5 mt-2.5">
-                <Link to={slug} state={{ id }}>
+                <Link href={slug}>
                   <button
                     type="button"
                     className="h-auto min-h-[32px] w-fit rounded-md bg-[--brand-primary] hover:!bg-[--brand-primary-hover] active:!bg-[--brand-primary-pressed] px-4 text-sm font-normal leading-4 text-white"
@@ -315,11 +250,11 @@ function ProductCard({
             </div>
           </div>
         </Link>
-        <img
+        <Image
           src={CloseGalleryButton}
           alt=""
           className="close-discount absolute right-5 top-5 h-[14px] w-[14px] cursor-pointer"
-          style={{ top: '20px' }}
+          style={{ top: "20px" }}
           onClick={handleClearContent}
         />
       </div>
@@ -327,23 +262,17 @@ function ProductCard({
       <>
         <div className="grow md:flex flex md:max-w-[363px] w-full md:flex-col md:justify-center md:py-1">
           <div className="flex flex-col space-y-[14px] justify-center">
-            <Link to={slug} state={{ id }}>
+            <Link href={slug}>
               <div className="flex justify-center flex-col">
                 <div>
-                  <div className="R-title-explan text-[--gray-text]">
-                    {name}
-                  </div>
+                  <div className="R-title-explan text-[--gray-text]">{name}</div>
                 </div>
                 <div>
-                  <div className="product-headline text-title-18 text-[--gray-text] line-clamp-1 overflow-x-hidden text-ellipsis">
-                    {headline}
-                  </div>
+                  <div className="product-headline text-title-18 text-[--gray-text] line-clamp-1 overflow-x-hidden text-ellipsis">{headline}</div>
                 </div>
               </div>
 
-              <div className="max-md:hidden R-body-box text-[#717171] line-clamp-2 text-ellipsis">
-                {subHeadline}
-              </div>
+              <div className="max-md:hidden R-body-box text-[#717171] line-clamp-2 text-ellipsis">{subHeadline}</div>
             </Link>
           </div>
           {award.length > 0 ? (
@@ -352,7 +281,7 @@ function ProductCard({
             <div className="flex-wrap hidden sm:flex md:space-x-[6px] mt-2.5">
               {tags.map((_i, idx) => {
                 return (
-                  <Link key={idx} data-v-42920170="" to={`/tag${_i.slug}`}>
+                  <Link key={idx} data-v-42920170="" href={`/tag${_i.slug}`}>
                     <div
                       data-v-42920170=""
                       className="md:flex hidden min-h-[20px] items-center whitespace-normal px-[4px] py-[1px] md:min-h-[18px] bg-[--bg-hover] text-[--gray] hover:bg-[--gray-bg-tag] R-14-light"
@@ -360,32 +289,32 @@ function ProductCard({
                       {_i.name}
                     </div>
                   </Link>
-                )
+                );
               })}
             </div>
           )}
         </div>
         {renderVoteAction()}
       </>
-    )
-  }
+    );
+  };
 
-  const handleLinkVideo = String(hoverVideo).split('/')
+  const handleLinkVideo = String(hoverVideo).split("/");
 
   return productCard.clearContent ? (
     <div
       className={`mb-2.5  w-full lg:max-w-[664px] max-w-fit items-center justify-center slide-up-enter-active slide-up-enter-to transition-all duration-300 ${
-        open ? 'flex h-[160px]' : 'hidden h-0'
+        open ? "flex h-[160px]" : "hidden h-0"
       }`}
     >
       <span className="text-base font-normal tracking-wide text-gray-1400">
-        {' '}
-        You can view your past Votes in{' '}
-        <Link to={'/my-votes'} className="underline">
-          {' '}
-          My Votes{' '}
-        </Link>{' '}
-        page.{' '}
+        {" "}
+        You can view your past Votes in{" "}
+        <Link href={"/my-votes"} className="underline">
+          {" "}
+          My Votes{" "}
+        </Link>{" "}
+        page.{" "}
       </span>
     </div>
   ) : (
@@ -393,7 +322,7 @@ function ProductCard({
       <div
         className={`group relative flex  w-full min-w-[300px] lg:max-w-[700px] max-w-full rounded-[10px] p-0 lg:min-w-fit cursor-pointer border-[--gray-line] border-[1px] max-[768px]:border-transparent  hover:bg-[--gray-bg-hover] hover:shadow-[0_4px_4px_0_#0000000D] max-[768px]:hover:bg-white max-[768px]:hover:shadow-none`}
       >
-        <Link to={slug} state={{ id }}>
+        <Link href={slug}>
           <div className="group/imagesContent  flex items-center justify-center overflow-hidden  rounded-l-[10px]  rounded-r-[10px] mr-5 mt-4 h-[72px] w-[72px] shrink-0 cursor-pointer  md:mr-[30px] md:mt-0 md:h-[160px] md:w-[160px] md:rounded-r-none">
             {hoverVideo && (
               <video
@@ -403,36 +332,26 @@ function ProductCard({
                 loop
                 playsInline
               >
-                <source
-                  src={`${process.env.REACT_APP_API_URL}/loadClip/${
-                    handleLinkVideo[handleLinkVideo.length - 1]
-                  }`}
-                  type="video/mp4"
-                />
+                <source src={`${process.env.NEXT_PUBLIC_API_URL}/loadClip/${handleLinkVideo[handleLinkVideo.length - 1]}`} type="video/mp4" />
               </video>
             )}
-            <img
-              src={
-                thumbnail
-                  ? `${process.env.REACT_APP_URL_BE}${thumbnail}`
-                  : DefaultThumbnail
-              }
+            <Image
+              src={thumbnail ? `${process.env.NEXT_PUBLIC_BE_URL}${thumbnail}` : DefaultThumbnail}
               className={`h-full max-h-full w-full max-w-full object-cover ${
-                hoverVideo ? 'group-hover/imagesContent:hidden' : ''
+                hoverVideo ? "group-hover/imagesContent:hidden" : ""
               }  rounded-l-[10px]  rounded-r-[10px] md:rounded-r-none`}
               alt=""
+              width={0}
+              height={0}
+              sizes="100vw"
             />
           </div>
         </Link>
         {handleVote()}
-        <canvas
-          width="824"
-          height="200"
-          className="confetti-canvas pointer-events-none absolute left-0 top-0 h-full w-full"
-        ></canvas>
+        <canvas width="824" height="200" className="confetti-canvas pointer-events-none absolute left-0 top-0 h-full w-full"></canvas>
       </div>
     </div>
-  )
+  );
 }
 
-export default ProductCard
+export default ProductCard;

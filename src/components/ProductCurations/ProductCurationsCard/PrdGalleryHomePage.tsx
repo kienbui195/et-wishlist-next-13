@@ -1,21 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
-import CrossIcon from 'assets/svg/Cross.svg'
-import Slider from 'react-slick'
-import './PrdGalleryHomePage.css'
-import {
-  IProductState,
-  prdDetailState,
-} from 'components/PrdDetailCommon/prdDetailInterface'
-import { ShowPrdGalleryModal } from '.'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'app/store'
-import { setMutedVideo } from 'features/global/mutedVideoSlice'
-import useInView from 'hooks/useInView'
-import {
-  convertNumbThousand,
-  formatDataNumber,
-  getCurrencyCode,
-} from 'utils/function'
+import React, { useEffect, useRef, useState } from "react";
+import Slider from "react-slick";
+import "./PrdGalleryHomePage.css";
+import { IProductState, prdDetailState } from "@/components/PrdDetailCommon/prdDetailInterface";
+import { ShowPrdGalleryModal } from ".";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { setMutedVideo } from "@/lib/features/global/mutedVideoSlice";
+import useInView from "@/hooks/useInView";
+import { convertNumbThousand, formatDataNumber, getCurrencyCode } from "@/utils/function";
 import {
   MoreIcon,
   SingleDot,
@@ -27,59 +19,61 @@ import {
   DefaultAvatar,
   DefaultThumbnail,
   HotDeal,
-} from 'utils/svgExport'
-import { Link } from 'react-router-dom'
-import { TCurrency } from 'data/wl-types'
-import IconButtonVoteAnimation from 'components/IconButtonVoteAnimation'
-import useMediaQuery from '../../../hooks/useMediaQuery'
+  CrossIcon,
+} from "@/utils/svgExport";
+import Link from "next/link";
+import { TCurrency } from "@/data/wl-types";
+import IconButtonVoteAnimation from "@/components/IconButtonVoteAnimation";
+import useMediaQuery from "../../../hooks/useMediaQuery";
+import Image from "next/image";
 
 interface PrdGalleryHomePageProps {
   media:
     | {
         attributes: {
-          url: string
-          height: number
-          width: number
-        }
+          url: string;
+          height: number;
+          width: number;
+        };
       }[]
-    | []
-  isHaveVideo: boolean
-  setShowPrdGallery: React.Dispatch<React.SetStateAction<ShowPrdGalleryModal>>
-  showPrdGallery: ShowPrdGalleryModal
-  handleBookmark: (productId: number, type: 'bookmark' | 'unbookmark') => void
+    | [];
+  isHaveVideo: boolean;
+  setShowPrdGallery: React.Dispatch<React.SetStateAction<ShowPrdGalleryModal>>;
+  showPrdGallery: ShowPrdGalleryModal;
+  handleBookmark: (productId: number, type: "bookmark" | "unbookmark") => void;
   bookmark: {
-    isBookmarked: boolean | undefined
-    loading: boolean
-  }
-  slug: string
-  prdDetail: IProductState
-  shopVariantCurrency: TCurrency | undefined
+    isBookmarked: boolean | undefined;
+    loading: boolean;
+  };
+  slug: string;
+  prdDetail: IProductState;
+  shopVariantCurrency: TCurrency | undefined;
   voteInfo: {
-    isVoted: boolean
-    count: number
-    votedId: number
-  }
-  handleVoteAction: () => void
-  setShowShareModal: React.Dispatch<React.SetStateAction<boolean>>
-  pricePrd: number
-  shareNumber: number | null
-  disabled: boolean
-  showSharedModal: boolean
+    isVoted: boolean;
+    count: number;
+    votedId: number;
+  };
+  handleVoteAction: () => void;
+  setShowShareModal: React.Dispatch<React.SetStateAction<boolean>>;
+  pricePrd: number;
+  shareNumber: number | null;
+  disabled: boolean;
+  showSharedModal: boolean;
   // prdDetail: prdDetailState
 }
 
 interface ListMediaProps {
-  videoLink: string
-  listImage: string[]
+  videoLink: string;
+  listImage: string[];
 }
 
 interface SettingSliderProps {
-  dots: boolean
-  infinite: boolean
-  speed: number
-  slidesToShow: number
-  slidesToScroll: number
-  initialSlide: number
+  dots: boolean;
+  infinite: boolean;
+  speed: number;
+  slidesToShow: number;
+  slidesToScroll: number;
+  initialSlide: number;
 }
 
 const PrdGalleryHomePage = ({
@@ -103,88 +97,75 @@ const PrdGalleryHomePage = ({
 PrdGalleryHomePageProps) => {
   const [listMedia, setListMedia] = useState<ListMediaProps>({
     listImage: [],
-    videoLink: '',
-  })
-  const slickSlider = useRef<Slider>(null)
-  const isMuted = useSelector((state: RootState) => state.mutedVideo)
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const dispatch = useDispatch()
-  const { isInView, ref } = useInView()
-  const volume = useSelector((state: RootState) => state.volumeVideo)
-  const mediaQuery = useMediaQuery()
+    videoLink: "",
+  });
+  const slickSlider = useRef<Slider>(null);
+  const isMuted = useSelector((state: RootState) => state.mutedVideo);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const dispatch = useDispatch();
+  const { isInView, ref } = useInView();
+  const volume = useSelector((state: RootState) => state.volumeVideo);
+  const mediaQuery = useMediaQuery();
 
   useEffect(() => {
-    let activeMedia = 0
+    let activeMedia = 0;
 
     const videoLink = isHaveVideo
-      ? `${process.env.REACT_APP_API_URL}/loadClip/${
-          media[0].attributes?.url.split('/')[
-            media[0].attributes?.url.split('/').length - 1
-          ]
-        }`
-      : ''
-    let LIST_GALLERY: string[] = []
+      ? `${process.env.NEXT_PUBLIC_API_URL}/loadClip/${media[0].attributes?.url.split("/")[media[0].attributes?.url.split("/").length - 1]}`
+      : "";
+    let LIST_GALLERY: string[] = [];
     if (videoLink) {
       for (let i = 1; i < media.length; i++) {
-        LIST_GALLERY.push(
-          `${process.env.REACT_APP_URL_BE}${media[i].attributes.url}`
-        )
+        LIST_GALLERY.push(`${process.env.NEXT_PUBLIC_BE_URL}${media[i].attributes.url}`);
         if (media[i].attributes.url === showPrdGallery.linkMedia) {
-          activeMedia = i
+          activeMedia = i;
         }
       }
     } else {
       LIST_GALLERY = media.map((_i, idx) => {
         if (showPrdGallery.linkMedia === _i.attributes.url) {
-          activeMedia = idx
+          activeMedia = idx;
         }
 
-        return `${process.env.REACT_APP_URL_BE}${_i.attributes.url}`
-      })
+        return `${process.env.NEXT_PUBLIC_BE_URL}${_i.attributes.url}`;
+      });
     }
     setListMedia({
       videoLink: videoLink,
       listImage: LIST_GALLERY,
-    })
+    });
 
     setSettingSlider((preState) => ({
       ...preState,
       initialSlide: activeMedia,
-    }))
+    }));
 
     const handleKeyDown = (e: any) => {
       if (e.keyCode === 37) {
-        ;(slickSlider.current as Slider).slickPrev()
+        (slickSlider.current as Slider).slickPrev();
       }
       if (e.keyCode === 39) {
-        ;(slickSlider.current as Slider).slickNext()
+        (slickSlider.current as Slider).slickNext();
       }
       if (e.keyCode === 27) {
         if (showSharedModal) {
-          setShowShareModal(false)
+          setShowShareModal(false);
         } else {
-          document.body.classList.remove('overflow-hidden')
+          document.body.classList.remove("overflow-hidden");
           setShowPrdGallery({
             openGallery: false,
             linkMedia: null,
-          })
+          });
         }
       }
-    }
+    };
     if (showPrdGallery.linkMedia) {
-      document.addEventListener('keydown', handleKeyDown)
+      document.addEventListener("keydown", handleKeyDown);
     }
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [
-    isHaveVideo,
-    media,
-    setShowPrdGallery,
-    setShowShareModal,
-    showPrdGallery.linkMedia,
-    showSharedModal,
-  ])
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isHaveVideo, media, setShowPrdGallery, setShowShareModal, showPrdGallery.linkMedia, showSharedModal]);
 
   const [settingSlider, setSettingSlider] = useState<SettingSliderProps>({
     dots: true,
@@ -193,32 +174,36 @@ PrdGalleryHomePageProps) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
-  })
+  });
 
   const handleVolumeChangeVideo = () => {
     if (videoRef.current) {
       if (videoRef.current.volume === 0 || videoRef.current.muted) {
-        dispatch(setMutedVideo(true))
+        dispatch(setMutedVideo(true));
       } else {
-        dispatch(setMutedVideo(false))
+        dispatch(setMutedVideo(false));
       }
     }
-  }
+  };
 
   useEffect(() => {
-    if (!videoRef.current) return
-    isInView ? videoRef.current.play() : videoRef.current.pause()
-  }, [isInView])
+    if (!videoRef.current) return;
+    isInView ? videoRef.current.play() : videoRef.current.pause();
+  }, [isInView]);
 
   useEffect(() => {
-    if (!videoRef.current) return
-    videoRef.current.volume = volume
-  }, [volume])
+    if (!videoRef.current) return;
+    videoRef.current.volume = volume;
+  }, [volume]);
 
   const renderActionCard = () => {
     return (
-      <section className={` overflow-hidden cursor-default ${mediaQuery > 332 ? 'p-[8px_16px_0]' : 'p-[4px_0]'}`}>
-        <div className={`flex items-center my-1  ${mediaQuery > 332 ? 'space-x-16 h-[40px] justify-between' : 'space-x-4 flex-wrap space-y-2 h-auto justify-center'}`}>
+      <section className={` overflow-hidden cursor-default ${mediaQuery > 332 ? "p-[8px_16px_0]" : "p-[4px_0]"}`}>
+        <div
+          className={`flex items-center my-1  ${
+            mediaQuery > 332 ? "space-x-16 h-[40px] justify-between" : "space-x-4 flex-wrap space-y-2 h-auto justify-center"
+          }`}
+        >
           <div className="flex space-x-2 items-start h-full">
             <div className="flex space-x-2 cursor-pointer">
               <div className="w-8">
@@ -227,60 +212,49 @@ PrdGalleryHomePageProps) => {
                     className="h-[30px] flex justify-center w-[30px]"
                     // onClick={!disabled ? handleUnVote : () => {}}
                   >
-                    <img src={CurationVoted} alt="" />
+                    <Image src={CurationVoted} alt="" />
                   </div>
                 ) : (
                   <div className="group h-[30px] w-[30px]">
-                    <IconButtonVoteAnimation
-                      mt="mt-[2px]"
-                      mode="btw"
-                      onClick={!disabled ? handleVoteAction : () => {}}
-                    />
+                    <IconButtonVoteAnimation mt="mt-[2px]" mode="btw" onClick={!disabled ? handleVoteAction : () => {}} />
                   </div>
                 )}
               </div>
-              <div className="text-link-16 w-full h-6 flex justify-center items-center m-auto">
-                {voteInfo.count ? convertNumbThousand(voteInfo.count) : 0}
-              </div>
+              <div className="text-link-16 w-full h-6 flex justify-center items-center m-auto">{voteInfo.count ? convertNumbThousand(voteInfo.count) : 0}</div>
             </div>
             <div className="flex space-x-2 cursor-pointer ">
               <div className="w-8">
                 <div className="flex justify-center items-center w-8 h-8">
-                  <img
+                  <Image
                     onClick={() => {
-                      setShowShareModal(true)
+                      setShowShareModal(true);
                     }}
                     src={CurationShare}
                     alt=""
                   />
                 </div>
               </div>
-              <div className="text-link-16 w-full h-6 flex justify-center m-auto">
-                {convertNumbThousand(shareNumber)}
-              </div>
+              <div className="text-link-16 w-full h-6 flex justify-center m-auto">{convertNumbThousand(shareNumber)}</div>
             </div>
           </div>
           <div className="flex space-x-3 items-start h-full ">
             <div className="flex space-x-2 items-stretch">
-
               <div className="text-end flex m-auto space-x-2">
-                <img alt="" src={HotDeal} className="w-5 h-5 m-auto" />
+                <Image alt="" src={HotDeal} className="w-5 h-5 m-auto" />
                 <div className="text-link-16 text-[--gray-text]">
-                  {shopVariantCurrency
-                    ? getCurrencyCode(shopVariantCurrency)
-                    : '$'}
+                  {shopVariantCurrency ? getCurrencyCode(shopVariantCurrency) : "$"}
                   {formatDataNumber(Number(pricePrd), 2)}
                 </div>
               </div>
               <div
                 className="flex space-x-2 h-[30px] justify-end items-center"
                 onClick={() => {
-                  document.body.classList.remove('overflow-hidden')
+                  document.body.classList.remove("overflow-hidden");
                 }}
               >
-                <Link to={slug} rel="noreferrer">
+                <Link href={slug} rel="noreferrer">
                   <div className="w-[30px] h-[30px]">
-                    <img src={CurationCart} alt="" className="" />
+                    <Image src={CurationCart} alt="" className="" />
                   </div>
                 </Link>
                 <div
@@ -288,48 +262,34 @@ PrdGalleryHomePageProps) => {
                   onClick={
                     !bookmark.loading
                       ? !bookmark.isBookmarked
-                        ? () => handleBookmark(prdDetail.id, 'bookmark')
-                        : () => handleBookmark(prdDetail.id, 'unbookmark')
+                        ? () => handleBookmark(prdDetail.id, "bookmark")
+                        : () => handleBookmark(prdDetail.id, "unbookmark")
                       : () => {}
                   }
                 >
-                  <img
-                    src={
-                      bookmark.isBookmarked
-                        ? CurationBookmarked
-                        : CurationBookmark
-                    }
-                    alt=""
-                  />
+                  <Image src={bookmark.isBookmarked ? CurationBookmarked : CurationBookmark} alt="" />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-    )
-  }
+    );
+  };
 
   return (
-    <div
-      className="el-overlay galeryImage"
-      style={{ zIndex: '2009' }}
-      id="galeryImageContainer"
-    >
+    <div className="el-overlay galeryImage" style={{ zIndex: "2009" }} id="galeryImageContainer">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="el-id-8149-4"
         aria-describedby="el-id-8149-5"
         className="el-overlay-dialog"
-        style={{ display: 'flex' }}
+        style={{ display: "flex" }}
       >
-        {listMedia.listImage.length > 0 || listMedia.videoLink !== '' ? (
+        {listMedia.listImage.length > 0 || listMedia.videoLink !== "" ? (
           <>
-            <div
-              className="l-carousel el-carousel--horizontal gallery-carousel h-screen w-full"
-              id="galleryCarousel"
-            >
+            <div className="l-carousel el-carousel--horizontal gallery-carousel h-screen w-full" id="galleryCarousel">
               <div className="el-carousel__container">
                 <Slider {...settingSlider} ref={slickSlider}>
                   {isHaveVideo ? (
@@ -360,15 +320,11 @@ PrdGalleryHomePageProps) => {
                             key={idx}
                           >
                             <div className="!flex h-full  max-h-[800px] max-w-[800px] md:max-h-[1000px] w-full md:max-w-[1000px] items-center justify-center">
-                              <img
-                                src={`${_i}`}
-                                alt=""
-                                className="h-auto max-h-[82vh] w-auto max-w-full rounded-10 object-contain"
-                              />
+                              <Image sizes="100vw" src={`${_i}`} alt="" width={0} height={0} className="h-auto max-h-[82vh] w-auto max-w-full rounded-10 object-contain" />
                             </div>
                             <div className="mb-4">{renderActionCard()}</div>
                           </div>
-                        )
+                        );
                       })
                     : null}
                 </Slider>
@@ -377,20 +333,20 @@ PrdGalleryHomePageProps) => {
             <div
               className="absolute right-[30px] top-[30px] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white"
               onClick={() => {
-                document.body.classList.remove('overflow-hidden')
+                document.body.classList.remove("overflow-hidden");
                 setShowPrdGallery({
                   openGallery: false,
                   linkMedia: null,
-                })
+                });
               }}
             >
-              <img className="w-6 h-6" src={CrossIcon} alt="" />
+              <Image className="w-6 h-6" src={CrossIcon} alt="" />
             </div>
           </>
         ) : null}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PrdGalleryHomePage
+export default PrdGalleryHomePage;

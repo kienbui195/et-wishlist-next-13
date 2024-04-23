@@ -135,7 +135,7 @@ const PrdGalleryModal = ({
                     }}
                   >
                     <img
-                      src={`${process.env.REACT_APP_URL_BE}${_i}`}
+                      src={`${process.env.NEXT_PUBLIC_BE_URL}${_i}`}
                       alt=""
                       className="max-h-[760px] h-[71vw] w-full object-cover"
                     />
@@ -169,7 +169,7 @@ const PrdGalleryModal = ({
                     return (
                       <div className="!flex h-full max-h-[1000px] w-full max-w-[1000px] items-center justify-center">
                         <img
-                          src={`${process.env.REACT_APP_URL_BE}${_i}`}
+                          src={`${process.env.NEXT_PUBLIC_BE_URL}${_i}`}
                           alt=""
                           className="h-auto max-h-full w-auto max-w-full rounded-10 object-contain"
                         />

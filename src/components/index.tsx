@@ -1,5 +1,7 @@
+'use client'
+
 import React, { lazy, Suspense, ReactElement } from 'react';
-import { convertKeys } from 'utils/function';
+import { convertKeys } from '../utils/function';
 
 const HeaderBarSingleContent = lazy(() => import('./HeaderBar/SingleContent'));
 const HeaderBarMultiContent = lazy(() => import('./HeaderBar/MultiContent'));

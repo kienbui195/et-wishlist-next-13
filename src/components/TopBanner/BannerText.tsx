@@ -1,63 +1,48 @@
-import { ITopBannerText } from 'app/HomePage'
-import CustomButton from 'components/Header/CustomButton'
-import React, { FC, useEffect, useRef, useState } from 'react'
-import ButtonClose from './ButtonClose'
-import { IOptionalSetting } from 'data/wl-types'
+'use client'
+
+import CustomButton from "../../components/Header/CustomButton";
+import React, { FC, useEffect, useRef, useState } from "react";
+import ButtonClose from "./ButtonClose";
+import { IOptionalSetting, ITopBannerText } from "../../data/wl-types";
 
 interface IBannerTextProps {
-  value: ITopBannerText
-  options?: IOptionalSetting
+  value: ITopBannerText;
+  options?: IOptionalSetting;
 }
 
 const BannerText: FC<IBannerTextProps> = ({ value = null, options }) => {
-  const [open, setOpen] = useState<boolean>(
-    options ? options.isShow : true
-  )
-  const contentRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState<boolean>(options ? options.isShow : true);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (contentRef.current && value) {
-      contentRef.current.innerHTML = value?.content + ''
+      contentRef.current.innerHTML = value?.content + "";
     }
-  }, [contentRef, value])
+  }, [contentRef, value]);
 
   return (
-    <div
-      className={`w-full h-fit select-none  text-ellipsis ${
-        open ? 'mt-[20px]' : ''
-      }`}
-    >
+    <div className={`w-full h-fit select-none  text-ellipsis ${open ? "mt-[20px]" : ""}`}>
       {open && (
-        <div
-          className={`relative whitespace-normal`}
-        >
+        <div className={`relative whitespace-normal`}>
           <div
             className={`flex justify-between whitespace-normal space-x-6 items-center p-8 border`}
             style={{
-              background: value?.background || 'white',
-              height: options?.height ? `${options.height}px` : 'fit',
+              background: value?.background || "white",
+              height: options?.height ? `${options.height}px` : "fit",
               maxWidth: `${options?.width || 1060}px`,
             }}
           >
-            <div
-              className={`overflow-hidden text-ellipsis w-full`}
-              ref={contentRef}
-            ></div>
+            <div className={`overflow-hidden text-ellipsis w-full`} ref={contentRef}></div>
             <CustomButton
               onClick={() => {
-                value?.link_on_click &&
-                  window.open(value?.link_on_click, '_blank')
+                value?.link_on_click && window.open(value?.link_on_click, "_blank");
               }}
               style={{
-                background:
-                  value && value.button_background
-                    ? value.button_background
-                    : 'white',
-                color:
-                  value && value.button_color ? value.button_color : 'black',
+                background: value && value.button_background ? value.button_background : "white",
+                color: value && value.button_color ? value.button_color : "black",
               }}
               className={`border hover:opacity-80`}
-              label={value?.button_label || 'Click Here'}
+              label={value?.button_label || "Click Here"}
             />
           </div>
           {options?.isAcceptClose && (
@@ -68,7 +53,7 @@ const BannerText: FC<IBannerTextProps> = ({ value = null, options }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default BannerText
+export default BannerText;

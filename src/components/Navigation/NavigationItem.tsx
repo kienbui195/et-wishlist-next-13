@@ -1,51 +1,51 @@
-import React, { FC, useEffect, useRef } from 'react'
-import { Route } from '../../routers/types'
-import { Link, useSearchParams } from 'react-router-dom'
-import { INavigation } from 'components/Header/HeaderLogged'
+"use client";
+
+import React, { FC, useEffect, useRef } from "react";
+import { INavigation } from "../../components/Header/HeaderLogged";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export interface NavItemType {
-  id: string
-  name: string
-  href: Route
-  targetBlank?: boolean
-  isNew?: boolean
-  emoji?: string
-  children?: NavItemType[]
-  type: 'dropdown' | 'mega' | 'none'
+  id: string;
+  name: string;
+  href: string;
+  targetBlank?: boolean;
+  isNew?: boolean;
+  emoji?: string;
+  children?: NavItemType[];
+  type: "dropdown" | "mega" | "none";
 }
 
 export interface NavigationItemProps {
-  menuItem: INavigation
+  menuItem: INavigation;
 }
 
 const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
-  const [searchParams] = useSearchParams()
-  const emojiRef = useRef<HTMLDivElement>(null)
+  const searchParams = useSearchParams();
+  const emojiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (emojiRef.current && menuItem.emoji) {
-      emojiRef.current.innerHTML = '&#' + menuItem.emoji + ' '
+      emojiRef.current.innerHTML = "&#" + menuItem.emoji + " ";
     }
-  }, [emojiRef, menuItem])
+  }, [emojiRef, menuItem]);
 
   // ===================== MENU MAIN MENU =====================
   const renderMainItem = (item: INavigation) => {
-    const href = window.location.pathname
+    const href = window.location.pathname;
 
     return (
       <div className="h-[34px] flex-shrink-0 flex items-center mr-5 space-x-[10px] box-border ">
         <Link
           className={`${
-            href.replace('/', '') === item.slug ||
+            href.replace("/", "") === item.slug ||
             href === item.slug ||
-            (searchParams.get('_pt') === 'Single' &&
-              item.slug === ('/' || '')) ||
-            (searchParams.get('_pt') === 'Merchant' &&
-              item.slug === ('/brands' || 'brands'))
-              ? 'border-[--gray-text]'
-              : 'border-transparent'
+            (searchParams.get("_pt") === "Single" && item.slug === ("/" || "")) ||
+            (searchParams.get("_pt") === "Merchant" && item.slug === ("/brands" || "brands"))
+              ? "border-[--gray-text]"
+              : "border-transparent"
           } text-menu-15 border-b-[2px] hover:border-[--gray-text] flex py-[8px]`}
-          to={{
+          href={{
             pathname: item.slug || undefined,
           }}
         >
@@ -58,10 +58,10 @@ const NavigationItem: FC<NavigationItemProps> = ({ menuItem }) => {
           </div>
         )}
       </div>
-    )
-  }
+    );
+  };
 
-  return <li className="menu-item flex-shrink-0">{renderMainItem(menuItem)}</li>
-}
+  return <li className="menu-item flex-shrink-0">{renderMainItem(menuItem)}</li>;
+};
 
-export default NavigationItem
+export default NavigationItem;

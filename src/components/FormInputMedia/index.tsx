@@ -291,7 +291,7 @@ const FormInputMedia: FC<IInputMediaProps> = ({
                         {value?.url && (
                           <div className="mt-5 h-40 w-40 overflow-hidden rounded-[10px]">
                             <img
-                              src={process.env.REACT_APP_URL_BE + value.url}
+                              src={process.env.NEXT_PUBLIC_BE_URL + value.url}
                               alt="Preview"
                               className="h-full max-h-full w-full max-w-full object-cover"
                             />
@@ -305,7 +305,7 @@ const FormInputMedia: FC<IInputMediaProps> = ({
                             <video
                               autoPlay
                               muted
-                              src={process.env.REACT_APP_URL_BE + value?.url}
+                              src={process.env.NEXT_PUBLIC_BE_URL + value?.url}
                               className="h-full w-full rounded-md object-cover"
                               loop
                               playsInline

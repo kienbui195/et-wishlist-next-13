@@ -1,32 +1,34 @@
-import React, { useState, Fragment, useEffect } from 'react'
-import { Transition } from '../../app/headlessui'
-import NavMobile from '../../components/Navigation/NavMobile'
-import usePathname from '../../hooks/usePathname'
-import { useNavigate } from 'react-router-dom'
-import useUserLogin from 'hooks/useUserLogin'
-import {useDispatch} from "react-redux";
-import {setDisplayMenuBar} from "../../features/global/menuBarDisplaySlice";
+"use client";
+
+import React, { useState, Fragment, useEffect } from "react";
+import { Transition } from "../headlessui";
+import NavMobile from "../../components/Navigation/NavMobile";
+import usePathname from "../../hooks/usePathname";
+import useUserLogin from "../../hooks/useUserLogin";
+import { useDispatch } from "react-redux";
+import { setDisplayMenuBar } from "../../lib/features/global/menuBarDisplaySlice";
+import { useRouter } from "next/navigation";
 
 const MenuBar: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false)
-  const { isLogin } = useUserLogin()
-  const navigate = useNavigate()
-  const pathname = usePathname()
-  const dispatch = useDispatch()
+  const [isVisible, setIsVisible] = useState(false);
+  const { isLogin } = useUserLogin();
+  const pathname = usePathname();
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
-    setIsVisible((preState) => !preState)
-  }, [isLogin])
+    setIsVisible((preState) => !preState);
+  }, [isLogin]);
 
   useEffect(() => {
-    setIsVisible(false)
-    dispatch(setDisplayMenuBar(false))
-  }, [pathname])
+    setIsVisible(false);
+    dispatch(setDisplayMenuBar(false));
+  }, [pathname]);
 
   const handleCloseMenu = () => {
-    setIsVisible(false)
-    dispatch(setDisplayMenuBar(false))
-  }
+    setIsVisible(false);
+    dispatch(setDisplayMenuBar(false));
+  };
   const renderContent = () => {
     return (
       <Transition show={isVisible} as={Fragment}>
@@ -40,10 +42,7 @@ const MenuBar: React.FC = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div
-              className="fixed inset-0 bg-neutral-900 bg-opacity-50 z-50"
-              onClick={handleCloseMenu}
-            />
+            <div className="fixed inset-0 bg-neutral-900 bg-opacity-50 z-50" onClick={handleCloseMenu} />
           </Transition.Child>
 
           <Transition.Child
@@ -61,7 +60,7 @@ const MenuBar: React.FC = () => {
                   <NavMobile
                     onClickClose={handleCloseMenu}
                     onEnter={(val) => {
-                      navigate(`/product-search/${val}`)
+                      router.push(`/product-search/${val}`);
                     }}
                   />
                 </div>
@@ -70,24 +69,19 @@ const MenuBar: React.FC = () => {
           </Transition.Child>
         </div>
       </Transition>
-    )
-  }
+    );
+  };
 
   return (
     <div>
       <button
         onClick={() => {
-          setIsVisible(!isVisible)
-          dispatch(setDisplayMenuBar(!isVisible))
+          setIsVisible(!isVisible);
+          dispatch(setDisplayMenuBar(!isVisible));
         }}
         className="p-2.5 rounded-lg text-neutral-700 dark:text-neutral-300 focus:outline-none flex items-center justify-center h-[36px] w-[36px]"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-7 w-7"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-        >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
           <path
             fillRule="evenodd"
             d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
@@ -98,7 +92,7 @@ const MenuBar: React.FC = () => {
 
       {renderContent()}
     </div>
-  )
-}
+  );
+};
 
-export default MenuBar
+export default MenuBar;

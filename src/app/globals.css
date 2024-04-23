@@ -2,26 +2,175 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer utilities {
+  .et-container {
+    width: 100%;
+    max-width: 1060px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .et-container-sm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  .brands-container {
+    width: 100%;
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brands-container-sm {
+    margin: 0;
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input {
+    --tw-ring-shadow: 0 0 #000 !important;
+  }
+
+  textarea {
+    --tw-ring-shadow: 0 0 #000 !important;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  .product-title-24 {
+    font-size: 24px;
+    line-height: 32px;
+    font-family: 'RobotoBold';
+  }
+  .product-title-22 {
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 700;
+    font-family: 'RobotoBold';
+  }
+  
+  .text-title-other-20 {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 700;
+    font-family: 'RobotoBold';
+  }
+
+  .text-link-bold-16 {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    font-family: 'RobotoBold';
+  }
+  
+  .text-title-18 {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    font-family: 'RobotoBold';
+  }
+  
+  .text-link-16 {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+  
+  .text-menu-15 {
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 700;
+    font-family: 'RobotoBold';
+  }
+  
+  .btn-13 {
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 400;
+    letter-spacing: 0.28px;
+    font-family: 'RobotoRegular';
+  }
+  
+  .R-product-content-title-20 {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+  
+  .R-product-content-16 {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+  
+  .R-content-15 {
+    font-size: 15px;
+    line-height: 22px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+
+  .R-title-explan {
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: 600;
+    font-family: 'RobotoBold';
+  }
+
+  .R-body-box {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+
+  .R-14-light{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+    font-family: 'RobotoRegular';
+  }
+
+  .R-body-small {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+
+  .R-body-extra-small {
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+
+  .R-body-extra-small {
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 400;
+    font-family: 'RobotoRegular';
+  }
+
+  .R-home-content {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    font-family: 'RobotoRegular';
+  }
+
 }

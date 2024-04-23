@@ -82,7 +82,7 @@ const OurStoryModal: FC<IOurStoryModal> = ({
             <img
               src={
                 avatarUrl !== ''
-                  ? `${process.env.REACT_APP_URL_BE}${avatarUrl}`
+                  ? `${process.env.NEXT_PUBLIC_BE_URL}${avatarUrl}`
                   : 'default-avatar.jpg'
               }
               alt=""
@@ -111,7 +111,7 @@ const OurStoryModal: FC<IOurStoryModal> = ({
               ref={videoRef}
             >
               <source
-                src={`${process.env.REACT_APP_URL_BE}${storyClipUrl}`}
+                src={`${process.env.NEXT_PUBLIC_BE_URL}${storyClipUrl}`}
                 type="video/mp4"
               />
               Your browser does not support the video tag.

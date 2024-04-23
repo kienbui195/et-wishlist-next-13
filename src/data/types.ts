@@ -1,9 +1,8 @@
-import { Route } from '../routers/types'
 
 //  ######  CustomLink  ######## //
 export interface CustomLink {
   label: string
-  href: Route
+  href: string
   targetBlank?: boolean
 }
 

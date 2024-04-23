@@ -31,7 +31,7 @@ const PrdMedia = ({ product, setPrdDetail, prdDetail }: PrdMediaProps) => {
               className="absolute inset-0 h-full w-full object-contain sm:rounded-l-[10px] rounded-l-none"
               src={
                 product?.attributes?.shortClips.data &&
-                `${process.env.REACT_APP_URL_BE}${product.attributes.shortClips.data[0]?.attributes?.clip?.data?.attributes?.url}`
+                `${process.env.NEXT_PUBLIC_BE_URL}${product.attributes.shortClips.data[0]?.attributes?.clip?.data?.attributes?.url}`
               }
             >
               Your browser does not support the video tag.
@@ -48,7 +48,7 @@ const PrdMedia = ({ product, setPrdDetail, prdDetail }: PrdMediaProps) => {
             <img
               src={
                 product?.attributes.images?.data &&
-                `${process.env.REACT_APP_URL_BE}${product?.attributes.images?.data[0]?.attributes?.url}`
+                `${process.env.NEXT_PUBLIC_BE_URL}${product?.attributes.images?.data[0]?.attributes?.url}`
               }
               alt={''}
               className="h-full w-full object-cover cursor-pointer"
@@ -69,7 +69,7 @@ const PrdMedia = ({ product, setPrdDetail, prdDetail }: PrdMediaProps) => {
                   }}
                 >
                   <img
-                    src={`${process.env.REACT_APP_URL_BE}${_i.attributes.url}`}
+                    src={`${process.env.NEXT_PUBLIC_BE_URL}${_i.attributes.url}`}
                     alt={''}
                     className="h-full w-full object-cover cursor-pointer"
                   />

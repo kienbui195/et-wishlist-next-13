@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import { IImageContent } from '.'
-import CustomCarousel from 'components/CustomCarousel'
-import { IOptionalSetting } from 'data/wl-types'
+import CustomCarousel from '../../components/CustomCarousel'
+import { IOptionalSetting } from '../../data/wl-types'
 
 export interface IMultiContentProps {
   value: IImageContent[]

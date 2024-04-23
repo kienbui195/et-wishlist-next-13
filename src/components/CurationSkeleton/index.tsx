@@ -1,6 +1,7 @@
-import useMediaQuery from 'hooks/useMediaQuery'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import * as React from 'react'
-import { MoreIcon, SingleDot } from 'utils/svgExport'
+import { MoreIcon, SingleDot } from '../../utils/svgExport'
+import Image from 'next/image'
 
 const CurationSkeleton = () => {
   const innerWidth = useMediaQuery()
@@ -17,7 +18,7 @@ const CurationSkeleton = () => {
                 <div className="flex h-4 space-x-1">
                   <div className="h-[12px] w-[100px] font-semibold capitalize line-clamp-2 text-ellipsis animate-pulse bg-[--gray-line]"></div>
                   <div className="p-[4px] flex items-center justify-center text-[--gray]">
-                    <img src={SingleDot} alt="" />
+                    <Image src={SingleDot} alt="" />
                   </div>
                   <div className="h-[12px] w-[12px] text-[--gray] animate-pulse bg-[--gray-line]"></div>
                 </div>
@@ -25,7 +26,7 @@ const CurationSkeleton = () => {
             </div>
             <div className="h-full flex items-center cursor-default">
               <div className="cursor-pointer">
-                <img
+                <Image
                   src={MoreIcon}
                   width="28"
                   height="28"

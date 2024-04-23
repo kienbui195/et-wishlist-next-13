@@ -46,7 +46,7 @@ const VendorDesc = ({ product, callback }: VendorDescProps) => {
             </div>
           </div>
           <img
-            src={`${process.env.REACT_APP_URL_BE}${product?.attributes.ourStory?.founderImage.data?.attributes.url}`}
+            src={`${process.env.NEXT_PUBLIC_BE_URL}${product?.attributes.ourStory?.founderImage.data?.attributes.url}`}
             alt=""
             className="h-20 w-20 shrink-0 rounded-full object-cover md:h-16 md:w-16"
           />

@@ -1,7 +1,8 @@
-import { ITopBannerImage } from 'app/HomePage'
+'use client'
+
 import React, { FC, useState } from 'react'
-import CustomCarousel from 'components/CustomCarousel'
-import { IOptionalSetting } from 'data/wl-types'
+import CustomCarousel from '../../components/CustomCarousel'
+import { IOptionalSetting, ITopBannerImage } from '../../data/wl-types'
 
 interface IBannerImageProps {
   value: ITopBannerImage[]

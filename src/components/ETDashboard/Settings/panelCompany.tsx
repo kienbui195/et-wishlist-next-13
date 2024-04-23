@@ -19,7 +19,7 @@ const CompanyPanel: React.FC<CompanyPanelProps> = ({
   onChangeImg,
   errors,
 }) => {
-  let url = process.env.REACT_APP_URL_BE
+  let url = process.env.NEXT_PUBLIC_BE_URL
   let imageUrl = url + company.logo.url
   const img = new Image()
   img.src = imageUrl

@@ -1,3 +1,7 @@
+import { ILogo, INavigation } from "@/components/Header/HeaderLogged"
+import { IHeaderBarPage } from "@/components/HeaderBar"
+import { ICompanyDefaultInitState } from "@/lib/features/global/companyDefaultSlice"
+
 export interface IImage {
   id: number
   attributes: {
@@ -111,3 +115,35 @@ export type TCurrency =
 export type TDiscountCodeStatus = 'ACTIVE' | 'LIMIT' | 'EXPIRE'
 
 export type TDeviceType = 'mobile/tablet' | 'laptop/pc'
+
+export interface ITopBannerImage {
+  id: number;
+  link_on_click: string;
+  image: {
+    data: IImage | null;
+  };
+}
+
+export interface ITopBannerText {
+  button_label: string;
+  background: string | null;
+  content: string | null;
+  button_background: string | null;
+  button_color: string | null;
+  accept_close: boolean;
+  link_on_click: string;
+}
+
+export interface IGlobalData {
+  logo?: {
+    data?: {
+      attributes: ILogo
+    }
+  }
+  companyInfo?: ICompanyDefaultInitState
+  footerMenu: INavigation[]
+  footerSubMenu: INavigation[]
+  headerBar: IHeaderBarPage[]
+  navItems: INavigation[]
+
+}

@@ -83,7 +83,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
   }
 
   const handleLoginGoogleSSO = () => {
-    window.open(`${process.env.REACT_APP_API_URL}/connect/google`, '_self')
+    window.open(`${process.env.NEXT_PUBLIC_API_URL}/connect/google`, '_self')
   }
 
   const handleLoginETSSO = () => {

@@ -1,15 +1,15 @@
-import React, { FC } from 'react'
-import { ISidebarBanner } from '.'
-import CustomCarousel from 'components/CustomCarousel'
-import { IOptionalSetting } from 'data/wl-types'
+import React, { FC } from "react";
+import { ISidebarBanner } from ".";
+import CustomCarousel from "../../components/CustomCarousel";
+import { IOptionalSetting } from "../../data/wl-types";
 
 interface ISidebarBannerProps {
-  value: ISidebarBanner[]
-  options?: IOptionalSetting
+  value: ISidebarBanner[];
+  options?: IOptionalSetting;
 }
 
 const SidebarBanner: FC<ISidebarBannerProps> = ({ value, options }) => {
-  const [open, setOpen] = React.useState<boolean>(options ? options.isShow : true)
+  const [open, setOpen] = React.useState<boolean>(options ? options.isShow : true);
 
   return open ? (
     <div className={`sidebar-right top-0 z-10 hidden mt-[24px] shrink-0 bg-white p-0 md:block w-full h-full `}>
@@ -26,8 +26,8 @@ const SidebarBanner: FC<ISidebarBannerProps> = ({ value, options }) => {
         width={options?.width}
         onClose={() => setOpen(false)}
       />
-    </div> 
-  ) : null
-}
+    </div>
+  ) : null;
+};
 
-export default SidebarBanner
+export default SidebarBanner;

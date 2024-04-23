@@ -1,57 +1,52 @@
-import DropdownFilter, { IDropdownItem1 } from 'components/DropdownFilter'
-import React, { FC, useEffect, useState } from 'react'
-import apis from 'apis'
-import { createQuery } from 'utils/function'
-import { CategoryIcon } from 'utils/svgExport'
-import useMediaQuery from 'hooks/useMediaQuery'
+import React, { FC, useEffect, useState } from "react";
+import DropdownFilter, { IDropdownItem1 } from "../DropdownFilter";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import apis from "@/apis";
+import { createQuery } from "@/utils/function";
+import Image from "next/image";
+import { CategoryIcon } from "@/utils/svgExport";
 
 export interface ICategoryFilterProps {
-  select?: 'one' | 'multi'
-  onChangeSingle?: (val: IDropdownItem1 | null) => void
-  onChangeMulti?: (val: IDropdownItem1[]) => void
-  className?: string
-  cateSlug: string | null
+  select?: "one" | "multi";
+  onChangeSingle?: (val: IDropdownItem1 | null) => void;
+  onChangeMulti?: (val: IDropdownItem1[]) => void;
+  className?: string;
+  cateSlug: string | null;
 }
 
-const CategoryFilter: FC<ICategoryFilterProps> = ({
-  select = 'one',
-  onChangeSingle,
-  onChangeMulti,
-  className = '',
-  cateSlug,
-}) => {
-  const [categories, setCategories] = useState<IDropdownItem1[]>([])
-  const [category, setCategory] = useState<IDropdownItem1 | null>(null)
-  const mediaQueryWidth = useMediaQuery()
+const CategoryFilter: FC<ICategoryFilterProps> = ({ select = "one", onChangeSingle, onChangeMulti, className = "", cateSlug }) => {
+  const [categories, setCategories] = useState<IDropdownItem1[]>([]);
+  const [category, setCategory] = useState<IDropdownItem1 | null>(null);
+  const mediaQueryWidth = useMediaQuery();
 
   useEffect(() => {
-    if (!cateSlug) return
+    if (!cateSlug) return;
     apis
-    .get(
-      `wl-prod-cats`,
-      createQuery({
-        fields: ['name', 'category_order', 'slug'],
-        filters: {
-          slug: cateSlug
-        },
+      .get(
+        `wl-prod-cats`,
+        createQuery({
+          fields: ["name", "category_order", "slug"],
+          filters: {
+            slug: cateSlug,
+          },
+        })
+      )
+      .then((res) => {
+        const cate = res.data.data[0];
+        setCategory({ id: cate.id, name: cate.attributes.name, slug: cate.attributes.slug });
       })
-    )
-    .then((res) => {
-      const cate = res.data.data[0]
-      setCategory({id: cate.id, name: cate.attributes.name, slug: cate.attributes.slug})
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }, [cateSlug])
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [cateSlug]);
 
   const handleGetCategory = () => {
     apis
       .get(
         `wl-prod-cats`,
         createQuery({
-          fields: ['name', 'category_order', 'slug'],
-          sort: ['category_order:asc'],
+          fields: ["name", "category_order", "slug"],
+          sort: ["category_order:asc"],
         })
       )
       .then((res) => {
@@ -61,19 +56,18 @@ const CategoryFilter: FC<ICategoryFilterProps> = ({
               id: item.id,
               name: item.attributes?.name,
               slug: item.attributes?.slug,
-            }
+            };
           })
-        )
+        );
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
-    handleGetCategory()
-  }, [])
-
+    handleGetCategory();
+  }, []);
 
   const renderContent = (id: number, name: string) => {
     return (
@@ -81,32 +75,25 @@ const CategoryFilter: FC<ICategoryFilterProps> = ({
       name && (
         <div
           key={id}
-          className={`px-[12px] py-[8px] flex justify-between items-center border bg-[--gray-bg-tag] rounded-[4px] h-[35px] space-x-[8px] ${mediaQueryWidth > 460 ? 'max-w-[270px]' : 'max-w-[178px]'} whitespace-normal text-ellipsis ${className}`}
+          className={`px-[12px] py-[8px] flex justify-between items-center border bg-[--gray-bg-tag] rounded-[4px] h-[35px] space-x-[8px] ${
+            mediaQueryWidth > 460 ? "max-w-[270px]" : "max-w-[178px]"
+          } whitespace-normal text-ellipsis ${className}`}
         >
-          <div className="font-[RobotoRegular] text-[15px] text-[--gray-text] max-w-[337px] line-clamp-2 text-ellipsis overflow-hidden">
-            {name}
-          </div>
+          <div className="font-[RobotoRegular] text-[15px] text-[--gray-text] max-w-[337px] line-clamp-2 text-ellipsis overflow-hidden">{name}</div>
           <div>
             <div
               className="w-[17px] h-[17px] rounded-full bg-[--brand-secondary3] z-30 flex justify-center items-center cursor-pointer"
               onClick={() => {
-                if (select === 'one') {
-                  setCategory(null)
-                  onChangeSingle && onChangeSingle(null)
+                if (select === "one") {
+                  setCategory(null);
+                  onChangeSingle && onChangeSingle(null);
                 } else {
-                  setCategories(categories.filter((i) => i.id !== id))
-                  onChangeMulti &&
-                    onChangeMulti(categories.filter((i) => i.id !== id))
+                  setCategories(categories.filter((i) => i.id !== id));
+                  onChangeMulti && onChangeMulti(categories.filter((i) => i.id !== id));
                 }
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="7"
-                height="7"
-                viewBox="0 0 7 7"
-                fill="none"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -118,8 +105,8 @@ const CategoryFilter: FC<ICategoryFilterProps> = ({
           </div>
         </div>
       )
-    )
-  }
+    );
+  };
 
   return (
     <div className="min-h-[35px] flex justify-start h-[35px] box-border items-center space-x-2 rounded-[4px]">
@@ -128,29 +115,26 @@ const CategoryFilter: FC<ICategoryFilterProps> = ({
           value={categories}
           label="Categories"
           onChange={(val) => {
-            if (select === 'one') {
-              setCategory(val)
-              onChangeSingle && onChangeSingle(val)
+            if (select === "one") {
+              setCategory(val);
+              onChangeSingle && onChangeSingle(val);
             } else {
               if (categories.findIndex((item) => item.id === val.id) === -1) {
-                setCategories([...categories, val])
+                setCategories([...categories, val]);
               }
-              onChangeMulti && onChangeMulti([...categories, val])
+              onChangeMulti && onChangeMulti([...categories, val]);
             }
           }}
-          icon={
-            mediaQueryWidth < 768 ? <img alt='' src={CategoryIcon} className='w-[15px] h-[15px]' /> : null
-          }
+          icon={mediaQueryWidth < 768 ? <Image alt="" src={CategoryIcon} className="w-[15px] h-[15px]" /> : null}
         />
       </div>
       <div className="flex justify-start items-center overflow-x-hidden min-h-[35px] space-x-[12px] overflow-y-hidden">
-        {select === 'multi'
-          ? categories.length > 0 &&
-            categories.map((item) => renderContent(item.id, item.name))
+        {select === "multi"
+          ? categories.length > 0 && categories.map((item) => renderContent(item.id, item.name))
           : category && renderContent(category.id, category.name)}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryFilter
+export default CategoryFilter;

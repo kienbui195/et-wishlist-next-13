@@ -60,7 +60,7 @@ const Video: FC<IVideoProps> = ({ title = '', src = '' }) => {
           ref={videoRef}
         >
           <source
-            src={src !== '' ? `${process.env.REACT_APP_URL_BE}${src}` : ''}
+            src={src !== '' ? `${process.env.NEXT_PUBLIC_BE_URL}${src}` : ''}
             type="video/mp4"
           />
         </video>

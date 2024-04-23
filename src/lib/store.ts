@@ -10,10 +10,26 @@ import companyDefaultReducer from "./features/global/companyDefaultSlice";
 import volumeVideoReducer from "./features/global/volumeVideoSlice";
 import menuBarDisplayReducer from "./features/global/menuBarDisplaySlice";
 
-export const makeStore = () => {
-  return configureStore({
-    reducer: {
-      header: headerReducer,
+// export const makeStore = () => {
+//   return configureStore({
+//     reducer: {
+//       header: headerReducer,
+//       footer: footerReducer,
+//       headerBar: headerBarReducer,
+//       openModalLogin: loginReducer,
+//       user: userReducer,
+//       shop: shopReducer,
+//       mutedVideo: mutedVideoReducer,
+//       companyDefault: companyDefaultReducer,
+//       volumeVideo: volumeVideoReducer,
+//       menuBarDisplay: menuBarDisplayReducer,
+//     },
+//   });
+// };
+
+export const store = configureStore({
+  reducer: {
+    header: headerReducer,
       footer: footerReducer,
       headerBar: headerBarReducer,
       openModalLogin: loginReducer,
@@ -23,12 +39,15 @@ export const makeStore = () => {
       companyDefault: companyDefaultReducer,
       volumeVideo: volumeVideoReducer,
       menuBarDisplay: menuBarDisplayReducer,
-    },
-  });
-};
-//
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type AppStore = ReturnType<typeof makeStore>
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
+  },
+});
+
+// //
+// // Infer the `RootState` and `AppDispatch` types from the store itself
+// export type AppStore = ReturnType<typeof makeStore>
+// // Infer the `RootState` and `AppDispatch` types from the store itself
+// export type RootState = ReturnType<AppStore['getState']>
+// export type AppDispatch = AppStore['dispatch']
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

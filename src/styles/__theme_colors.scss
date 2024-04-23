@@ -1,0 +1,43 @@
+// Change your color you want --- please input rgb color (ex: 22,33,44)
+
+// THEME PALETTE 10 indigo-coolGrey ==========================================
+:root {
+  // Brand
+  --brand-primary: #003d68;
+  --brand-primary: #003d68;
+  --brand-primary-hover: #003153;
+  --brand-primary-pressed: #124c8d;
+  --brand-primary-disabled: #c0c7d1;
+  --brand-secondary2: #e9232d;
+  --brand-secondary3: #d1563f;
+  --body-color: #; 
+  // Gray colors
+  --gray-text: #222222;
+  --gray: #8e9dae;
+  --gray2: #b3cee2;
+  --gray-line: #e8ebef;
+  --gray-bg-tag: #f2f5f7;
+  --gray-bg-hover: #f8f9fc;
+  --gray-white: #ffffff;
+  --black-text: #000000;
+  --black-btn-text: #101010;
+  --text-gray: #717171;
+  --over-lay: #e8ebefcc;
+  --modal-shadow: #0000001a;
+
+  // State colors
+  --state-info: #116acc;
+  --state-success: #06c270;
+  --state-warning: #faad14;
+  --state-error: #f5222d;
+
+  // bg
+  --el-overlay-color-lighter: rgba(232, 235, 239, 0.8);
+  --carousel-btn: rgba(246, 247, 250, 0.5);
+  --carousel-hover: rgba(0, 61, 104, 1);
+
+  // award
+  --week-award: #3f9ea5;
+  --month-award: #8abe34;
+  --year-award: linear-gradient(180deg, #fd7ec3 0%, #ffba89 100%);
+}

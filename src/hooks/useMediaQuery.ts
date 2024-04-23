@@ -1,9 +1,15 @@
+'use client'
+
 import React from 'react';
 
 const useMediaQuery = () => {
-  const [width, setWidth] = React.useState<number>(window.innerWidth)
+  const isClient = typeof window === 'object'
+
+  const [width, setWidth] = React.useState<number>(isClient ? window.innerWidth : 0)
 
   React.useEffect(() => {
+    if (!isClient) return
+
     const handleResize = () => {
       setWidth(window.innerWidth)
     }
@@ -11,7 +17,7 @@ const useMediaQuery = () => {
     window.addEventListener('resize', handleResize)
 
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [isClient])
 
   return width
 }

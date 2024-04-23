@@ -21,13 +21,13 @@
                   <source
                     src={
                       prdVideo.length > 0
-                        ? `${process.env.REACT_APP_API_URL}/loadClip/${
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/loadClip/${
                             prdVideo[0].attributes?.url.split('/')[
                               prdVideo[0].attributes?.url.split('/').length - 1
                             ]
                           }`
                         : ''
-                    `${process.env.REACT_APP_URL_BE}${prdVideo?.attributes?.url}`
+                    `${process.env.NEXT_PUBLIC_BE_URL}${prdVideo?.attributes?.url}`
                     }
                     type="video/mp4"
                   />
