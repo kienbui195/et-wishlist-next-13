@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 const InnerHtml = ({ text, className }: { text: string; className?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const textAfterReplaceUrl = text.replaceAll("../../../../uploads", `${process.env.REACT_APP_URL_BE}/uploads`);
+    const textAfterReplaceUrl = text.replaceAll("../../../../uploads", `${process.env.NEXT_PUBLIC_BE_URL}/uploads`);
     if (ref.current) {
       ref.current.innerHTML = textAfterReplaceUrl;
       const images = ref.current.querySelectorAll("img");

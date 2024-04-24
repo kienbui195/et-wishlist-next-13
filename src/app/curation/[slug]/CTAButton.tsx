@@ -48,7 +48,7 @@ const CTAButton = ({
               <Image
                 alt=""
                 className="w-6 h-6"
-                src={`${process.env.REACT_APP_URL_BE}${ctaButton.icon?.data.attributes.url}`}
+                src={`${process.env.NEXT_PUBLIC_BE_URL}${ctaButton.icon?.data.attributes.url}`}
                 width={0}
                 height={0}
                 sizes="100vw"

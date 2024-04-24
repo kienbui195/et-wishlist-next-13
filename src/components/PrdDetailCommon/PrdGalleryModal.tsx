@@ -123,6 +123,9 @@ const PrdGalleryModal = ({ product, setPrdDetail, prdDetail, closeGallery, windo
                       src={`${process.env.NEXT_PUBLIC_BE_URL}${_i}`}
                       alt=""
                       className="max-h-[760px] h-[71vw] w-full object-cover"
+                      width={0}
+                      height={0}
+                      sizes="100vw"
                     />
                   </div>
                 ))}
@@ -154,6 +157,9 @@ const PrdGalleryModal = ({ product, setPrdDetail, prdDetail, closeGallery, windo
                           src={`${process.env.NEXT_PUBLIC_BE_URL}${_i}`}
                           alt=""
                           className="h-auto max-h-full w-auto max-w-full rounded-10 object-contain"
+                          width={0}
+                          height={0}
+                          sizes="100vw"
                         />
                       </div>
                     );

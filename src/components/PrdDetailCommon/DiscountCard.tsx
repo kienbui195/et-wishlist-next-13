@@ -19,6 +19,7 @@ import {
   UpvotedDetailHover,
   UpVoteDetail,
 } from "@/utils/svgExport";
+import Link from "next/link";
 
 interface DiscountCardProps {
   product: IProductState;
@@ -110,7 +111,7 @@ const DiscountCard = ({
             }}
           />
         </div>
-        <a
+        <Link
           href={
             productBuyLink
               ? `${productBuyLink}&discount=${prdDetail.discount.discount_code}`
@@ -125,7 +126,7 @@ const DiscountCard = ({
           >
             Buy With Discount
           </button>
-        </a>
+        </Link>
         <div className="mt-[22px] text-center R-body-box text-[--gray-text]">
           The discount code above is unique to you and can only be used once. You can access all of your discounts later
           in your ‘My Votes’ page.
@@ -236,7 +237,7 @@ const DiscountCard = ({
             </span>
           </button>
         </div>
-        <a
+        <Link
           href={
             productBuyLink
               ? productBuyLink
@@ -247,7 +248,7 @@ const DiscountCard = ({
           rel="noreferrer"
         >
           Buy Now
-        </a>
+        </Link>
       </div>
       <div className="leading-4.4 mt-[22px] text-center R-body-box text-[--gray-text]">
         Discount code revealed after voting.

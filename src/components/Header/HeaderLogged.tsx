@@ -32,7 +32,9 @@ const HeaderLogged: React.FC<HeaderProps> = () => {
 
   return (
     <div
-      className={`${pathname.includes('login') || pathname.includes('register') ? "hidden" : "flex"} top-0 bg-[#F6F6F6] z-40 md:h-[70px] h-[56px]  flex-col items-center justify-center w-full ${
+      className={`${
+        pathname.includes("login") || pathname.includes("register") ? "hidden" : "flex"
+      } top-0 bg-[#F6F6F6] z-40 md:h-[70px] h-[56px]  flex-col items-center justify-center w-full ${
         mediaQueryWidth > 851 ? "transition-y-[70px]" : "transition-y-[56px]"
       } ${mediaQueryWidth > 851 ? "sticky transition-all duration-500" : !isScrollingDown ? "sticky transition-all duration-500" : ""}`}
     >

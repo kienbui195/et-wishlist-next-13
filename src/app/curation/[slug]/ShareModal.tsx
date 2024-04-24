@@ -48,7 +48,7 @@ const ShareModal = ({ curation, onClose, onShare, isPreview = false }: ShareModa
         <div className="relative mb-8 mt-6 flex overflow-hidden rounded-lg border border-gray-1500 bg-white mx-[40px] max-w-full shadow-productShareInfo cardShare">
           <div className="group/items rounded-10 mr-5 flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-10 md:mr-[30px] md:h-[160px] md:w-[160px]">
             <video
-              src={`${process.env.REACT_APP_URL_BE}${curation.attributes.hoverVideo?.data?.attributes.url}`}
+              src={`${process.env.NEXT_PUBLIC_BE_URL}${curation.attributes.hoverVideo?.data?.attributes.url}`}
               className="h-full w-full object-cover hidden group-hover/items:block"
               loop
               playsInline
@@ -56,7 +56,7 @@ const ShareModal = ({ curation, onClose, onShare, isPreview = false }: ShareModa
               autoPlay
             ></video>
             <Image
-              src={`${process.env.REACT_APP_URL_BE}${curation.attributes.thumbnail?.data?.attributes.url}`}
+              src={`${process.env.NEXT_PUBLIC_BE_URL}${curation.attributes.thumbnail?.data?.attributes.url}`}
               className="h-full max-h-full w-full max-w-full object-cover group-hover/items:hidden"
               alt=""
               width={0}

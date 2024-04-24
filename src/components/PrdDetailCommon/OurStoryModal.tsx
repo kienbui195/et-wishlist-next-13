@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/lib/store";
 import { setMutedVideo } from "@/lib/features/global/mutedVideoSlice";
 import Image from "next/image";
+import { DefaultAvatar } from "@/utils/svgExport";
 
 interface IOurStoryModal {
   onClick?: () => void;
@@ -38,6 +39,8 @@ const OurStoryModal: FC<IOurStoryModal> = ({
   };
 
   useEffect(() => {
+    if (!videoRef.current)  return
+
     const handleVolumeChange = (e: any) => {
       if (e.target.volume === 0 || e.target.muted) {
         dispatch(setMutedVideo(true));
@@ -80,9 +83,13 @@ const OurStoryModal: FC<IOurStoryModal> = ({
           </div>
           <div className="mt-[26px] flex items-center border-y border-gray-1350 py-[25px]">
             <Image
-              src={avatarUrl !== "" ? `${process.env.NEXT_PUBLIC_BE_URL}${avatarUrl}` : "default-avatar.jpg"}
+              src={avatarUrl !== "" ? `${process.env.NEXT_PUBLIC_BE_URL}${avatarUrl}` : DefaultAvatar}
               alt=""
               className="mr-5 h-[60px] w-[60px] shrink-0 rounded-full object-cover"
+              width={0}
+              height={0}
+              sizes="100vw"
+
             />
             <div className="editor-block mt-1 overflow-hidden whitespace-pre-wrap text-base font-normal leading-normal text-gray-2350 md:text-sm md:leading-normal text-[--text-gray]">
               {founderName}

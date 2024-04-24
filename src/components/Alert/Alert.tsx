@@ -1,16 +1,10 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import { TAlertType } from "../../data/wl-types";
-import Success from "../../assets/svg/StatusS.svg";
-import Info from "../../assets/svg/StatusI.svg";
-import Error from "../../assets/svg/StatusE.svg";
-import Warning from "../../assets/svg/StatusW.svg";
-import CloseS from "../../assets/svg/CloseS.svg";
-import CloseW from "../../assets/svg/CloseW.svg";
-import CloseI from "../../assets/svg/CloseI.svg";
-import CloseE from "../../assets/svg/CloseE.svg";
+
 import useMediaQuery from "../../hooks/useMediaQuery";
 import { isMobileOrTabletDevice } from "../../utils/function";
 import Image from "next/image";
+import { CloseE, CloseI, CloseS, CloseW, Info, Success, Warning } from "@/utils/svgExport";
 
 export interface AlertProps {
   children: string;

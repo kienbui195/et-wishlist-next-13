@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import Logo from "../../components/Logo/Logo";
-import MenuBar from "../../components/MenuBar/MenuBar";
-import Navigation from "../../components/Navigation/Navigation";
+import Logo from "@/components/Logo/Logo";
+import MenuBar from "@/components/MenuBar/MenuBar";
+import Navigation from "@/components/Navigation/Navigation";
 import RightMenu from "./RightMenu";
 import { IFooter, ILogo, INavigation } from "./HeaderLogged";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../lib/store";
-import apis from "../../apis";
+import { RootState } from "@/lib/store";
+import apis from "@/apis";
 import { Fragment, useEffect, useState } from "react";
-import { setUser } from "../../lib/features/authenticate/userSlice";
-import { updateShopInfo } from "../../lib/features/authenticate/shopSlice";
-import { setOpenModalLogin } from "../../lib/features/authenticate/loginSlice";
+import { setUser } from "@/lib/features/authenticate/userSlice";
+import { updateShopInfo } from "@/lib/features/authenticate/shopSlice";
+import { setOpenModalLogin } from "@/lib/features/authenticate/loginSlice";
 import { usePathname, useRouter } from "next/navigation";
-import { useAlertContext } from "../../context/alertContext";
-import useUserLogin from "../../hooks/useUserLogin";
+import { useAlertContext } from "@/context/alertContext";
+import useUserLogin from "@/hooks/useUserLogin";
 
 export interface MainNav2LoggedProps {
   navInfo?: INavigation[];

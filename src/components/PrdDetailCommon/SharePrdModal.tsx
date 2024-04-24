@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useAlertContext } from "@/context/alertContext";
 import apis from "@/apis";
 import Image from "next/image";
+import { DefaultThumbnail2 } from "@/utils/svgExport";
 
 interface SharePrdModalProps {
   setPrdDetail: React.Dispatch<React.SetStateAction<prdDetailState>>;
@@ -21,14 +22,7 @@ interface SharePrdModalProps {
   isDemo?: boolean;
 }
 
-const SharePrdModal = ({
-  setPrdDetail,
-  product,
-  prdDetail,
-  closeSharePrd,
-  onShared,
-  isDemo = false,
-}: SharePrdModalProps) => {
+const SharePrdModal = ({ setPrdDetail, product, prdDetail, closeSharePrd, onShared, isDemo = false }: SharePrdModalProps) => {
   const { showAlert } = useAlertContext();
 
   const handleShare = () => {
@@ -99,8 +93,7 @@ const SharePrdModal = ({
               Don’t Keep {product?.attributes.name} a Secret!
             </div>
             <div className="break-normal text-center text-base font-normal leading-5 tracking-wide text-[--text-gray] mx-auto max-w-[382px]">
-              Share {product?.attributes.name} with friends or on social media to boost its exposure and support its
-              creators.
+              Share {product?.attributes.name} with friends or on social media to boost its exposure and support its creators.
             </div>
             <div className="relative mb-8 mt-6 flex overflow-hidden rounded-lg border border-gray-1500 bg-white mx-[40px] max-w-full shadow-productShareInfo cardShare">
               <div className="group/items rounded-10 mr-5 flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-10 md:mr-[30px] md:h-[160px] md:w-[160px]">
@@ -113,9 +106,16 @@ const SharePrdModal = ({
                   autoPlay
                 ></video>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BE_URL}${product?.attributes.thumbnail?.data?.attributes.url}`}
+                  src={
+                    product?.attributes.thumbnail
+                      ? `${process.env.NEXT_PUBLIC_BE_URL}${product?.attributes.thumbnail?.data?.attributes.url}`
+                      : DefaultThumbnail2
+                  }
                   className="h-full max-h-full w-full max-w-full object-cover group-hover/items:hidden"
                   alt=""
+                  width={0}
+                  height={0}
+                  sizes="100vw"
                 />
               </div>
               <div className="mr-2 mt-[22px] grow md:mt-0 md:flex md:max-w-[390px] md:flex-col md:justify-center md:pb-[9px] md:pt-2.5">

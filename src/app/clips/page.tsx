@@ -735,7 +735,7 @@ const ClipPage = () => {
                     controls
                     src={
                       currentInfo?.attributes.clip.data?.attributes.url
-                        ? `${process.env.REACT_APP_URL_BE}${currentInfo?.attributes.clip?.data.attributes.url}`
+                        ? `${process.env.NEXT_PUBLIC_BE_URL}${currentInfo?.attributes.clip?.data.attributes.url}`
                         : ""
                     }
                   ></video>
@@ -768,7 +768,7 @@ const ClipPage = () => {
                           autoPlay
                           src={
                             _i?.attributes.clip.data?.attributes.url
-                              ? `${process.env.REACT_APP_URL_BE}${_i?.attributes.clip?.data.attributes.url}`
+                              ? `${process.env.NEXT_PUBLIC_BE_URL}${_i?.attributes.clip?.data.attributes.url}`
                               : ""
                           }
                         ></video>
@@ -814,7 +814,7 @@ const ClipPage = () => {
                             <Image
                               src={
                                 currentInfo?.attributes.brand && currentInfo?.attributes.brand?.logo
-                                  ? `${process.env.REACT_APP_URL_BE}${currentInfo.attributes.brand.logo.url}`
+                                  ? `${process.env.NEXT_PUBLIC_BE_URL}${currentInfo.attributes.brand.logo.url}`
                                   : DefaultThumbnail
                               }
                               alt="brand"
@@ -897,7 +897,7 @@ const ClipPage = () => {
                     <Image
                       src={
                         currentInfo?.attributes.brand && currentInfo?.attributes.brand?.logo
-                          ? `${process.env.REACT_APP_URL_BE}${currentInfo.attributes.brand.logo.url}`
+                          ? `${process.env.NEXT_PUBLIC_BE_URL}${currentInfo.attributes.brand.logo.url}`
                           : DefaultThumbnail
                       }
                       alt=""

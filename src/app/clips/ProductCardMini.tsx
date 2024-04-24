@@ -25,7 +25,7 @@ const ProductCardMini: FC<IProductCardSmallProps> = ({
       <div className="group/items rounded-10 mr-5 flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-10 md:mr-[30px] md:h-[160px] md:w-[160px]">
         {hoverVideo !== "" && (
           <video
-            src={hoverVideo !== "" ? `${process.env.REACT_APP_URL_BE}${hoverVideo}` : ""}
+            src={hoverVideo !== "" ? `${process.env.NEXT_PUBLIC_BE_URL}${hoverVideo}` : ""}
             className="h-full w-full object-cover hidden group-hover/items:block rounded-lg"
             loop
             playsInline
@@ -34,7 +34,7 @@ const ProductCardMini: FC<IProductCardSmallProps> = ({
           ></video>
         )}
         <Image
-          src={thumbnail !== "" ? `${process.env.REACT_APP_URL_BE}${thumbnail}` : DefaultThumbnail2}
+          src={thumbnail !== "" ? `${process.env.NEXT_PUBLIC_BE_URL}${thumbnail}` : DefaultThumbnail2}
           className={`h-full max-h-full w-full max-w-full object-cover rounded-lg ${
             hoverVideo !== "" ? "group-hover/items:hidden" : ""
           }`}

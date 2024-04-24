@@ -4,7 +4,7 @@ import { useAlertContext } from "@/context/alertContext";
 import { TCurrency, TDiscountCodeStatus } from "./prdDetailInterface";
 import * as React from "react";
 import { formatDataNumber, getCurrencyCode } from "@/utils/function";
-import { CloseButton, CurationBookmark, CurationBookmarked, UpVote, VotedIcon } from "@/utils/svgExport";
+import { CloseButton, CurationBookmark, CurationBookmarked, Info, UpVote, VotedIcon } from "@/utils/svgExport";
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import { ENUM_WL_SYS_CONFIG } from "@/utils/constants";
@@ -108,12 +108,13 @@ const VoteLandMobile: React.FC<IVoteLandMobileProps> = ({
       <div className="flex  text-xl font-semibold leading-none text-slate-1150 font-[RobotoBold]">
         {`${isVoted ? "Thanks for voting!" : "UpVote Or Bookmark"}`}
         <Image
-          src="https://d22lwxpnhu2n4a.cloudfront.net/grommet/Image/info.svg"
+          src={Info}
           alt="info"
-          width={15}
-          height={15}
+          width={0}
+          height={0}
           className="ml-[5px] cursor-pointer"
           onClick={() => setShowTips(!showTips)}
+          sizes="100vw"
         />
       </div>
       {/* TODO: price info*/}
