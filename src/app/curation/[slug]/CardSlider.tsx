@@ -10,6 +10,7 @@ import ArrowRight from "../../../assets/svg/arrow_right.svg";
 import { ICuration } from "@/components/PrdDetailCommon/prdDetailInterface";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { DefaultThumbnail2 } from "@/utils/svgExport";
 
 export interface CardSliderProps {
   className?: string;
@@ -85,7 +86,7 @@ const CardSlider: FC<CardSliderProps> = ({ heading, className = "", posts, perVi
                         <div>
                           <div className="relative pb-[10px]">
                             <Image
-                              src={`${process.env.NEXT_PUBLIC_BE_URL}${_i.attributes.thumbnail?.data?.attributes.url}`}
+                              src={`${process.env.NEXT_PUBLIC_BE_URL}${_i.attributes.thumbnail?.data?.attributes.url}` ?? DefaultThumbnail2}
                               className="w-[200px] h-[200px] object-cover"
                               alt=""
                               width={0}
