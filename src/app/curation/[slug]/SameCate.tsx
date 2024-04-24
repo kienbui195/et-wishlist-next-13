@@ -53,6 +53,7 @@ const SameCate = ({ curation }: { curation: ICuration }) => {
     };
 
     handleGetSameCate(curation);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [curation.id]);
 
   return (

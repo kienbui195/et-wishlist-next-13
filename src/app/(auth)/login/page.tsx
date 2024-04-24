@@ -41,7 +41,7 @@ const Login = () => {
   const staticPage = useSelector((state: RootState) => state.footer.footer);
   const termUrl = staticPage.submenu.find((item) => item.slug.includes("term"))?.slug || "#";
   const privacyUrl = staticPage.submenu.find((item) => item.slug.includes("privacy"))?.slug || "#";
-  const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const EMAIL_REGEX = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   const handleClose = () => {
     setStep(0);
@@ -262,6 +262,7 @@ const Login = () => {
     } else {
       setDenied(true)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.email])
 
   return (

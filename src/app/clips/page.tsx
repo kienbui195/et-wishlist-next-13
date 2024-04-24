@@ -585,6 +585,7 @@ const ClipPage = () => {
     return () =>
       // eslint-disable-next-line react-hooks/exhaustive-deps
       videoRef.current?.removeEventListener("volumechange", handleVolumeChange);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef.current?.volume, mutedVideo]);
 
   useEffect(() => {
