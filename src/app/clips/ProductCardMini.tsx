@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import s from "./style.module.css";
 import Image from "next/image";
 import { DefaultThumbnail2 } from "@/utils/svgExport";
 
@@ -20,7 +19,7 @@ const ProductCardMini: FC<IProductCardSmallProps> = ({
 }) => {
   return (
     <div
-      className={`relative mb-8 mt-6 flex overflow-hidden rounded-lg border border-gray-1500 bg-white mx-[40px] max-w-full ${s.prodCardShadow}`}
+      className={`relative mb-8 mt-6 flex overflow-hidden rounded-lg border border-gray-1500 bg-white mx-[40px] max-w-full`}
     >
       <div className="group/items rounded-10 mr-5 flex h-[72px] w-[72px] shrink-0 items-center justify-center overflow-hidden rounded-10 md:mr-[30px] md:h-[160px] md:w-[160px]">
         {hoverVideo !== "" && (
