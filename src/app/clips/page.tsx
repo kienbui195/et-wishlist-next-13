@@ -4,7 +4,6 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import CustomButton from "./CustomButton";
 import CustomTag from "./CustomTag";
 import { useAlertContext } from "@/context/alertContext";
-import s from "./style.module.css";
 import Modal from "../../components/CustomModal";
 import ProductCardMini from "./ProductCardMini";
 import { convertKeys, createQuery, devLog, formatDataNumber } from "../../utils/function";
@@ -444,7 +443,7 @@ const ClipPage = () => {
           thumbnail={currentInfo?.attributes.product?.data?.attributes.thumbnail.data?.attributes?.url || ""}
           pageHeadline={currentInfo?.attributes.product?.data?.attributes.subHeadline || ""}
         />
-        <div className={`flex h-[74px] items-center justify-center ${s.prodShareShadow}`}>
+        <div className={`flex h-[74px] items-center justify-center `}>
           <Link className="share-network-facebook mr-2 cursor-pointer" href="/#">
             <Image src={FacebookIcon} alt="" />
           </Link>
