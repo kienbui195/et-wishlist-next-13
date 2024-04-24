@@ -1,4 +1,4 @@
-import { ILogo, INavigation } from '../../../components/Header/HeaderLogged';
+import { ILogo, INavigation } from '@/components/Header/HeaderLogged';
 import {createSlice} from '@reduxjs/toolkit'
 import type {PayloadAction } from "@reduxjs/toolkit";
 

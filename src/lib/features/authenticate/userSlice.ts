@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { IDropdownItem } from '../../data/wl-types'
+import { IDropdownItem } from '@/data/wl-types'
 
 export interface IUserLogin {
   user: {
