@@ -39,3 +39,5 @@ input:focus-visible {
 .scrollBar:hover::-webkit-scrollbar-thumb:hover {
   background: gray !important;
 }
+
+

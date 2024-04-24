@@ -1,3 +1,5 @@
+'use client'
+
 import { RootState } from "@/lib/store";
 import { DEFAULT_MEDIA_WIDTH, ShowPrdGalleryModal } from "@/components/ProductCurations/ProductCurationsCard";
 import VideoController from "@/components/VideoController";

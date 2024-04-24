@@ -1,6 +1,8 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import "./PrdGalleryHomePage.css";
+// import "./PrdGalleryHomePage.css";
 import { IProductState, prdDetailState } from "@/components/PrdDetailCommon/prdDetailInterface";
 import { ShowPrdGalleryModal } from ".";
 import { useDispatch, useSelector } from "react-redux";
@@ -111,7 +113,9 @@ PrdGalleryHomePageProps) => {
     let activeMedia = 0;
 
     const videoLink = isHaveVideo
-      ? `${process.env.NEXT_PUBLIC_API_URL}/loadClip/${media[0].attributes?.url.split("/")[media[0].attributes?.url.split("/").length - 1]}`
+      ? `${process.env.NEXT_PUBLIC_API_URL}/loadClip/${
+          media[0].attributes?.url.split("/")[media[0].attributes?.url.split("/").length - 1]
+        }`
       : "";
     let LIST_GALLERY: string[] = [];
     if (videoLink) {
@@ -198,10 +202,12 @@ PrdGalleryHomePageProps) => {
 
   const renderActionCard = () => {
     return (
-      <section className={` overflow-hidden cursor-default ${mediaQuery > 332 ? "p-[8px_16px_0]" : "p-[4px_0]"}`}>
+      <section className={`overflow-hidden cursor-default ${mediaQuery > 332 ? "p-[8px_16px_0]" : "p-[4px_0]"}`}>
         <div
           className={`flex items-center my-1  ${
-            mediaQuery > 332 ? "space-x-16 h-[40px] justify-between" : "space-x-4 flex-wrap space-y-2 h-auto justify-center"
+            mediaQuery > 332
+              ? "space-x-16 h-[40px] justify-between"
+              : "space-x-4 flex-wrap space-y-2 h-auto justify-center"
           }`}
         >
           <div className="flex space-x-2 items-start h-full">
@@ -212,15 +218,21 @@ PrdGalleryHomePageProps) => {
                     className="h-[30px] flex justify-center w-[30px]"
                     // onClick={!disabled ? handleUnVote : () => {}}
                   >
-                    <Image src={CurationVoted} alt="" />
+                    <Image src={CurationVoted} alt="" className="w-6 h-6" />
                   </div>
                 ) : (
                   <div className="group h-[30px] w-[30px]">
-                    <IconButtonVoteAnimation mt="mt-[2px]" mode="btw" onClick={!disabled ? handleVoteAction : () => {}} />
+                    <IconButtonVoteAnimation
+                      mt="mt-[2px]"
+                      mode="btw"
+                      onClick={!disabled ? handleVoteAction : () => {}}
+                    />
                   </div>
                 )}
               </div>
-              <div className="text-link-16 w-full h-6 flex justify-center items-center m-auto">{voteInfo.count ? convertNumbThousand(voteInfo.count) : 0}</div>
+              <div className="text-link-16 w-full h-6 flex justify-center items-center m-auto">
+                {voteInfo.count ? convertNumbThousand(voteInfo.count) : 0}
+              </div>
             </div>
             <div className="flex space-x-2 cursor-pointer ">
               <div className="w-8">
@@ -234,7 +246,9 @@ PrdGalleryHomePageProps) => {
                   />
                 </div>
               </div>
-              <div className="text-link-16 w-full h-6 flex justify-center m-auto">{convertNumbThousand(shareNumber)}</div>
+              <div className="text-link-16 w-full h-6 flex justify-center m-auto">
+                {convertNumbThousand(shareNumber)}
+              </div>
             </div>
           </div>
           <div className="flex space-x-3 items-start h-full ">
@@ -275,10 +289,14 @@ PrdGalleryHomePageProps) => {
         </div>
       </section>
     );
-  };
+  };  
 
   return (
-    <div className="el-overlay galeryImage" style={{ zIndex: "2009" }} id="galeryImageContainer">
+    <div
+      className="el-overlay bg-white fixed top-0 left-0 flex-1 w-full h-full"
+      style={{ zIndex: "2009" }}
+      id="galleryImageContainer"
+    >
       <div
         role="dialog"
         aria-modal="true"
@@ -320,7 +338,14 @@ PrdGalleryHomePageProps) => {
                             key={idx}
                           >
                             <div className="!flex h-full  max-h-[800px] max-w-[800px] md:max-h-[1000px] w-full md:max-w-[1000px] items-center justify-center">
-                              <Image sizes="100vw" src={`${_i}`} alt="" width={0} height={0} className="h-auto max-h-[82vh] w-auto max-w-full rounded-10 object-contain" />
+                              <Image
+                                sizes="100vw"
+                                src={_i as string}
+                                alt=""
+                                width={0}
+                                height={0}
+                                className="h-auto max-h-[82vh] w-full max-w-full rounded-10 object-contain"
+                              />
                             </div>
                             <div className="mb-4">{renderActionCard()}</div>
                           </div>

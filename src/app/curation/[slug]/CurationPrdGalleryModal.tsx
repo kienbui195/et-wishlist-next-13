@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useRef, useState } from "react";
 import { prdDetailState, ICuration } from "@/components/PrdDetailCommon/prdDetailInterface";
 

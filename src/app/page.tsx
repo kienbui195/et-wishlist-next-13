@@ -38,7 +38,7 @@ const HomePageCMS: React.FC = () => {
   const categorySlug = useSearchParams().get("category");
   const dispatch = useDispatch();
   const { showAlert } = useAlertContext();
-  const searchParams = new URLSearchParams(location.search);
+  const searchParams = useSearchParams()
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [switchingProduct, setSwitchingProduct] = useState<boolean>(false);
   const [topBanner, setTopBanner] = useState<ITopBannerComponent[]>([]);
@@ -370,7 +370,7 @@ const HomePageCMS: React.FC = () => {
   useEffect(() => {
     getProduct(1);
     handleCheckAndControlDisplayFilter();
-  }, [token, pathname, timeFilter, window.location.href]);
+  }, [token, pathname, timeFilter]);
 
   useEffect(() => {
     if (provider) {
