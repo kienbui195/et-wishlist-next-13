@@ -86,7 +86,11 @@ const CardSlider: FC<CardSliderProps> = ({ heading, className = "", posts, perVi
                         <div>
                           <div className="relative pb-[10px]">
                             <Image
-                              src={`${process.env.NEXT_PUBLIC_BE_URL}${_i.attributes.thumbnail?.data?.attributes.url}` ?? DefaultThumbnail2}
+                              src={
+                                _i.attributes.thumbnail?.data
+                                  ? `${process.env.NEXT_PUBLIC_BE_URL}${_i.attributes.thumbnail?.data?.attributes.url}`
+                                  : DefaultThumbnail2
+                              }
                               className="w-[200px] h-[200px] object-cover"
                               alt=""
                               width={0}

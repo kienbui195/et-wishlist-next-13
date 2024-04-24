@@ -26,7 +26,15 @@ export interface CardInitProps {
   showProdGallery: boolean;
 }
 
-const Card0: FC<CardInitProps> = ({ media, isVideo = false, height = DEFAULT_MEDIA_WIDTH, onClick, showFull = false, setShowPrdGallery, showProdGallery }) => {
+const Card0: FC<CardInitProps> = ({
+  media,
+  isVideo = false,
+  height = DEFAULT_MEDIA_WIDTH,
+  onClick,
+  showFull = false,
+  setShowPrdGallery,
+  showProdGallery,
+}) => {
   const playVideoRef = useRef<HTMLVideoElement>(null);
   const dispatch = useDispatch();
   const mutedVideo = useSelector((state: RootState) => state.mutedVideo);
@@ -91,7 +99,7 @@ const Card0: FC<CardInitProps> = ({ media, isVideo = false, height = DEFAULT_MED
         // mediaQuery > 845 || isMobileOrTabletDevice() || isFireFoxBrowser.current
         mediaQuery > 845 && !isMobileOrTabletDevice() && !isFireFoxBrowser.current;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showProdGallery]);
 
   useEffect(() => {
@@ -110,6 +118,7 @@ const Card0: FC<CardInitProps> = ({ media, isVideo = false, height = DEFAULT_MED
 
   return !isVideo ? (
     <Image
+      unoptimized={true}
       sizes="100vw"
       width={0}
       height={0}
@@ -162,7 +171,13 @@ const Card0: FC<CardInitProps> = ({ media, isVideo = false, height = DEFAULT_MED
         }}
       >
         <source
-          src={isVideo ? `${process.env.NEXT_PUBLIC_API_URL}/loadClip/${media.attributes?.url.split("/")[media.attributes?.url.split("/").length - 1]}` : ""}
+          src={
+            isVideo
+              ? `${process.env.NEXT_PUBLIC_API_URL}/loadClip/${
+                  media.attributes?.url.split("/")[media.attributes?.url.split("/").length - 1]
+                }`
+              : ""
+          }
         />
         Your browser does not support the video tag.
       </video>
@@ -282,7 +297,12 @@ const Card0: FC<CardInitProps> = ({ media, isVideo = false, height = DEFAULT_MED
               src={MuteOn}
             />
           ) : (
-            <Image onClick={() => dispatch(setMutedVideo(true))} alt="" className="h-6 w-6 absolute z-20 right-[13px] top-[9px] cursor-pointer" src={MuteOff} />
+            <Image
+              onClick={() => dispatch(setMutedVideo(true))}
+              alt=""
+              className="h-6 w-6 absolute z-20 right-[13px] top-[9px] cursor-pointer"
+              src={MuteOff}
+            />
           )}
         </React.Fragment>
       )}
