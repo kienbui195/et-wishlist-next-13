@@ -104,7 +104,7 @@ import ShopifyApp from '@/assets/svg/Shopify-app.svg'
 import MainImage from '@/assets/svg/Step1.1-image.svg'
 import MainImage2 from '@/assets/svg/Step2-image.svg'
 import PersonIcon from "@/assets/svg/PersonIcon.svg";
-import MainImage3 from 'assets/svg/Step3-image.svg'
+import MainImage3 from '@/assets/svg/Step3-image.svg'
 
 
 
