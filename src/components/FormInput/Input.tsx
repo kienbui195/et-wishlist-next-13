@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
 export interface IInputProps {

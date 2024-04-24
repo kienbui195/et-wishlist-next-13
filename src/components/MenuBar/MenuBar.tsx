@@ -23,6 +23,7 @@ const MenuBar: React.FC = () => {
   useEffect(() => {
     setIsVisible(false);
     dispatch(setDisplayMenuBar(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const handleCloseMenu = () => {

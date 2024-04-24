@@ -23,6 +23,7 @@ const GlobalData = ({data} : {data: any}) => {
       dispatch(setFooterMenu(data?.footerMenu))
       dispatch(setFooterSubMenu(data?.footerSubMenu))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   return (

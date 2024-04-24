@@ -91,6 +91,7 @@ const Card0: FC<CardInitProps> = ({ media, isVideo = false, height = DEFAULT_MED
         // mediaQuery > 845 || isMobileOrTabletDevice() || isFireFoxBrowser.current
         mediaQuery > 845 && !isMobileOrTabletDevice() && !isFireFoxBrowser.current;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showProdGallery]);
 
   useEffect(() => {

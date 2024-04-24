@@ -2,7 +2,8 @@ import React, { FC, useState } from 'react'
 import { IWlClip } from '..'
 import VerifiedBadgeSvg from 'assets/svg/VerifiedBadge.svg'
 import BrandDotSvg from 'assets/svg/BrandDot.svg'
-import Dropdown from 'components/CustomDropdown'
+import Dropdown from '@/components/CustomDropdown'
+import Image from 'next/image'
 
 interface ClipCardProps {
   data: IWlClip

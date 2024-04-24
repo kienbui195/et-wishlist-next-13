@@ -16,7 +16,7 @@ const NotFound = () => {
           </span>
           <div className="flex justify-center">
             <Link
-              to="/"
+              href="/"
               className="flex mt-4 h-[50px] items-center justify-center rounded-md bg-[--brand-primary] px-6 hover:bg-[--brand-primary-hover] active:bg-[--brand-primary-pressed]"
               tabIndex={-1}
             >

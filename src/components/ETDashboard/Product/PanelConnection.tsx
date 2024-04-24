@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
-import apis from 'apis'
-import { SpProduct, WLShopsBasicProps } from 'data/types'
-import PlaceholderImagePrd from '../../../assets/svg/PlaceHolderImagePrd.svg'
-import SingleSelect from 'components/SingleSelect'
+import apis from '@/apis'
+import { SpProduct, WLShopsBasicProps } from '@/data/types'
+import {PlaceholderImagePrd} from '@/utils/svgExport'
+import SingleSelect from '@/components/SingleSelect'
 import { CreateProductFormState } from './type'
-import Modal from 'components/CustomModal'
-import { createQuery } from 'utils/function'
+import Modal from '@/components/CustomModal'
+import { createQuery } from '@/utils/function'
+import Image from 'next/image'
 
 type prdSelected = SpProduct | null
 interface Props {
@@ -103,9 +104,10 @@ const PanelConnection: FC<Props> = ({
             <div className="flex flex-row">
               <div className="mr-4">
                 <Image
-                  className="object-cover"
-                  width="50"
-                  height="50"
+                  className="object-cover w-[50px] h-[50px]"
+                  width={0}
+                  height={0}
+                  sizes='100vw'
                   src={
                     productSelected.images.nodes &&
                     productSelected.images.nodes.length > 0
@@ -172,9 +174,10 @@ const PanelConnection: FC<Props> = ({
           <div className="flex flex-row">
             <div className="mr-4">
               <Image
-                className="object-cover"
-                width="50"
-                height="50"
+                className="object-cover w-[50px] h-[50px]"
+                width={0}
+                height={0}
+                sizes='100vw'
                 src={_i.images.nodes[0]?.url || PlaceholderImagePrd}
                 alt=""
               />

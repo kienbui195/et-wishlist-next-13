@@ -1,59 +1,48 @@
-import React, { useEffect, useState } from 'react'
-import './index.css'
-import apis from 'apis'
-import {
-  convertKeys,
-  createQuery,
-  initChartData,
-} from 'utils/function'
-import ProdPerformanceFilters from './ProdPerformanceFilters'
-import SectionInfo from './Components/SectionInfo'
-import moment from 'moment'
-import { Line } from 'react-chartjs-2'
-import { CategoryScale } from 'chart.js'
-import Chart from 'chart.js/auto'
-import { useSelector } from 'react-redux'
-import { RootState } from 'app/store'
-import { IDropdownItem } from 'data/wl-types'
-import SingleSelect from 'components/SingleSelect'
-import CustomDateRangePicker, {
-  IDateState,
-} from 'components/CustomDateRangePicker'
+import React, { useEffect, useState } from "react";
+import "./index.css";
+import apis from "@/apis";
+import { convertKeys, createQuery, initChartData } from "@/utils/function";
+import ProdPerformanceFilters from "./ProdPerformanceFilters";
+import SectionInfo from "./Components/SectionInfo";
+import moment from "moment";
+import { Line } from "react-chartjs-2";
+import { CategoryScale } from "chart.js";
+import Chart from "chart.js/auto";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { IDropdownItem } from "@/data/wl-types";
+import SingleSelect from "@/components/SingleSelect";
+import CustomDateRangePicker, { IDateState } from "@/components/CustomDateRangePicker";
 
-Chart.register(CategoryScale)
+Chart.register(CategoryScale);
 
 interface IChartData {
-  date: string
-  value: number
+  date: string;
+  value: number;
 }
 
 const Dashboard = () => {
-  const initData = initChartData(
-    moment(new Date()).startOf('isoWeeks').format('YYYY-MM-DD'),
-    moment(new Date()).format('YYYY-MM-DD')
-  )
+  const initData = initChartData(moment(new Date()).startOf("isoWeeks").format("YYYY-MM-DD"), moment(new Date()).format("YYYY-MM-DD"));
   const [totalInfo, setTotalInfo] = useState({
     pageViews: 0,
     votes: 0,
     orders: 0,
     grossSales: 0,
-  })
-  const [typeChart, setTypeChart] = useState('votes')
+  });
+  const [typeChart, setTypeChart] = useState("votes");
   const [datePicker, setDatePicker] = useState<IDateState>({
-    startDate: new Date(
-      moment(new Date()).startOf('isoWeeks').format('YYYY/MM/DD')
-    ),
-    endDate: new Date(moment(new Date()).format('YYYY/MM/DD')),
-  })
-  const [chartData, setChartData] = useState<IChartData[]>([])
+    startDate: new Date(moment(new Date()).startOf("isoWeeks").format("YYYY/MM/DD")),
+    endDate: new Date(moment(new Date()).format("YYYY/MM/DD")),
+  });
+  const [chartData, setChartData] = useState<IChartData[]>([]);
   const [chartJs, setChartJs] = useState({
     labels: initData.map((data) => data.date),
     datasets: [
       {
         label: typeChart,
         data: initData.map((data) => data.value),
-        backgroundColor: ['#e1fef9'],
-        borderColor: 'rgb(193,245,244)',
+        backgroundColor: ["#e1fef9"],
+        borderColor: "rgb(193,245,244)",
         borderWidth: 3,
         fill: true,
         pointRadius: 3,
@@ -61,34 +50,34 @@ const Dashboard = () => {
         pointHoverBorderWidth: 5,
       },
     ],
-  })
-  const user = useSelector((state: RootState) => state.user.user)
-  const [products, setProducts] = useState<IDropdownItem[]>([])
+  });
+  const user = useSelector((state: RootState) => state.user.user);
+  const [products, setProducts] = useState<IDropdownItem[]>([]);
   const [productId, setProductId] = useState<IDropdownItem>({
     id: 0,
-    name: 'All products',
-  })
+    name: "All products",
+  });
 
   const handleGetTotalStatical = () => {
     apis
-      .post('dashboard/dashboard-total', {
+      .post("dashboard/dashboard-total", {
         data: {
-          startDate: moment(datePicker?.startDate).format('YYYYMMDD'),
-          endDate: moment(datePicker?.endDate).format('YYYYMMDD'),
+          startDate: moment(datePicker?.startDate).format("YYYYMMDD"),
+          endDate: moment(datePicker?.endDate).format("YYYYMMDD"),
           productId: productId.id,
         },
       })
       .then((res) => {
-        setTotalInfo(convertKeys(res.data.data))
+        setTotalInfo(convertKeys(res.data.data));
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   const handleGetChart = () => {
     apis
-      .post('dashboard/dashboard-chart', {
+      .post("dashboard/dashboard-chart", {
         data: {
           startDate: datePicker?.startDate,
           endDate: datePicker?.endDate,
@@ -97,20 +86,20 @@ const Dashboard = () => {
         },
       })
       .then((res) => {
-        setChartData(convertKeys(res.data.data))
+        setChartData(convertKeys(res.data.data));
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   const handleGetProducts = () => {
     if (user.id) {
       apis
         .get(
-          'wl-products',
+          "wl-products",
           createQuery({
-            fields: ['name'],
+            fields: ["name"],
             filters: {
               member_id: user.id,
             },
@@ -122,32 +111,32 @@ const Dashboard = () => {
               acc.push({
                 id: item.id,
                 name: item.attributes.name,
-              })
-              return acc
+              });
+              return acc;
             }, [])
-          )
+          );
         })
         .catch((err) => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     }
-  }
+  };
 
   useEffect(() => {
-    handleGetTotalStatical()
+    handleGetTotalStatical();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datePicker, productId])
-
-  useEffect(() => {
-    handleGetChart()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datePicker, typeChart, productId])
+  }, [datePicker, productId]);
 
   useEffect(() => {
-    handleGetProducts()
+    handleGetChart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [datePicker, typeChart, productId]);
+
+  useEffect(() => {
+    handleGetProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (chartData.length > 0) {
@@ -157,8 +146,8 @@ const Dashboard = () => {
           {
             label: typeChart,
             data: chartData.map((data) => data.value),
-            backgroundColor: ['#e1fef9'],
-            borderColor: 'rgb(193,245,244)',
+            backgroundColor: ["#e1fef9"],
+            borderColor: "rgb(193,245,244)",
             borderWidth: 3,
             fill: true,
             pointRadius: 3,
@@ -166,46 +155,37 @@ const Dashboard = () => {
             pointHoverBorderWidth: 5,
           },
         ],
-      })
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartData])
+  }, [chartData]);
 
   useEffect(() => {
-    document.title = 'ET Wishlist | Brand Dashboard'
-  }, [])
+    document.title = "ET Wishlist | Brand Dashboard";
+  }, []);
 
-  let today = new Date()
-  let lastWeek = new Date(today)
-  lastWeek.setDate(today.getDate() - 7)
-  let firstDayOfLastWeek = new Date(lastWeek)
-  firstDayOfLastWeek.setDate(lastWeek.getDate() - lastWeek.getDay() + 1)
+  let today = new Date();
+  let lastWeek = new Date(today);
+  lastWeek.setDate(today.getDate() - 7);
+  let firstDayOfLastWeek = new Date(lastWeek);
+  firstDayOfLastWeek.setDate(lastWeek.getDate() - lastWeek.getDay() + 1);
 
   return (
     <main className="w-full px-10 py-7">
       <div className="flex w-full items-end justify-between">
         <div>
-          <span className="text-10 font-bold leading-none tracking-wide text-gray-1150">
-            {' '}
-            DASHBOARD{' '}
-          </span>
-          <h1 className="font-[RobotoBold] mt-3 text-xl font-semibold leading-none tracking-tight text-black">
-            {' '}
-            Overview{' '}
-          </h1>
-          <h2 className="font-base mt-[11px] leading-none text-gray-1150">
-            {' '}
-            An overview of your performance on Wishlist.{' '}
-          </h2>
+          <span className="text-10 font-bold leading-none tracking-wide text-gray-1150"> DASHBOARD </span>
+          <h1 className="font-[RobotoBold] mt-3 text-xl font-semibold leading-none tracking-tight text-black"> Overview </h1>
+          <h2 className="font-base mt-[11px] leading-none text-gray-1150"> An overview of your performance on Wishlist. </h2>
         </div>
         <div className="flex items-center flex-1 justify-end space-x-1">
           <SingleSelect
-            list={[{ id: 0, name: 'All products' }, ...products]}
+            list={[{ id: 0, name: "All products" }, ...products]}
             label=""
             placeholder="Select Product"
             value={productId.name}
             onChange={(val) => setProductId(val)}
-            position='bottom-right'
+            position="bottom-right"
           />
           <div className="h-[44px] mt-[12px] flex items-center">
             <CustomDateRangePicker
@@ -225,31 +205,17 @@ const Dashboard = () => {
       <div className="border w-full my-5"></div>
       <div className="flex space-x-[14px]">
         {Object.entries(totalInfo).map(([key, value]) => {
-          return (
-            <SectionInfo
-              key={key}
-              label={key.replace(/([a-z])([A-Z])/g, '$1 $2')}
-              value={value}
-            />
-          )
+          return <SectionInfo key={key} label={key.replace(/([a-z])([A-Z])/g, "$1 $2")} value={value} />;
         })}
       </div>
       <div className="border w-full my-5"></div>
       <div className="mb-5 flex w-full items-center justify-between">
         <div>
-          <div className="text-xl font-semibold font-[RobotoBold] leading-none tracking-tight text-black">
-            {' '}
-            Product Performance{' '}
-          </div>
-          <h2 className="font-base mt-[11px] leading-none text-gray-1150">
-            {' '}
-            Track your performance on Wishlist – now and over time.{' '}
-          </h2>
+          <div className="text-xl font-semibold font-[RobotoBold] leading-none tracking-tight text-black"> Product Performance </div>
+          <h2 className="font-base mt-[11px] leading-none text-gray-1150"> Track your performance on Wishlist – now and over time. </h2>
         </div>
 
-        <ProdPerformanceFilters
-          onChange={(val) => setTypeChart(val.id as string)}
-        />
+        <ProdPerformanceFilters onChange={(val) => setTypeChart(val.id as string)} />
       </div>
       <div className="max-h-[350px] w-[99%] max-w-full h-full">
         <Line
@@ -272,7 +238,7 @@ const Dashboard = () => {
         />
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

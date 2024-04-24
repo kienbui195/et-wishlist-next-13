@@ -1,125 +1,114 @@
-import React, { FC, useEffect, useState } from 'react'
-import { ICompanyProduct } from './index'
-import SingleSelect from '../../SingleSelect'
-import { IDropdownItem } from '../../../data/wl-types'
-import FormInput from '../../FormInput/Input'
-import FormTextarea from '../../FormTextarea/FormTextarea'
-import apis from '../../../apis'
-import { createQuery, devLog, generateSlug } from '../../../utils/function'
-import { useSelector } from 'react-redux'
-import { RootState } from 'app/store'
-import { useAdminContext } from 'context/adminContext'
-import { REGEX } from './helper'
+import React, { FC, useEffect, useState } from "react";
+import { ICompanyProduct } from "./index";
+import SingleSelect from "../../SingleSelect";
+import { IDropdownItem } from "@/data/wl-types";
+import FormInput from "../../FormInput/Input";
+import FormTextarea from "../../FormTextarea/FormTextarea";
+import apis from "@/apis";
+import { createQuery, devLog, generateSlug } from "@/utils/function";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import { useAlertContext } from "@/context/alertContext";
+import { REGEX } from "./helper";
 
 interface Step3Props {
-  nextStep: () => void
-  backStep: () => void
-  shopId: number
+  nextStep: () => void;
+  backStep: () => void;
+  shopId: number;
 }
 
 const Step3: FC<Step3Props> = ({ nextStep, backStep, shopId }) => {
-  const userInfo = useSelector((state: RootState) => state.user.user)
-  const { showAlert } = useAdminContext()
+  const userInfo = useSelector((state: RootState) => state.user.user);
+  const { showAlert } = useAlertContext();
   const [companyPrd, setCompanyPrd] = useState<ICompanyProduct>({
     category: {
-      id: '',
-      name: '',
+      id: "",
+      name: "",
     },
-    linkToPrdPage: '',
-    linkToReview: '',
-    productDesc: '',
-    productName: '',
+    linkToPrdPage: "",
+    linkToReview: "",
+    productDesc: "",
+    productName: "",
     shippingFrom: {
-      id: 'US',
-      name: 'United States',
+      id: "US",
+      name: "United States",
     },
-  })
+  });
 
-  const [categories, setCategories] = useState<IDropdownItem[]>([])
+  const [categories, setCategories] = useState<IDropdownItem[]>([]);
   const [errors, setErrors] = useState({
-    category: '',
-    prdName: '',
-    prdDesc: '',
-    linkToPage: '',
-    linkToReview: '',
-  })
+    category: "",
+    prdName: "",
+    prdDesc: "",
+    linkToPage: "",
+    linkToReview: "",
+  });
 
   const [countries, setCountries] = useState({
     countries: [],
-    accessToken: '',
-  })
-  const handleChange = (
-    e: any,
-    stateName: string,
-    isSelect: boolean = false
-  ) => {
-    setCompanyPrd({ ...companyPrd, [stateName]: isSelect ? e : e.target.value })
-  }
+    accessToken: "",
+  });
+  const handleChange = (e: any, stateName: string, isSelect: boolean = false) => {
+    setCompanyPrd({ ...companyPrd, [stateName]: isSelect ? e : e.target.value });
+  };
 
   const validate = (values: any) => {
     const listErrors = {
-      category: '',
-      prdName: '',
-      prdDesc: '',
-      linkToPage: '',
-      linkToReview: '',
-    }
-    if (values.category.name === '') {
-      listErrors.category = 'Please select at least one category'
+      category: "",
+      prdName: "",
+      prdDesc: "",
+      linkToPage: "",
+      linkToReview: "",
+    };
+    if (values.category.name === "") {
+      listErrors.category = "Please select at least one category";
     }
 
-    if (values.productName.trim() === '') {
-      listErrors.prdName = 'Please input Product Name'
+    if (values.productName.trim() === "") {
+      listErrors.prdName = "Please input Product Name";
     } else if (values.productName.length > 40) {
-      listErrors.prdName =
-        'The number of characters has exceeded the allowed number of characters (less than 40).'
+      listErrors.prdName = "The number of characters has exceeded the allowed number of characters (less than 40).";
     }
 
-    if (values.productDesc.trim() === '') {
-      listErrors.prdDesc = 'Please input Product Description'
+    if (values.productDesc.trim() === "") {
+      listErrors.prdDesc = "Please input Product Description";
     } else if (values.productDesc.length > 800) {
-      listErrors.prdDesc =
-        'The number of characters has exceeded the allowed number of characters (less than 800).'
+      listErrors.prdDesc = "The number of characters has exceeded the allowed number of characters (less than 800).";
     }
 
-    if (values.linkToPrdPage.trim() === '') {
-      listErrors.linkToPage = 'Please input Link to Page'
+    if (values.linkToPrdPage.trim() === "") {
+      listErrors.linkToPage = "Please input Link to Page";
     } else if (!REGEX.WEBSITE.test(values.linkToPrdPage)) {
-      listErrors.linkToPage = 'Invalid link'
+      listErrors.linkToPage = "Invalid link";
     }
 
-    if (values.linkToReview.trim() !== '') {
+    if (values.linkToReview.trim() !== "") {
       if (!REGEX.WEBSITE.test(values.linkToReview)) {
-        listErrors.linkToReview = 'Invalid link'
+        listErrors.linkToReview = "Invalid link";
       }
     }
 
-    return listErrors
-  }
+    return listErrors;
+  };
 
   const handleValidate = () => {
-    const listError = validate(companyPrd)
-    if (
-      listError.category === '' &&
-      listError.prdName === '' &&
-      listError.prdDesc === '' &&
-      listError.linkToPage === ''
-    ) {
-      handleSubmit()
+    const listError = validate(companyPrd);
+    if (listError.category === "" && listError.prdName === "" && listError.prdDesc === "" && listError.linkToPage === "") {
+      handleSubmit();
     } else {
-      setErrors(listError)
+      setErrors(listError);
     }
-  }
+  };
 
   const handleSubmit = () => {
     if (shopId && +shopId > 0 && userInfo.id) {
       apis
-        .post('wl-first-products', {
+        .post("wl-first-products", {
           data: {
             name: companyPrd.productName,
             slug: generateSlug(companyPrd.productName),
-            headline: '',
-            sub_headline: '',
+            headline: "",
+            sub_headline: "",
             shop_product_id: 0,
             shop: {
               connect: [shopId],
@@ -131,17 +120,17 @@ const Step3: FC<Step3Props> = ({ nextStep, backStep, shopId }) => {
               set: [userInfo.id],
             },
             prod_dtl: {
-              product_headline: '',
-              product_page_headline: '',
+              product_headline: "",
+              product_page_headline: "",
               product_page_desc: companyPrd.productDesc,
               product_page_link: companyPrd.linkToPrdPage,
               product_reviews_link: companyPrd.linkToReview,
             },
             more_info: {
               shipping_info: `Shipping from ${companyPrd.shippingFrom?.name}`,
-              features: ' ',
-              return_exchange_policy: ' ',
-              what_included: ' ',
+              features: " ",
+              return_exchange_policy: " ",
+              what_included: " ",
             },
             discount_type: 0,
             launch_type: 0,
@@ -150,30 +139,24 @@ const Step3: FC<Step3Props> = ({ nextStep, backStep, shopId }) => {
           },
         })
         .then((res) => {
-          nextStep && nextStep()
+          nextStep && nextStep();
         })
         .catch((err) => {
-          showAlert(
-            'error',
-            'Create your first product failed! Please check and try again'
-          )
-          devLog(err, 'Step3.handleSubmit')
-        })
+          showAlert("error", "Create your first product failed! Please check and try again");
+          devLog(err, "Step3.handleSubmit");
+        });
     } else {
-      showAlert(
-        'error',
-        'No shop information found! Please install the app on shopify'
-      )
+      showAlert("error", "No shop information found! Please install the app on shopify");
     }
-  }
+  };
 
   const handleGetCategory = () => {
     apis
       .get(
         `wl-prod-cats`,
         createQuery({
-          fields: ['name', 'category_order', 'slug'],
-          sort: 'name',
+          fields: ["name", "category_order", "slug"],
+          sort: "name",
         })
       )
       .then((res) => {
@@ -182,14 +165,14 @@ const Step3: FC<Step3Props> = ({ nextStep, backStep, shopId }) => {
             return {
               id: `${item.id}`,
               name: item.attributes?.name,
-            }
+            };
           })
-        )
+        );
       })
       .catch((err) => {
-        console.log(err)
-      })
-  }
+        console.log(err);
+      });
+  };
 
   const handleGetCountries = () => {
     apis
@@ -201,21 +184,21 @@ const Step3: FC<Step3Props> = ({ nextStep, backStep, shopId }) => {
             acc.push({
               id: item.iso3,
               name: item.name,
-            })
-            return acc
+            });
+            return acc;
           }, []),
-        })
+        });
       })
       .catch((err) => {
-        console.log(err.message)
-      })
-  }
+        console.log(err.message);
+      });
+  };
 
   useEffect(() => {
-    handleGetCategory()
-    handleGetCountries()
+    handleGetCategory();
+    handleGetCountries();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <main className="w-full flex-1">
@@ -226,103 +209,86 @@ const Step3: FC<Step3Props> = ({ nextStep, backStep, shopId }) => {
           <div className="mr-2.5 h-1.5 w-[50px] rounded-full bg-green-950"></div>
           {/*<div className='mr-2.5 h-1.5 w-[50px] rounded-full bg-gray-1350'></div>*/}
         </div>
-        <div className="mt-[9px] text-base font-semibold leading-none text-green-1450">
-          3 of 3{' '}
-        </div>
+        <div className="mt-[9px] text-base font-semibold leading-none text-green-1450">3 of 3 </div>
         {/*<div className='mt-[9px] text-base font-semibold leading-none text-green-1450'>*/}
         {/*  3 of 4{' '}*/}
         {/*</div>*/}
-        <h1 className="mt-[35px] text-xl font-semibold leading-none text-black">
-          Tell us about your product.
-        </h1>
+        <h1 className="mt-[35px] text-xl font-semibold leading-none text-black">Tell us about your product.</h1>
         <h2 className="mt-2.5 text-sm leading-tight text-gray-1150">
-          {' '}
-          Now the important part: we want to hear about your innovative product.
-          Tell us all about it (and be as detailed as possible) so we can ensure
-          it's a great fit for our millions of innovation-loving Shoppers.{' '}
+          {" "}
+          {`Now the important part: we want to hear about your innovative product. Tell us all about it (and be as detailed as possible) so we can ensure it's a
+          great fit for our millions of innovation-loving Shoppers.`}{" "}
         </h2>
-        <div
-          className="el-divider el-divider--horizontal mb-[40px] mt-[29px] border-gray-1350 px-[50px]"
-          role="separator"
-        ></div>
+        <div className="el-divider el-divider--horizontal mb-[40px] mt-[29px] border-gray-1350 px-[50px]" role="separator"></div>
       </div>
       <form className="el-form el-form--default el-form--label-top flex">
         <div className="max-w-[555px] grow">
-          <div className="text-lg font-semibold leading-tight text-gray-1050">
-            {' '}
-            Product Information{' '}
-          </div>
+          <div className="text-lg font-semibold leading-tight text-gray-1050"> Product Information </div>
           <SingleSelect
-            className={'mt-[25px]'}
-            label={'Product Category'}
+            className={"mt-[25px]"}
+            label={"Product Category"}
             required
             list={categories}
-            placeholder={'Select Category'}
+            placeholder={"Select Category"}
             hint="If multiple, select your principle category"
-            error={errors.category !== ''}
+            error={errors.category !== ""}
             labelError={errors.category}
             value={companyPrd.category.name}
-            onChange={(e) => handleChange(e, 'category', true)}
+            onChange={(e) => handleChange(e, "category", true)}
           />
           <FormInput
-            className={'mt-5'}
-            label={'Product Name'}
-            placeholder={'Enter Product Name'}
+            className={"mt-5"}
+            label={"Product Name"}
+            placeholder={"Enter Product Name"}
             required
             value={companyPrd.productName}
-            onChange={(e) => handleChange(e, 'productName')}
-            error={errors.prdName !== ''}
+            onChange={(e) => handleChange(e, "productName")}
+            error={errors.prdName !== ""}
             labelError={errors.prdName}
           />
           <FormTextarea
-            className={'mt-5'}
-            label={'Product Description'}
-            error={errors.prdDesc !== ''}
+            className={"mt-5"}
+            label={"Product Description"}
+            error={errors.prdDesc !== ""}
             labelError={errors.prdDesc}
             value={companyPrd.productDesc}
-            placeholder={'Enter a description'}
+            placeholder={"Enter a description"}
             required
             limitCharacter={800}
-            onChange={(e) => handleChange(e, 'productDesc')}
+            onChange={(e) => handleChange(e, "productDesc")}
           />
         </div>
-        <div
-          className="el-divider el-divider--vertical mx-[60px] h-[291px] border-gray-1350"
-          role="separator"
-        ></div>
+        <div className="el-divider el-divider--vertical mx-[60px] h-[291px] border-gray-1350" role="separator"></div>
         <div className="max-w-[555px] grow">
-          <div className="text-lg font-semibold leading-tight text-gray-1050">
-            {' '}
-            Product Validation{' '}
-          </div>
+          <div className="text-lg font-semibold leading-tight text-gray-1050"> Product Validation </div>
           <SingleSelect
-            label={'Shipping From'}
-            placeholder={'Select Country'}
+            label={"Shipping From"}
+            placeholder={"Select Country"}
             value={companyPrd.shippingFrom?.name}
-            className={'mt-[25px]'}
+            className={"mt-[25px]"}
             list={countries.countries}
             onChange={(val) => {
-              handleChange(val, 'shippingFrom', true)
+              handleChange(val, "shippingFrom", true);
             }}
           />
           <FormInput
-            className={'mt-[25px]'}
-            label={'Link to Product Page'}
+            className={"mt-[25px]"}
+            label={"Link to Product Page"}
             value={companyPrd.linkToPrdPage}
-            onChange={(e) => handleChange(e, 'linkToPrdPage')}
+            onChange={(e) => handleChange(e, "linkToPrdPage")}
             required
-            placeholder={'https://'}
-            error={errors.linkToPage !== ''}
+            placeholder={"https://"}
+            error={errors.linkToPage !== ""}
             labelError={errors.linkToPage}
             isCheckMaxLength={false}
           />
           <FormInput
-            className={'mt-[25px]'}
-            label={'Link to Reviews'}
+            className={"mt-[25px]"}
+            label={"Link to Reviews"}
             value={companyPrd.linkToReview}
-            onChange={(e) => handleChange(e, 'linkToReview')}
-            placeholder={'https://'}
-            error={errors.linkToReview !== ''}
+            onChange={(e) => handleChange(e, "linkToReview")}
+            placeholder={"https://"}
+            error={errors.linkToReview !== ""}
             labelError={errors.linkToReview}
             isCheckMaxLength={false}
           />
@@ -341,14 +307,14 @@ const Step3: FC<Step3Props> = ({ nextStep, backStep, shopId }) => {
         <button
           className="w-full rounded-md text-xs font-semibold px-2.5 text-black bg-transparent border border-gray-1350 hover:bg-gray-2150 ml-2.5 h-[50px] max-w-[120px] select-none"
           onClick={() => {
-            backStep && backStep()
+            backStep && backStep();
           }}
         >
           <span className="text-lg font-semibold">Back</span>
         </button>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default Step3
+export default Step3;

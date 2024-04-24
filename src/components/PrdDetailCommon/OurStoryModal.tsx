@@ -54,6 +54,7 @@ const OurStoryModal: FC<IOurStoryModal> = ({
       video.addEventListener("volumechange", handleVolumeChange);
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => videoRef.current?.removeEventListener("volumechange", handleVolumeChange);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoRef.current?.volume, mutedVideo]);

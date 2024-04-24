@@ -1,33 +1,20 @@
-import React from 'react'
-import { ProductPanelProps } from './type'
-import FormInput from 'components/FormInput/Input'
-import FormTextarea from 'components/FormTextarea/FormTextarea'
-import FormInputMedia from 'components/FormInputMedia'
-import { generateSlug } from 'utils/function'
+import React from "react";
+import { ProductPanelProps } from "./type";
+import FormInput from "@/components/FormInput/Input";
+import FormTextarea from "@/components/FormTextarea/FormTextarea";
+import FormInputMedia from "@/components/FormInputMedia";
+import { generateSlug } from "@/utils/function";
 
-const PanelFeed: React.FC<ProductPanelProps> = ({
-  data,
-  onSetState,
-  isCreate,
-  errors 
-}) => {
+const PanelFeed: React.FC<ProductPanelProps> = ({ data, onSetState, isCreate, errors }) => {
   return (
-    <div
-      id="pane-Feed"
-      className="el-tab-pane"
-      role="tabpanel"
-      aria-hidden="true"
-      aria-labelledby="tab-Feed"
-    >
+    <div id="pane-Feed" className="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-Feed">
       <div>
         <div>
-          <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">
-            Stand Out In The Feed
-          </h2>
+          <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">Stand Out In The Feed</h2>
           <h3 className="mt-2.5 text-base leading-tight text-gray-1150">
-            Your product will likely be seen first on ET Wishlist's homepage (The
+            {`Your product will likely be seen first on ET Wishlist's homepage (The
             Trending Feed). Quickly highlight its value to grab Shoppers'
-            attention.
+            attention.`}
           </h3>
         </div>
         <div className="mt-[30px] flex">
@@ -43,43 +30,43 @@ const PanelFeed: React.FC<ProductPanelProps> = ({
                     ...preState,
                     name: e.target.value,
                     slug: generateSlug(e.target.value),
-                  }))
+                  }));
                 }}
                 labelError={errors?.name}
-                error={errors?.name !== ''}
+                error={errors?.name !== ""}
               />
             </div>
             <div className="el-form-item is-required asterisk-right mt-5">
               <FormTextarea
                 required
-                label={'Feed Headline'}
-                placeholder={'Enter a description'}
+                label={"Feed Headline"}
+                placeholder={"Enter a description"}
                 limitCharacter={40}
                 value={data.headline}
                 onChange={(e) => {
                   onSetState((preState) => ({
                     ...preState,
                     headline: e.target.value,
-                  }))
+                  }));
                 }}
-                error={errors?.headline !== ''}
+                error={errors?.headline !== ""}
                 labelError={errors?.headline}
               />
             </div>
             <div className="el-form-item is-required asterisk-right mt-5">
               <FormTextarea
                 required
-                label={'Feed Sub-Headline'}
-                placeholder={'Enter a description'}
+                label={"Feed Sub-Headline"}
+                placeholder={"Enter a description"}
                 limitCharacter={100}
                 value={data.subHeadline}
                 onChange={(e) => {
                   onSetState((preState) => ({
                     ...preState,
                     subHeadline: e.target.value,
-                  }))
+                  }));
                 }}
-                error={errors?.subHeadline !== ''}
+                error={errors?.subHeadline !== ""}
                 labelError={errors?.subHeadline}
               />
             </div>
@@ -96,9 +83,9 @@ const PanelFeed: React.FC<ProductPanelProps> = ({
                 onSetState((preState) => ({
                   ...preState,
                   thumbnail: { ...value },
-                }))
+                }));
               }}
-              error={errors?.thumbnail !== ''}
+              error={errors?.thumbnail !== ""}
               labelError={errors?.thumbnail}
             />
 
@@ -114,16 +101,16 @@ const PanelFeed: React.FC<ProductPanelProps> = ({
                 onSetState((preState) => ({
                   ...preState,
                   hoverVideo: { ...value },
-                }))
+                }));
               }}
-              error={errors?.hoverVideo !== ''}
+              error={errors?.hoverVideo !== ""}
               labelError={errors?.hoverVideo}
             />
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PanelFeed
+export default PanelFeed;

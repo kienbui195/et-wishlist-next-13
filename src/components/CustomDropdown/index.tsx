@@ -1,5 +1,6 @@
 import React, {FC, useEffect, useRef, useState} from 'react'
 import DropdownIcon from '../../assets/svg/ThreeDot.svg'
+import Image from 'next/image'
 
 interface IDropdownItem {
   id: string | number
