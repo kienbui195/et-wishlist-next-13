@@ -1,5 +1,5 @@
-import { Switch } from "../../app/headlessui";
-import { useThemeMode } from "../../hooks/useThemeMode";
+import { useThemeMode } from "@/hooks/useThemeMode";
+import { Switch } from "@headlessui/react";
 import React from "react";
 
 export interface SwitchDarkMode2Props {

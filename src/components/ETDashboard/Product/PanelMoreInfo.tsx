@@ -1,31 +1,17 @@
-import React from 'react'
-import { ProductPanelProps } from './type'
-import FormTextarea from 'components/FormTextarea/FormTextarea'
-import SingleSelect from 'components/SingleSelect'
+import React from "react";
+import { ProductPanelProps } from "./type";
+import FormTextarea from "@/components/FormTextarea/FormTextarea";
+import SingleSelect from "@/components/SingleSelect";
 
-const PanelMoreInfo: React.FC<ProductPanelProps> = ({
-  data,
-  onSetState,
-  errors,
-}) => {
+const PanelMoreInfo: React.FC<ProductPanelProps> = ({ data, onSetState, errors }) => {
   return (
-    <div
-      id="pane-More Info"
-      className="el-tab-pane"
-      role="tabpanel"
-      aria-hidden="true"
-      aria-labelledby="tab-More Info"
-    >
+    <div id="pane-More Info" className="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-More Info">
       <div product-form-ref="[object Object]">
         <div>
-          <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">
-            More Details
-          </h2>
+          <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">More Details</h2>
           <h3 className="mt-2.5 text-base leading-tight text-gray-1150">
-            Located at the bottom of your Product Page, include detailed
-            information about shipping, returns, and what Shoppers can expect
-            when they buy your product. Accurate information ensures a great
-            customer experience and encourages purchases.
+            Located at the bottom of your Product Page, include detailed information about shipping, returns, and what Shoppers can expect when they buy your
+            product. Accurate information ensures a great customer experience and encourages purchases.
           </h3>
         </div>
         <div className="mt-[30px] flex pb-5">
@@ -44,9 +30,9 @@ const PanelMoreInfo: React.FC<ProductPanelProps> = ({
                       ...preState.moreInfo,
                       features: e.target.value,
                     },
-                  }))
+                  }));
                 }}
-                error={errors?.features !== ''}
+                error={errors?.features !== ""}
                 labelError={errors?.features}
               />
             </div>
@@ -66,9 +52,9 @@ const PanelMoreInfo: React.FC<ProductPanelProps> = ({
                       ...preState.moreInfo,
                       shippingInfo: e.target.value,
                     },
-                  }))
+                  }));
                 }}
-                error={errors?.shippingInfo !== ''}
+                error={errors?.shippingInfo !== ""}
                 labelError={errors?.shippingInfo}
               />
             </div>
@@ -86,9 +72,9 @@ const PanelMoreInfo: React.FC<ProductPanelProps> = ({
                       ...preState.moreInfo,
                       returnExchangePolicy: e.target.value,
                     },
-                  }))
+                  }));
                 }}
-                error={errors?.returnPolicy !== ''}
+                error={errors?.returnPolicy !== ""}
                 labelError={errors?.returnPolicy}
               />
             </div>
@@ -106,9 +92,9 @@ const PanelMoreInfo: React.FC<ProductPanelProps> = ({
                       ...preState.moreInfo,
                       whatIncluded: e.target.value,
                     },
-                  }))
+                  }));
                 }}
-                error={errors?.includes !== ''}
+                error={errors?.includes !== ""}
                 labelError={errors?.includes}
               />
             </div>
@@ -119,7 +105,7 @@ const PanelMoreInfo: React.FC<ProductPanelProps> = ({
                 value={data.moreInfo?.whatIncludedTitle}
                 list={[
                   { id: "What's Included", name: "What's Included" },
-                  { id: 'Ingredients', name: 'Ingredients' },
+                  { id: "Ingredients", name: "Ingredients" },
                 ]}
                 onChange={(val) => {
                   onSetState((preState) => ({
@@ -128,7 +114,7 @@ const PanelMoreInfo: React.FC<ProductPanelProps> = ({
                       ...preState.moreInfo,
                       whatIncludedTitle: val.name,
                     },
-                  }))
+                  }));
                 }}
               />
             </div>
@@ -136,7 +122,7 @@ const PanelMoreInfo: React.FC<ProductPanelProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PanelMoreInfo
+export default PanelMoreInfo;

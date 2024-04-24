@@ -2,11 +2,11 @@
 
 import React, { useState, Fragment, useEffect } from "react";
 import { Transition } from "../headlessui";
-import NavMobile from "../../components/Navigation/NavMobile";
-import usePathname from "../../hooks/usePathname";
-import useUserLogin from "../../hooks/useUserLogin";
+import NavMobile from "@/components/Navigation/NavMobile";
+import usePathname from "@/hooks/usePathname";
+import useUserLogin from "@/hooks/useUserLogin";
 import { useDispatch } from "react-redux";
-import { setDisplayMenuBar } from "../../lib/features/global/menuBarDisplaySlice";
+import { setDisplayMenuBar } from "@/lib/features/global/menuBarDisplaySlice";
 import { useRouter } from "next/navigation";
 
 const MenuBar: React.FC = () => {
@@ -23,7 +23,7 @@ const MenuBar: React.FC = () => {
   useEffect(() => {
     setIsVisible(false);
     dispatch(setDisplayMenuBar(false));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   const handleCloseMenu = () => {

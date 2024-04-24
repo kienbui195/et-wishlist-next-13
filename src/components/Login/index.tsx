@@ -25,13 +25,13 @@ import {
 } from "@/utils/svgExport";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 interface LoginProps {
   open: boolean;
   onClose?: () => void;
 }
 
-const EMAIL_REGEX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const EMAIL_REGEX = /^[\w.-]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
   const initFormState = {
@@ -43,29 +43,28 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
     hasEMail: false,
   };
   const dispatch = useDispatch();
-  // const location = useLocation();
-  // const navigate = useNavigate();
   const [form, setForm] = useState(initFormState);
   const [denied, setDenied] = useState<boolean>(true);
   const [loadingBtn, setLoadingBtn] = useState<boolean>(false);
   const [loadingBtnLWPW, setLoadingBtnLWPW] = useState<boolean>(false);
   const [step, setStep] = useState<number>(0);
   const [retrieveUser, setRetrieveUser] = useState<any>(null);
-  // const { showAlert } = useAdminContext();
+  const { showAlert } = useAlertContext();
   const inputEmailRef = useRef<HTMLInputElement>(null);
-  const searchParams = new URLSearchParams(location.search);
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
   const staticPage = useSelector((state: RootState) => state.footer.footer);
   const termUrl = staticPage.submenu.find((item) => item.slug.includes("term"))?.slug || "#";
   const privacyUrl = staticPage.submenu.find((item) => item.slug.includes("privacy"))?.slug || "#";
-
+  const router = useRouter();
   const mediaQueryWidth = useMediaQuery();
 
   const handleClose = () => {
     setStep(0);
     setForm(initFormState);
     onClose && onClose();
-    if (location.pathname === "reset-password") {
-      navigate("/");
+    if (pathname === "reset-password") {
+      router.push("/");
     }
   };
 
@@ -229,7 +228,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
         // const { user, jwt } = res.data
         setForm(initFormState);
         showAlert("success", "Reset password successfully! You can login with new password");
-        navigate("/");
+        router.push("/");
       })
       .catch((err) => {
         console.log(err.message);
@@ -302,7 +301,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
               To discover, vote and discounts, sign in to Wishlist below.
             </div>
           </div>
-          {location.pathname !== "/reset-password" && step === 0 && (
+          {pathname !== "/reset-password" && step === 0 && (
             <Fragment>
               <div className="flex space-x-[14px] h-[40px] w-full">
                 {/* <ButtonLogin
@@ -325,7 +324,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
             onSubmit={async (e) => {
               e.preventDefault();
               if (loadingBtn) return;
-              if (location.pathname !== "/reset-password") {
+              if (pathname !== "/reset-password") {
                 if (denied) return;
                 if (step === 0) {
                   handleRetrieveUser();
@@ -344,7 +343,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
             }}
           >
             <div className={`flex flex-col space-y-[18px] mb-[32px]`}>
-              {location.pathname !== "/reset-password" ? (
+              {pathname !== "/reset-password" ? (
                 step === 2 ? (
                   <div className="R-body-small text-[--gray] tracking-[0.2px] text-start">
                     Please click on the special link we just send you to confirm register
@@ -406,7 +405,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
                   />
                 </Fragment>
               )}
-              {location.pathname !== "/reset-password" && step === 1 && (
+              {pathname !== "/reset-password" && step === 1 && (
                 <Input
                   label="Password"
                   startIcon={KeyIcon}
@@ -425,12 +424,12 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
             <ButtonLogin
               loading={loadingBtn}
               label={
-                location.pathname !== "/reset-password" ? (step === 0 ? "Continue with email" : step === 1 ? "Next" : "Resend confirm email") : "Reset Password"
+                pathname !== "/reset-password" ? (step === 0 ? "Continue with email" : step === 1 ? "Next" : "Resend confirm email") : "Reset Password"
               }
               labelColor={"!text-white"}
               className={
                 `bg-[--brand-primary] !h-[40px] mb-[16px] select-none ` +
-                (location.pathname !== "/reset-password"
+                (pathname !== "/reset-password"
                   ? denied
                     ? "!cursor-not-allowed opacity-[30%] hover:!opacity-[30%]"
                     : "!cursor-pointer"
@@ -438,7 +437,7 @@ const LoginModal: FC<LoginProps> = ({ open = false, onClose }) => {
                   ? "!cursor-not-allowed opacity-[30%] hover:!opacity-[30%]"
                   : "!cursor-pointer")
               }
-              disabled={location.pathname !== "/reset-password" ? denied : form.password !== form.confirmPassword}
+              disabled={pathname !== "/reset-password" ? denied : form.password !== form.confirmPassword}
             />
             {step === 1 && (
               <Fragment>

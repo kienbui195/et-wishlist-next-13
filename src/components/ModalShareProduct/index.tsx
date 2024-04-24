@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useRef } from "react";
 import Link from "next/link";
@@ -19,7 +19,7 @@ interface IModalSharePrdProps {
 const ModalShareProduct = ({ prdDetail, onClose, handleCopyLink, setShowPrdGallery }: IModalSharePrdProps) => {
   const closeSharePrd = useRef();
   const { showAlert } = useAlertContext();
-  const router = useRouter();  
+  const router = useRouter();
 
   return (
     <div>
@@ -43,7 +43,11 @@ const ModalShareProduct = ({ prdDetail, onClose, handleCopyLink, setShowPrdGalle
             autoPlay
           ></video>
           <Image
-            src={prdDetail?.attributes.thumbnail?.data ? `${process.env.NEXT_PUBLIC_BE_URL}${prdDetail?.attributes.thumbnail?.data?.attributes.url}` : DefaultThumbnail2}
+            src={
+              prdDetail?.attributes.thumbnail?.data
+                ? `${process.env.NEXT_PUBLIC_BE_URL}${prdDetail?.attributes.thumbnail?.data?.attributes.url}`
+                : DefaultThumbnail2
+            }
             className="h-full max-h-full w-full max-w-full object-cover group-hover/items:hidden"
             alt=""
             width={0}

@@ -105,10 +105,14 @@ import MainImage from '@/assets/svg/Step1.1-image.svg'
 import MainImage2 from '@/assets/svg/Step2-image.svg'
 import PersonIcon from "@/assets/svg/PersonIcon.svg";
 import MainImage3 from '@/assets/svg/Step3-image.svg'
+import DeleteIcon from "@/assets/svg/TrashIcon.svg";
+import CheckedIcon from "assets/svg/Checked.svg";
+
 
 
 
 export {
+  CheckedIcon,
   MainImage3,
   PersonIcon,
   ShopifyApp,
@@ -214,5 +218,6 @@ export {
   PrdAwdYear,
   ArrowRight,
   VideoPlayBtn,
-  MainImage2
+  MainImage2,
+  DeleteIcon
 };

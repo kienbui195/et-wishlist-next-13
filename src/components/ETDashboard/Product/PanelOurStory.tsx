@@ -1,11 +1,11 @@
 import React from 'react'
 import { ProductPanelProps } from './type'
-import FormInput from 'components/FormInput/Input'
-import FormInputMedia from 'components/FormInputMedia'
-import FormTextarea from 'components/FormTextarea/FormTextarea'
-import apis from 'apis'
+import FormInput from '@/components/FormInput/Input'
+import FormInputMedia from '@/components/FormInputMedia'
+import FormTextarea from '@/components/FormTextarea/FormTextarea'
+import apis from '@/apis'
 import { useSelector } from 'react-redux'
-import { RootState } from 'app/store'
+import { RootState } from '@/lib/store'
 
 const PanelOurStory: React.FC<ProductPanelProps> = ({
   data,

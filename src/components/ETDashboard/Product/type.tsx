@@ -1,6 +1,6 @@
-import { IAdminNotes } from 'components/PrdDetailCommon/prdDetailInterface'
-import { SpProduct } from 'data/types'
-import { IImage } from 'data/wl-types'
+import { IAdminNotes } from '@/components/PrdDetailCommon/prdDetailInterface'
+import { SpProduct } from '@/data/types'
+import { IImage } from '@/data/wl-types'
 
 export interface PrdVariants {
   id: string

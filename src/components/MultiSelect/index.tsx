@@ -1,10 +1,9 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-import s from "./style.module.css";
 import { IDropdownItem } from "@/data/wl-types";
-import Dropdown from "assets/svg/DropdownIcon.svg";
-import CheckedIcon from "assets/svg/Checked.svg";
 import { generateUID } from "@/utils/function";
 import Image from "next/image";
+import { CheckedIcon, Dropdown } from "@/utils/svgExport";
+import './style.css'
 
 export interface IMultiSelectProps {
   onChange?: (val: IDropdownItem[]) => void;
@@ -185,7 +184,7 @@ const MultiSelect: FC<IMultiSelectProps> = ({
         flex-col items-stretch max-h-[242px] ${
           list.length * 44 >= 242 ? "overflow-y-auto" : "overflow-y-hidden"
         } overflow-x-hidden absolute z-30 left-0 top-[${58 + (error ? 12 : 0) + (hint !== "" ? 12 : 0)}px] 
-        shadow-[_-12px_17px_24px_0px_#4B4B7140] ${s.scrollBar}`}
+        shadow-[_-12px_17px_24px_0px_#4B4B7140] scrollBar`}
         >
           {loading
             ? renderDropdownRow("-1", "Loading...", true)

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { ISidebarBanner } from ".";
-import CustomCarousel from "../../components/CustomCarousel";
-import { IOptionalSetting } from "../../data/wl-types";
+import CustomCarousel from "@/components/CustomCarousel";
+import { IOptionalSetting } from "@/data/wl-types";
 
 interface ISidebarBannerProps {
   value: ISidebarBanner[];

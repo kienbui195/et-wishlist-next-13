@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { ISidebarTag } from ".";
 import Link from "next/link";
-import { IOptionalSetting } from "../../data/wl-types";
+import { IOptionalSetting } from "@/data/wl-types";
 
 interface ISidebarTagProps {
   value: {

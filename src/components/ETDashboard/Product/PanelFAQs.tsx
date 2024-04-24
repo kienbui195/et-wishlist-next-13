@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { ProductPanelProps } from "./type";
 import FormInput from "@/components/FormInput/Input";
 import FormTextarea from "@/components/FormTextarea/FormTextarea";
-import DeleteIcon from "../../../assets/svg/TrashIcon.svg";
 import { FAQ } from "./type";
 import Image from "next/image";
+import { DeleteIcon } from "@/utils/svgExport";
 
 const PanelFAQs: React.FC<ProductPanelProps> = ({ data, onSetState, isCreate = true }) => {
   const initialFAQ: FAQ = {
@@ -34,13 +34,10 @@ const PanelFAQs: React.FC<ProductPanelProps> = ({ data, onSetState, isCreate = t
     <div id="pane-FAQs" className="el-tab-pane" role="tabpanel" aria-hidden="true" aria-labelledby="tab-FAQs">
       <div product-form-ref="[object Object]">
         <div>
-          <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">
-            Frequently Asked Questions
-          </h2>
+          <h2 className="mt-[25px] text-sm font-medium leading-none tracking-tight text-black">Frequently Asked Questions</h2>
           <h3 className="mt-2.5 text-base leading-tight text-gray-1150">
-            Pro tip: Focus on the most common questions (or objections) your potential customers will have before buying
-            your product. Prioritize them and use each answer as an opportunity to convey the value of your product and
-            why its worth buying.
+            Pro tip: Focus on the most common questions (or objections) your potential customers will have before buying your product. Prioritize them and use
+            each answer as an opportunity to convey the value of your product and why its worth buying.
           </h3>
         </div>
         <div className="mt-[41px] w-[555px]">
@@ -55,9 +52,7 @@ const PanelFAQs: React.FC<ProductPanelProps> = ({ data, onSetState, isCreate = t
                       placeholder="Enter Question"
                       value={data.faqs[index]?.question}
                       onChange={(e) => {
-                        const updatedFAQs = data.faqs.map((faq, idx) =>
-                          index === idx ? { ...faq, question: e.target.value } : faq
-                        );
+                        const updatedFAQs = data.faqs.map((faq, idx) => (index === idx ? { ...faq, question: e.target.value } : faq));
 
                         const newFAQs = updatedFAQs.some((faq, idx) => index === idx)
                           ? updatedFAQs
@@ -77,9 +72,7 @@ const PanelFAQs: React.FC<ProductPanelProps> = ({ data, onSetState, isCreate = t
                       placeholder="Enter Answer"
                       value={data.faqs[index]?.answer}
                       onChange={(e) => {
-                        const updatedFAQs = data.faqs.map((faq, idx) =>
-                          index === idx ? { ...faq, answer: e.target.value } : faq
-                        );
+                        const updatedFAQs = data.faqs.map((faq, idx) => (index === idx ? { ...faq, answer: e.target.value } : faq));
 
                         const newFAQs = updatedFAQs.some((faq, idx) => index === idx)
                           ? updatedFAQs
@@ -96,9 +89,7 @@ const PanelFAQs: React.FC<ProductPanelProps> = ({ data, onSetState, isCreate = t
               ) : (
                 <div className="relative mb-5 rounded-md border border-gray-1350 p-[30px]">
                   <div className="text-sm font-medium leading-none text-slate-1050">Question {index + 1}</div>
-                  <div className="mt-3 text-sm font-medium leading-none text-slate-1150">
-                    {data.faqs[index]?.question}
-                  </div>
+                  <div className="mt-3 text-sm font-medium leading-none text-slate-1150">{data.faqs[index]?.question}</div>
                   <div className="mt-1.5 text-sm text-gray-1150">{data.faqs[index]?.answer}</div>
                   <div className="absolute right-[30px] top-[30px] h-1 cursor-pointer">
                     <div onClick={() => deleteFAQ(index)}>

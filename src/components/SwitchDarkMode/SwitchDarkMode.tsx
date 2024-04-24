@@ -1,7 +1,7 @@
 import React from "react";
 import { MoonIcon } from "@heroicons/react/24/solid";
 import { SunIcon } from "@heroicons/react/24/outline";
-import { useThemeMode } from "../../hooks/useThemeMode";
+import { useThemeMode } from "@/hooks/useThemeMode";
 export interface SwitchDarkModeProps {
   className?: string;
 }

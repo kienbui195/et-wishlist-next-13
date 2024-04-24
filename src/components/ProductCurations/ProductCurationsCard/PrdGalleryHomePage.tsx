@@ -24,7 +24,7 @@ import {
 import Link from "next/link";
 import { TCurrency } from "@/data/wl-types";
 import IconButtonVoteAnimation from "@/components/IconButtonVoteAnimation";
-import useMediaQuery from "../../../hooks/useMediaQuery";
+import useMediaQuery from "@/hooks/useMediaQuery";
 import Image from "next/image";
 
 interface PrdGalleryHomePageProps {

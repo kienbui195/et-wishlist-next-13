@@ -1,23 +1,19 @@
-'use client'
+"use client";
 
-import React, { FC, useState } from 'react'
-import CustomCarousel from '../../components/CustomCarousel'
-import { IOptionalSetting, ITopBannerImage } from '../../data/wl-types'
+import React, { FC, useState } from "react";
+import CustomCarousel from "@/components/CustomCarousel";
+import { IOptionalSetting, ITopBannerImage } from "@/data/wl-types";
 
 interface IBannerImageProps {
-  value: ITopBannerImage[]
-  options?: IOptionalSetting
+  value: ITopBannerImage[];
+  options?: IOptionalSetting;
 }
 
 const BannerImage: FC<IBannerImageProps> = ({ value = [], options }) => {
-  const [open, setOpen] = useState<boolean>(options ? options.isShow : true)    
+  const [open, setOpen] = useState<boolean>(options ? options.isShow : true);
 
   return (
-    <div
-      className={`select-none ${
-        open ? 'border border-[--gray-line] mt-[20px]' : 'hidden'
-      } `}
-    >
+    <div className={`select-none ${open ? "border border-[--gray-line] mt-[20px]" : "hidden"} `}>
       <CustomCarousel
         images={value}
         className=""
@@ -26,13 +22,13 @@ const BannerImage: FC<IBannerImageProps> = ({ value = [], options }) => {
         autoSlideDelay={5000}
         containHeight={`h-[170px]`}
         imageHeight={`h-[170px]`}
-        imageWidth={'w-auto'}
+        imageWidth={"w-auto"}
         isAcceptClose={options?.isAcceptClose}
         width={options?.width}
         height={options?.height}
       />
     </div>
-  )
-}
+  );
+};
 
-export default BannerImage
+export default BannerImage;

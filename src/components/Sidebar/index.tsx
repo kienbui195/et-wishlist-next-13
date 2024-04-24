@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import Component from '../index'
-import {IImage, IOptionalSetting} from "../../data/wl-types";
+import {IImage, IOptionalSetting} from "@/data/wl-types";
 
 export interface ISidebarComponent {
   id: number,

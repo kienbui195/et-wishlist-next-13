@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import ProductItem from './ProductComponent/ProductItem'
-import apis from 'apis'
+import apis from '@/apis'
 import { useSelector } from 'react-redux'
-import { RootState } from 'app/store'
-import { createQuery } from 'utils/function'
-import { useAdminContext } from 'context/adminContext'
+import { RootState } from '@/lib/store'
+import { createQuery } from '@/utils/function'
+import { useAlertContext } from '@/context/alertContext'
 import moment from 'moment'
 import DashboardButton from '../Components/Button'
-import { useNavigate } from 'react-router-dom'
-
+import {useRouter} from 'next/navigation'
 export interface IProductState {
   id: number
   name: string
@@ -28,9 +27,9 @@ export interface IProductState {
 
 const BrandProduct = () => {
   const shopInfo = useSelector((state: RootState) => state.shop.shop)
-  const { showAlert } = useAdminContext()
+  const { showAlert } = useAlertContext()
   const [products, setProducts] = useState<IProductState[]>([])
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const handleGetProducts = () => {
     if (shopInfo.id > 0) {
@@ -108,7 +107,7 @@ const BrandProduct = () => {
             <DashboardButton
               label="Submit New Product"
               // onClick={() => onSetState(PROD_LAYOUT_TYPE['create'])}
-              onClick={() => navigate('/brand-products/create')}
+              onClick={() => router.push('/brand-products/create')}
             />
         </div>
         <div

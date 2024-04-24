@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import CustomButton from "../../components/Header/CustomButton";
+import CustomButton from "@/components/Header/CustomButton";
 import React, { FC, useEffect, useRef, useState } from "react";
 import ButtonClose from "./ButtonClose";
-import { IOptionalSetting, ITopBannerText } from "../../data/wl-types";
+import { IOptionalSetting, ITopBannerText } from "@/data/wl-types";
 
 interface IBannerTextProps {
   value: ITopBannerText;
