@@ -106,7 +106,7 @@ import MainImage2 from '@/assets/svg/Step2-image.svg'
 import PersonIcon from "@/assets/svg/PersonIcon.svg";
 import MainImage3 from '@/assets/svg/Step3-image.svg'
 import DeleteIcon from "@/assets/svg/TrashIcon.svg";
-import CheckedIcon from "assets/svg/Checked.svg";
+import CheckedIcon from "@/assets/svg/Checked.svg";
 
 
 
