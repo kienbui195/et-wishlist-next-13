@@ -1,6 +1,6 @@
 import moment from 'moment'
 import qs from 'qs'
-import { IValueOfRangeDate, TCurrency, TDeviceType } from 'data/wl-types'
+import { IValueOfRangeDate, TCurrency, TDeviceType } from '@/data/wl-types'
 import { CURRENCY_MAPPING } from './constants'
 
 export const defaultAvatar = 'assets/images/default-avatar.svg.svg'
